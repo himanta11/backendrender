@@ -1,6 +1,6 @@
 // API Configuration
 const API_CONFIG = {
-    baseUrl: 'http://localhost:8000',
+    baseUrl: 'https://backendrender-o1bo.onrender.com',
     apiKey: '', // Add your API key here if needed
     endpoints: {
         auth: {
