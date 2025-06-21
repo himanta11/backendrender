@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspirant - My Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: rgba(108, 92, 231, 0.1);
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --card-shadow: 0 10px 20px -5px rgba(108, 92, 231, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 15px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary);
+            background-color: white;
+            overflow: hidden;
+        }
+        
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .profile-email {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .profile-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* Main Content */
+        .profile-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .profile-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            font-size: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: var(--text-light);
+            flex: 1;
+        }
+        
+        .info-value {
+            flex: 1;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .info-value input,
+        .info-value select {
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 200px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .info-value input:focus,
+        .info-value select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+        
+        .info-value input:disabled,
+        .info-value select:disabled {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        
+        .info-value input:not(:disabled):hover,
+        .info-value select:not(:disabled):hover {
+            border-color: var(--primary);
+        }
+        
+        .edit-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .edit-btn.save {
+            background-color: #00b894;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            background-color: var(--primary-light);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .profile-header {
+                padding: 40px 20px 30px;
+            }
+            
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
+            }
+            
+            .profile-name {
+                font-size: 26px;
+            }
+            
+            .profile-container {
+                padding: 40px 20px 30px;
+                transform: none;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="profile-header">
+        <button class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="profile-pic">
+            <i class="fas fa-user"></i>
+            <!-- <img src="profile.jpg" alt="Profile"> -->
+        </div>
+        <h1 class="profile-name" id="profileName">Enter your name</h1>
+        <span class="profile-badge">Free Member</span>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="profile-container">
+        <!-- Personal Info Card -->
+        <div class="profile-card">
+            <h2 class="card-title">
+                <i class="fas fa-user-circle"></i> Personal Information
+            </h2>
+            <div class="info-item">
+                <span class="info-label">Full Name</span>
+                <span class="info-value">
+                    <input type="text" id="nameInput" placeholder="Enter your name" value="" disabled>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Mobile</span>
+                <span class="info-value">
+                    <input type="tel" id="mobileInput" placeholder="Enter mobile number" value="" disabled>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Date of Birth</span>
+                <span class="info-value">
+                    <input type="date" id="dobInput" value="" disabled>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Gender</span>
+                <span class="info-value">
+                    <select id="genderInput" disabled>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </span>
+            </div>
+            <button class="edit-btn" id="editProfileBtn">Edit Profile</button>
+        </div>
+        
+        <!-- Academic Info Card -->
+        <div class="profile-card">
+            <h2 class="card-title">
+                <i class="fas fa-graduation-cap"></i> Academic Information
+            </h2>
+            <div class="info-item">
+                <span class="info-label">Education</span>
+                <span class="info-value">
+                    <select id="educationInput" disabled>
+                        <option value="">Select education level</option>
+                        <option value="high-school">High School</option>
+                        <option value="bachelor">Bachelor's Degree</option>
+                        <option value="master">Master's Degree</option>
+                        <option value="phd">PhD</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="other">Other</option>
+                    </select>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Target Exam</span>
+                <span class="info-value">
+                    <select id="targetExamInput" disabled>
+                        <option value="">Select target exam</option>
+                        <option value="jee-main">JEE Main</option>
+                        <option value="jee-advanced">JEE Advanced</option>
+                        <option value="neet">NEET</option>
+                        <option value="gate">GATE</option>
+                        <option value="cat">CAT</option>
+                        <option value="upsc">UPSC</option>
+                        <option value="ssc">SSC</option>
+                        <option value="banking">Banking Exams</option>
+                        <option value="other">Other</option>
+                    </select>
+                </span>
+            </div>
+            <button class="edit-btn" id="editAcademicBtn">Edit Academic Info</button>
+        </div>
+        
+        <!-- Account Settings Card -->
+        <div class="profile-card">
+            <h2 class="card-title">
+                <i class="fas fa-cog"></i> Account Settings
+            </h2>
+            <div class="info-item">
+                <span class="info-label">Account Status</span>
+                <span class="info-value">Active</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Membership</span>
+                <span class="info-value" style="color: var(--primary); font-weight: 600;">FREE</span>
+            </div>
+            <button class="edit-btn" style="background-color: #ff7675; margin-top: 20px;" onclick="handleLogout()">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="auth-utils.js"></script>
+    <script>
+        // Back button functionality
+        document.querySelector('.back-btn').addEventListener('click', () => {
+            window.history.back();
+        });
+        
+        // Edit profile functionality
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const nameInput = document.getElementById('nameInput');
+        const mobileInput = document.getElementById('mobileInput');
+        const dobInput = document.getElementById('dobInput');
+        const genderInput = document.getElementById('genderInput');
+        const profileName = document.getElementById('profileName');
+        let isEditing = false;
+
+        // Academic info editing functionality
+        const editAcademicBtn = document.getElementById('editAcademicBtn');
+        const educationInput = document.getElementById('educationInput');
+        const targetExamInput = document.getElementById('targetExamInput');
+        let isEditingAcademic = false;
+
+        // Update profile name when input changes
+        nameInput.addEventListener('input', function() {
+            profileName.textContent = this.value || 'Enter your name';
+        });
+
+        editProfileBtn.addEventListener('click', function() {
+            isEditing = !isEditing;
+            
+            if (isEditing) {
+                // Enable editing
+                nameInput.disabled = false;
+                mobileInput.disabled = false;
+                dobInput.disabled = false;
+                genderInput.disabled = false;
+                
+                this.textContent = 'Save Changes';
+                this.classList.add('save');
+            } else {
+                // Save changes
+                nameInput.disabled = true;
+                mobileInput.disabled = true;
+                dobInput.disabled = true;
+                genderInput.disabled = true;
+                
+                this.textContent = 'Edit Profile';
+                this.classList.remove('save');
+                
+                // Update the profile name in the header
+                const newName = nameInput.value;
+                profileName.textContent = newName || 'Enter your name';
+                
+                // Here you would typically send the updated data to your server
+                const updatedData = {
+                    fullName: newName,
+                    mobile: mobileInput.value,
+                    dob: dobInput.value,
+                    gender: genderInput.value
+                };
+                console.log('Saving profile changes:', updatedData);
+            }
+        });
+
+        editAcademicBtn.addEventListener('click', function() {
+            isEditingAcademic = !isEditingAcademic;
+            
+            if (isEditingAcademic) {
+                // Enable editing
+                educationInput.disabled = false;
+                targetExamInput.disabled = false;
+                
+                this.textContent = 'Save Changes';
+                this.classList.add('save');
+            } else {
+                // Save changes
+                educationInput.disabled = true;
+                targetExamInput.disabled = true;
+                
+                this.textContent = 'Edit Academic Info';
+                this.classList.remove('save');
+                
+                // Here you would typically send the updated data to your server
+                const updatedAcademicData = {
+                    education: educationInput.value,
+                    targetExam: targetExamInput.value
+                };
+                console.log('Saving academic changes:', updatedAcademicData);
+            }
+        });
+        
+        // Logout functionality
+        function handleLogout() {
+            // Use auth manager to properly handle logout
+            authManager.removeToken();
+            
+            // Clear any stored user data
+            localStorage.removeItem('userData');
+            localStorage.removeItem('selectedCourse');
+            localStorage.removeItem('courseData');
+            
+            // Redirect to index page
+            window.location.href = 'index.html';
+        }
+        
+        // Function to set membership status
+        function setMembershipStatus() {
+            // Get user data from localStorage or set default
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            const membership = userData.membership || 'free';
+            
+            // Update profile badge in header
+            const profileBadge = document.querySelector('.profile-badge');
+            if (membership === 'premium' || membership === 'pro') {
+                profileBadge.textContent = 'Premium Member';
+                profileBadge.style.backgroundColor = 'rgba(255, 215, 0, 0.3)'; // Gold background
+                profileBadge.style.color = '#FFD700';
+            } else {
+                profileBadge.textContent = 'Free Member';
+                profileBadge.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                profileBadge.style.color = 'white';
+            }
+            
+            // Update membership status in account settings
+            const membershipStatus = document.querySelector('.info-value[style*="color: var(--primary)"]');
+            if (membershipStatus) {
+                if (membership === 'premium' || membership === 'pro') {
+                    membershipStatus.textContent = 'PREMIUM';
+                    membershipStatus.style.color = '#FFD700';
+                    membershipStatus.style.fontWeight = '600';
+                } else {
+                    membershipStatus.textContent = 'FREE';
+                    membershipStatus.style.color = 'var(--primary)';
+                    membershipStatus.style.fontWeight = '600';
+                }
+            }
+        }
+        
+        // Initialize membership status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setMembershipStatus();
+        });
+    </script>
+</body>
+</html>

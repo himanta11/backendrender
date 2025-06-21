@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspirant - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: rgba(108, 92, 231, 0.1);
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --card-shadow: 0 10px 20px -5px rgba(108, 92, 231, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        body {
+            display: flex;
+            background-color: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Fixed Header Styles */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 80px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.1);
+            z-index: 90;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            position: relative;
+            z-index: 10000;
+        }
+        
+        .mobile-menu-btn i {
+            font-size: 20px;
+            color: var(--text);
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background-color: white;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 5px 0 30px rgba(108, 92, 231, 0.1);
+            padding: 25px 0;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            left: 0;
+            top: 0;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .sidebar-placeholder {
+            height: 80px;
+            background-color: var(--primary-light);
+            margin: 0 25px 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+        
+        .nav-item {
+            padding: 14px 20px;
+            margin: 6px 0;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-light);
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+            text-decoration: none;
+        }
+        
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .nav-item:nth-child(1) { animation-delay: 0.1s; }
+        .nav-item:nth-child(2) { animation-delay: 0.15s; }
+        .nav-item:nth-child(3) { animation-delay: 0.2s; }
+        .nav-item:nth-child(4) { animation-delay: 0.25s; }
+        .nav-item:nth-child(5) { animation-delay: 0.3s; }
+        .nav-item:nth-child(6) { animation-delay: 0.35s; }
+        .nav-item:nth-child(7) { animation-delay: 0.4s; }
+        
+        .nav-item.active, .nav-item:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .nav-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .coming-soon-badge {
+            margin-left: auto;
+            color: #FFD700;
+            font-size: 14px;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+            padding-top: 100px;
+            transition: margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .search-bar {
+            flex: 1;
+            min-width: 250px;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            font-size: 16px;
+            outline: none;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 18px;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .notification-btn, .profile-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .notification-btn:hover, .profile-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.2);
+        }
+        
+        .notification-btn::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4757;
+            border-radius: 50%;
+            top: 10px;
+            right: 10px;
+            border: 2px solid white;
+        }
+        
+        .profile-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* Dashboard Content */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .welcome-banner h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+        
+        .welcome-banner p {
+            max-width: 60%;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            top: -50px;
+            right: -50px;
+            border-radius: 50%;
+        }
+        
+        /* Streak Card Styles */
+        .streak-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 15px;
+            max-width: fit-content;
+        }
+        
+        .streak-count {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .streak-count::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60%;
+            width: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .streak-info {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .streak-info strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .streak-info span {
+            font-size: 12px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.2);
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .progress-card {
+            position: relative;
+        }
+        
+        .course-name {
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 17px;
+        }
+        
+        .progress-container {
+            height: 10px;
+            background-color: var(--border);
+            border-radius: 5px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+            width: 65%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+        
+        /* Start Learning Card Styles */
+        .start-learning-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .start-learning-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+        }
+        
+        .start-learning-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .start-learning-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            max-width: 80%;
+        }
+        
+        .start-learning-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .start-learning-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+        }
+        
+        .course-select-container {
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .course-select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background-color: white;
+            font-size: 15px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+        
+        .confirm-course-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .confirm-course-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .upcoming-test {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .upcoming-test:hover {
+            transform: translateX(5px);
+        }
+        
+        .upcoming-test:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .test-date {
+            width: 55px;
+            height: 55px;
+            background-color: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .test-date .day {
+            font-size: 20px;
+            line-height: 1;
+        }
+        
+        .test-date .month {
+            font-size: 13px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        
+        .test-info h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .test-info p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .new-course {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .new-course:hover {
+            background-color: var(--primary-light);
+            transform: translateX(5px);
+        }
+        
+        .course-thumbnail {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .course-details h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .course-details p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .action-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 30px 20px;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-8px);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 24px;
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+        
+        .action-card h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        
+        .action-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            max-width: 80%;
+        }
+        
+        .ai-assistant-container {
+            margin-top: 30px;
+        }
+        
+        .ai-assistant-box {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .ai-assistant-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .ai-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        
+        .ai-tab {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-tab.active, .ai-tab:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .ai-input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            position: relative;
+        }
+        
+        .ai-input {
+            flex: 1;
+            padding: 12px 20px;
+            padding-right: 50px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            outline: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-input:focus {
+            border-color: var(--primary);
+        }
+        
+        .ai-input::placeholder {
+            color: var(--text-light);
+        }
+        
+        .ai-send-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-send-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .ai-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .ai-attach-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-attach-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin: 40px 0 20px;
+            font-weight: 600;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 240px;
+            }
+            .fixed-header {
+                left: 240px;
+            }
+            .main-content {
+                margin-left: 240px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -280px;
+            }
+            .sidebar.open {
+                left: 0;
+            }
+            .fixed-header {
+                left: 0;
+                z-index: 9998;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 25px 15px;
+                padding-top: 100px;
+            }
+            .mobile-menu-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
+            }
+            .welcome-banner p {
+                max-width: 100%;
+            }
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .card {
+                padding: 12px;
+            }
+            .fixed-header {
+                padding: 0 12px;
+                height: 70px;
+            }
+            .header-content {
+                gap: 10px;
+            }
+            .search-bar {
+                min-width: 150px;
+            }
+            .search-bar input {
+                padding: 8px 12px 8px 35px;
+                font-size: 13px;
+            }
+            .search-bar i {
+                left: 10px;
+                font-size: 14px;
+            }
+            .notification-btn, .profile-btn {
+                width: 35px;
+                height: 35px;
+            }
+            .notification-btn::after {
+                width: 7px;
+                height: 7px;
+                top: 7px;
+                right: 7px;
+            }
+            .welcome-banner {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .welcome-banner h1 {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+            .welcome-banner p {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+            .streak-card {
+                padding: 10px;
+                gap: 12px;
+            }
+            .streak-count {
+                font-size: 22px;
+                padding-right: 12px;
+            }
+            .streak-info strong {
+                font-size: 13px;
+            }
+            .streak-info span {
+                font-size: 11px;
+            }
+            .card-header {
+                margin-bottom: 12px;
+            }
+            .card-title {
+                font-size: 16px;
+            }
+            .start-learning-card {
+                padding: 15px 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                min-height: 200px;
+            }
+            .start-learning-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .start-learning-title {
+                font-size: 15px;
+                margin-bottom: 8px;
+                text-align: center;
+                line-height: 1.3;
+                padding: 0 5px;
+            }
+            .start-learning-desc {
+                font-size: 12px;
+                margin-bottom: 15px;
+                text-align: center;
+                line-height: 1.4;
+                padding: 0 5px;
+            }
+            .start-learning-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+                white-space: nowrap;
+                min-width: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+            }
+            .start-learning-btn i {
+                font-size: 12px;
+            }
+            .course-thumbnail {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            .course-details h4 {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            .course-details p {
+                font-size: 10px;
+            }
+            .new-course {
+                padding: 6px;
+                gap: 8px;
+                margin-bottom: 8px;
+            }
+            .test-date {
+                width: 40px;
+                height: 40px;
+            }
+            .test-date .day {
+                font-size: 16px;
+            }
+            .test-date .month {
+                font-size: 10px;
+            }
+            .test-info h4 {
+                font-size: 12px;
+            }
+            .test-info p {
+                font-size: 10px;
+            }
+            .upcoming-test {
+                padding: 10px 0;
+                gap: 10px;
+            }
+            .action-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+            .action-card h3 {
+                font-size: 15px;
+                margin-bottom: 5px;
+            }
+            .action-card p {
+                font-size: 11px;
+            }
+            .ai-assistant-box {
+                padding: 12px;
+            }
+            .ai-assistant-header {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+            .ai-tabs {
+                gap: 6px;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+            .ai-tab {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            .ai-input {
+                padding: 8px 12px 8px 35px;
+                font-size: 12px;
+            }
+            .ai-send-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+            .ai-attach-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+                gap: 5px;
+            }
+            .section-title {
+                font-size: 18px;
+                margin: 25px 0 12px;
+            }
+            .main-content {
+                padding: 15px 10px;
+                padding-top: 85px;
+            }
+        }
+        
+        /* Add these styles in the existing style section */
+        .locked-item {
+            position: relative;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .locked-item:hover::after {
+            content: 'Coming Soon';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+        
+        .locked-item:hover::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--primary) transparent transparent transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="fixed-header" id="fixedHeader">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-bar">
+                    <i class="fas fa-search" onclick="handleSearch()"></i>
+                    <input type="text" id="searchInput" placeholder="Search any courses" onkeypress="handleSearch(event)">
+                </div>
+            </div>
+            <div class="user-actions">
+                <div class="notification-btn" onclick="window.location.href='notification.html'">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="profile-btn" onclick="window.location.href='profile.html'">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-placeholder">Aspirant</div>
+        <ul class="nav-menu">
+            <li class="nav-item active">
+                <a href="index.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="courses.html">
+                    <i class="fas fa-book-open"></i>
+                    <span>Courses</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mocktest.html">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Mock Tests</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pyq.html">
+                    <i class="fas fa-file-alt"></i>
+                    <span>PYQs</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="locked-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Current Affairs</span>
+                    <i class="fas fa-lock coming-soon-badge"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="performance.html">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Performance</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pyqreel.html" onclick="window.location.href='pyqreel.html'">
+                    <i class="fas fa-scroll"></i>
+                    <span>Reel</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pricing.html">
+                    <i class="fas fa-tags"></i>
+                    <span>Pricing</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="main-content" id="mainContent">
+        <!-- Welcome Banner - Changes based on course selection -->
+        <div class="welcome-banner" id="welcomeBanner">
+            <h1 id="welcomeTitle">Welcome back, Student!</h1>
+            <p id="welcomeMessage">You're making great progress. Keep up the good work!</p>
+            <!-- Streak card will be shown here when user selects a course -->
+            <div id="streakContainer" style="display: none;">
+                <div class="streak-card">
+                    <div class="streak-count" id="streakCount">5</div>
+                    <div class="streak-info">
+                        <strong>Day Streak</strong>
+                        <span>Keep learning to maintain your streak!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Grid - 2x2 Layout -->
+        <div class="dashboard-grid">
+            <!-- Course Progress Card - Changes based on course selection -->
+            <div class="card" id="progressCard">
+                <!-- This content will be replaced when user selects a course -->
+                <div class="start-learning-card" id="startLearningCard">
+                    <div class="start-learning-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="start-learning-title">Start Your Learning Journey</h3>
+                    <button class="start-learning-btn" id="startLearningBtn">Select Course</button>
+                </div>
+                
+                <!-- This will be shown when user has selected a course -->
+                <div class="progress-card" id="userProgressCard" style="display: none;">
+                    <div class="card-header">
+                        <div class="card-title">Your Progress</div>
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <div class="course-name" id="selectedCourseName">RRB NTPC Complete Course</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="completedText">0% Completed</span>
+                        <span id="remainingText">100% Remaining</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- New Launches -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">New Launches</div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="new-course">
+                    <div class="course-thumbnail">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="course-details">
+                        <h4>RRB NTPC FULL COURSE</h4>
+                        <p>Starting from 5 June</p>
+                    </div>
+                </div>
+                <div class="new-course">
+                    <div class="course-thumbnail">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="course-details">
+                        <h4>SSC CGL FULL COURSE</h4>
+                        <p>Starting from 10 June</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upcoming Mock Tests -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Upcoming Mock Tests</div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="upcoming-test">
+                    <div class="test-date">
+                        <div class="day">15</div>
+                        <div class="month">JUN</div>
+                    </div>
+                    <div class="test-info">
+                        <h4>RRB NTPC CBT 1</h4>
+                        <p>9:00 AM - 90 minutes</p>
+                    </div>
+                </div>
+                <div class="upcoming-test">
+                    <div class="test-date">
+                        <div class="day">20</div>
+                        <div class="month">JUN</div>
+                    </div>
+                    <div class="test-info">
+                        <h4>SSC CGL Tier 1</h4>
+                        <p>10:30 AM - 60 minutes</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Watch Reels Card -->
+            <div class="card action-card" onclick="window.location.href='pyqreel.html'">
+                <div class="action-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <h3>Watch Reels</h3>
+                <p>Master any subjects while scrolling reels</p>
+            </div>
+        </div>
+        
+        <!-- AI Assistant Box -->
+        <div class="ai-assistant-container">
+            <div class="card ai-assistant-box">
+                <div class="ai-assistant-header">ASPIRANT AI</div>
+                <div class="ai-tabs">
+                    <button class="ai-tab active" onclick="navigateToAskDoubt('concept')">Concept Explainer</button>
+                    <button class="ai-tab" onclick="navigateToAskDoubt('doubt')">Doubt Solver</button>
+                    <button class="ai-tab" onclick="navigateToAskDoubt('planner')">Study Planner</button>
+                    <button class="ai-tab" onclick="navigateToAskDoubt('test')">Test Preparation</button>
+                </div>
+                <div class="ai-input-container">
+                    <input type="text" class="ai-input" placeholder="Ask anything about your studies...">
+                    <button class="ai-send-btn" onclick="navigateToAskDoubt()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="ai-actions">
+                    <label class="ai-attach-btn">
+                        <i class="fas fa-paperclip"></i>
+                        <span>Attach File</span>
+                        <input type="file" id="fileUpload" style="display: none;" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script src="config.js"></script>
+    <script src="auth-utils.js"></script>
+    <script>
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check authentication on page load
+            await authManager.checkAuthOnLoad();
+            
+            // Start auto-refresh for persistent login
+            authManager.startAutoRefresh();
+            
+            // Get user data
+            try {
+                const headers = await authManager.getAuthHeaders();
+                const response = await fetch(`${API_CONFIG.baseUrl}/users/me`, {
+                    headers: headers
+                });
+                
+                if (response.ok) {
+                    const userData = await response.json();
+                    // Update welcome message with user's email
+                    const welcomeTitle = document.querySelector('.welcome-title');
+                    if (welcomeTitle) {
+                        welcomeTitle.textContent = `Welcome back, ${userData.email}!`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error getting user data:', error);
+                authManager.handleAuthError();
+            }
+
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const profileBtn = document.querySelector('.profile-btn');
+
+            function toggleMobileMenu() {
+                sidebar.classList.toggle('open');
+                sidebarOverlay.classList.toggle('active');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            sidebarOverlay.addEventListener('click', toggleMobileMenu);
+            profileBtn.addEventListener('click', function() {
+                window.location.href = 'profile.html';
+            });
+        });
+
+        // Handle logout
+        function handleLogout() {
+            authManager.removeToken();
+            window.location.href = 'index.html';
+        }
+
+        // Course selection elements
+        const startLearningBtn = document.getElementById('startLearningBtn');
+        const courseSelectContainer = document.getElementById('courseSelectContainer');
+        const courseSelect = document.getElementById('courseSelect');
+        const confirmCourseBtn = document.getElementById('confirmCourseBtn');
+        const startLearningCard = document.getElementById('startLearningCard');
+        const userProgressCard = document.getElementById('userProgressCard');
+        const progressBar = document.getElementById('progressBar');
+        const completedText = document.getElementById('completedText');
+        const remainingText = document.getElementById('remainingText');
+        const selectedCourseName = document.getElementById('selectedCourseName');
+        
+        // Welcome banner elements
+        const welcomeBanner = document.getElementById('welcomeBanner');
+        const welcomeTitle = document.getElementById('welcomeTitle');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const streakContainer = document.getElementById('streakContainer');
+        const streakCount = document.getElementById('streakCount');
+        
+        // Check if user has selected a course (in a real app, this would come from backend/localStorage)
+        let hasSelectedCourse = localStorage.getItem('selectedCourse') || false;
+        
+        // Initialize the dashboard based on user state
+        function initializeDashboard() {
+            if (hasSelectedCourse) {
+                // User has selected a course - show progress card
+                startLearningCard.style.display = 'none';
+                userProgressCard.style.display = 'block';
+                
+                // Set course details
+                const courseData = JSON.parse(localStorage.getItem('courseData'));
+                selectedCourseName.textContent = courseData.name;
+                progressBar.style.width = courseData.progress + '%';
+                completedText.textContent = courseData.progress + '% Completed';
+                remainingText.textContent = (100 - courseData.progress) + '% Remaining';
+                
+                // Update welcome banner to show streak
+                welcomeTitle.textContent = 'Great job, Student!';
+                welcomeMessage.textContent = 'Your consistent efforts will pay off!';
+                streakContainer.style.display = 'block';
+                streakCount.textContent = courseData.streak || '3'; // Default to 3 if no streak
+            } else {
+                // User hasn't selected a course - show start learning card
+                startLearningCard.style.display = 'flex';
+                userProgressCard.style.display = 'none';
+                courseSelectContainer.style.display = 'none';
+                
+                // Default welcome message
+                welcomeTitle.textContent = 'Welcome back, Student!';
+                welcomeMessage.textContent = 'Start your learning journey by selecting a course!';
+                streakContainer.style.display = 'none';
+            }
+        }
+        
+        // Show course selection dropdown
+        startLearningBtn.addEventListener('click', () => {
+            window.location.href = 'courses.html';
+        });
+        
+        // Confirm course selection
+        confirmCourseBtn.addEventListener('click', () => {
+            if (courseSelect.value) {
+                // Save course selection (in a real app, this would go to backend)
+                const courseData = {
+                    name: courseSelect.options[courseSelect.selectedIndex].text,
+                    id: courseSelect.value,
+                    progress: 0, // Start with 0% progress
+                    streak: 1 // Start with 1 day streak
+                };
+                
+                localStorage.setItem('selectedCourse', true);
+                localStorage.setItem('courseData', JSON.stringify(courseData));
+                hasSelectedCourse = true;
+                
+                // Update the UI
+                initializeDashboard();
+                
+                // Simulate progress increasing over time
+                simulateProgress();
+            } else {
+                alert('Please select a course');
+            }
+        });
+        
+        // Simulate progress increasing (for demo purposes)
+        function simulateProgress() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                if (progress < 65) { // Cap at 65% for demo
+                    progress += 5;
+                    progressBar.style.width = progress + '%';
+                    completedText.textContent = progress + '% Completed';
+                    remainingText.textContent = (100 - progress) + '% Remaining';
+                    
+                    // Update localStorage
+                    const courseData = JSON.parse(localStorage.getItem('courseData'));
+                    courseData.progress = progress;
+                    localStorage.setItem('courseData', JSON.stringify(courseData));
+                    
+                    // Randomly increase streak (for demo)
+                    if (Math.random() > 0.7 && progress % 15 === 0) {
+                        const currentStreak = parseInt(streakCount.textContent);
+                        streakCount.textContent = currentStreak + 1;
+                        courseData.streak = currentStreak + 1;
+                        localStorage.setItem('courseData', JSON.stringify(courseData));
+                    }
+                } else {
+                    clearInterval(interval);
+                }
+            }, 2000);
+        }
+        
+        // Function to navigate to aitalk.html
+        function navigateToAskDoubt(type = '') {
+            const message = document.querySelector('.ai-input').value;
+            const fileInput = document.getElementById('fileUpload');
+            const file = fileInput.files[0];
+            
+            let url = `aitalk.html?type=${type}`;
+            
+            if (message.trim()) {
+                const encodedMessage = encodeURIComponent(message);
+                url += `&message=${encodedMessage}`;
+            }
+            
+            if (file) {
+                // Store file in localStorage temporarily
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const fileData = {
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: e.target.result,
+                        timestamp: new Date().toISOString()
+                    };
+                    localStorage.setItem('tempFileData', JSON.stringify(fileData));
+                    // Clear the input field and file
+                    document.querySelector('.ai-input').value = '';
+                    fileInput.value = '';
+                    window.location.href = url;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // Clear the input field
+                document.querySelector('.ai-input').value = '';
+                window.location.href = url;
+            }
+        }
+        
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.ai-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (cardPosition < screenPosition) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // File upload handling
+        const fileUpload = document.getElementById('fileUpload');
+        fileUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Show file name in the input field
+                const aiInput = document.querySelector('.ai-input');
+                const fileSize = (file.size / (1024 * 1024)).toFixed(1);
+                aiInput.value = `Attached file: ${file.name} (${fileSize} MB)`;
+            }
+        });
+
+        // Send button click handler
+        document.querySelector('.ai-send-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default behavior
+            const fileInput = document.getElementById('fileUpload');
+            const file = fileInput.files[0];
+            const message = document.querySelector('.ai-input').value;
+            
+            if (file || message.trim()) {
+                navigateToAskDoubt();
+            }
+        });
+
+        // Add event listener for Enter key in the input field
+        document.querySelector('.ai-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent default behavior
+                navigateToAskDoubt();
+            }
+        });
+
+        // Add this function to handle search
+        function handleSearch(event) {
+            const searchInput = document.getElementById('searchInput');
+            if (event && event.key === 'Enter' || !event) {
+                if (searchInput.value.trim() !== '') {
+                    window.location.href = 'courses.html';
+                }
+            }
+        }
+
+        // Debug function
+        function debugElement(element, name) {
+            console.log(`${name} styles:`, {
+                display: window.getComputedStyle(element).display,
+                visibility: window.getComputedStyle(element).visibility,
+                position: window.getComputedStyle(element).position,
+                zIndex: window.getComputedStyle(element).zIndex,
+                left: window.getComputedStyle(element).left,
+                transform: window.getComputedStyle(element).transform
+            });
+        }
+
+        // Debug on load
+        window.addEventListener('load', function() {
+            debugElement(mobileMenuBtn, 'Mobile Menu Button (on load)');
+            debugElement(sidebar, 'Sidebar (on load)');
+        });
+
+        // Add this to the existing script section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent navigation for locked items
+            document.querySelectorAll('.locked-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

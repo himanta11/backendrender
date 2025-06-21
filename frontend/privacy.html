@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - ExamAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Gasket+One:wght@400;700&family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light: #2d2d3a;
+            --pink: #ff86eb;
+            --green: #b3f461;
+            --purple: #5e17eb;
+            --dark: #ffffff;
+            --glass: rgba(45, 45, 58, 0.15);
+            --blue: #011fbb;
+            --yellow: #ceff05;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(45, 45, 58, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-tab {
+            background-color: var(--blue);
+            border-radius: 20px;
+            padding: 10px 25px;
+            display: inline-block;
+        }
+        
+        .logo-tab span {
+            font-family: 'Gasket One', sans-serif;
+            color: var(--yellow);
+            font-size: 24px;
+            text-transform: lowercase;
+            font-weight: 700;
+        }
+
+        /* Privacy Policy Content */
+        .privacy-content {
+            padding: 120px 0 60px;
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            padding: 60px 20px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .privacy-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .privacy-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(45, 45, 58, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .policy-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(94, 23, 235, 0.1);
+        }
+
+        .policy-section h2 {
+            color: var(--purple);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .policy-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--pink);
+            border-radius: 3px;
+        }
+
+        .policy-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: var(--light);
+        }
+
+        .policy-section ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .policy-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        /* Footer Section */
+        footer {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            color: var(--dark);
+            padding: 80px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links,
+        .policy-links,
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-links a,
+        .policy-links a,
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover,
+        .policy-links a:hover,
+        .social-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .privacy-header h1 {
+                font-size: 2rem;
+            }
+
+            .policy-section {
+                padding: 30px 20px;
+            }
+
+            .policy-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo-tab">
+                    <span>aspirant</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Privacy Policy Content -->
+    <div class="privacy-content">
+        <div class="container">
+            <div class="privacy-header">
+                <h1>Privacy Policy</h1>
+                <p>Welcome to ASPIRANT AI. We are committed to protecting your privacy and ensuring you have a safe and enjoyable experience on our platform. This Privacy Policy explains how we collect, use, and protect your information when you use our services.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>Information We Collect</h2>
+                <p>We collect information that you provide directly to us when using our services:</p>
+                <ul>
+                    <li>Account information (name, email, phone number)</li>
+                    <li>Educational background and preferences</li>
+                    <li>Performance data from mock tests and practice sessions</li>
+                    <li>Usage data and interaction with our platform</li>
+                    <li>Device information and technical data</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>How We Use Your Information</h2>
+                <p>We use the collected information for the following purposes:</p>
+                <ul>
+                    <li>Personalizing your learning experience</li>
+                    <li>Providing AI-powered recommendations</li>
+                    <li>Analyzing and improving our services</li>
+                    <li>Communicating updates and relevant content</li>
+                    <li>Ensuring platform security and preventing fraud</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>Data Security</h2>
+                <p>We implement appropriate security measures to protect your personal information:</p>
+                <ul>
+                    <li>Encryption of sensitive data</li>
+                    <li>Regular security audits and updates</li>
+                    <li>Secure data storage and transmission</li>
+                    <li>Access controls and authentication</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>Your Rights</h2>
+                <p>You have the following rights regarding your personal information:</p>
+                <ul>
+                    <li>Access your personal data</li>
+                    <li>Request corrections or updates</li>
+                    <li>Delete your account and associated data</li>
+                    <li>Opt-out of marketing communications</li>
+                    <li>Export your data in a portable format</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>Contact Us</h2>
+                <p>If you have any questions about our Privacy Policy or how we handle your data, please contact us:</p>
+                <ul>
+                    <li>Email: privacy@aspirant.com</li>
+                    <li>Phone: +1 (555) 123-4567</li>
+                    <li>Address: 123 Learning Street, Education City, 12345</li>
+                </ul>
+            </div>
+
+            <div class="last-updated">
+                Last updated: January 2024
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="/company">Company</a>
+                    <a href="/about">About</a>
+                    <a href="/founders">Founders</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="footer-policies">
+                    <div class="policy-links">
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/terms">Terms & Conditions</a>
+                        <a href="/pricing">Pricing</a>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">YouTube</a>
+                    <a href="#">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

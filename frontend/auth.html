@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - Aspirant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light: #2d2d3a;
+            --pink: #ff86eb;
+            --green: #b3f461;
+            --purple: #5e17eb;
+            --dark: #ffffff;
+            --glass: rgba(45, 45, 58, 0.15);
+            --blue: #011fbb;
+            --yellow: #ceff05;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated Background */
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            background: rgba(94, 23, 235, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+            background: rgba(255, 134, 235, 0.1);
+        }
+        
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 100px;
+            right: -50px;
+            animation-delay: 2s;
+            background: rgba(179, 244, 97, 0.1);
+        }
+        
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(45, 45, 58, 0.2);
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .auth-header {
+            text-align: center;
+            padding: 40px 30px 20px;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 134, 235, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
+        
+        .auth-header * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--yellow);
+            margin-bottom: 10px;
+            text-transform: lowercase;
+        }
+        
+        .auth-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+        
+        .auth-box {
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .auth-nav {
+            display: flex;
+            background: rgba(94, 23, 235, 0.1);
+            border-radius: 15px;
+            padding: 5px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .auth-nav-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            color: var(--purple);
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .auth-nav-btn.active {
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(94, 23, 235, 0.3);
+        }
+        
+        .auth-nav-btn:hover:not(.active) {
+            background: rgba(94, 23, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--light);
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(45, 45, 58, 0.1);
+            border-radius: 15px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: rgba(248, 249, 250, 0.8);
+            color: var(--light);
+        }
+        
+        .form-input:focus {
+            border-color: var(--purple);
+            outline: none;
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(94, 23, 235, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .form-input::placeholder {
+            color: #999;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        
+        .password-toggle:hover {
+            color: var(--purple);
+            transform: scale(1.1);
+        }
+        
+        .auth-submit-btn {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .auth-submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .auth-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(94, 23, 235, 0.4);
+        }
+        
+        .auth-submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Enhanced Mobile Responsive Styles */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .auth-container {
+                max-width: 100%;
+                margin: 0;
+                border-radius: 20px;
+            }
+            
+            .auth-header {
+                padding: 30px 20px 15px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .auth-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .auth-box {
+                padding: 30px 20px;
+            }
+
+            .form-label {
+                font-size: 13px;
+            }
+
+            .form-input {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+            
+            .password-toggle {
+                right: 16px;
+                top: 47px;
+            }
+
+            .auth-submit-btn {
+                padding: 14px 16px;
+                margin-top: 15px;
+            }
+            
+            .auth-nav-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Loading animation */
+        .loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="auth-container">
+        <!-- Header Section -->
+        <div class="auth-header">
+            <div class="logo">aspirant</div>
+            <div class="auth-subtitle">Your Ultimate Exam Companion</div>
+        </div>
+
+        <div class="auth-box">
+            <div class="auth-nav">
+                <button class="auth-nav-btn active" onclick="showForm('login')">Login</button>
+                <button class="auth-nav-btn" onclick="showForm('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                    <span class="password-toggle" onclick="togglePassword('loginPassword')">👁️</span>
+                </div>
+                
+                <button type="submit" class="auth-submit-btn">Login to Dashboard</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form" onsubmit="signup(event)">
+                <div class="form-group">
+                    <label for="signupUsername" class="form-label">Username</label>
+                    <input type="text" id="signupUsername" class="form-input" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupEmail" class="form-label">Email Address</label>
+                    <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupPassword" class="form-label">Password</label>
+                    <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required>
+                    <span class="password-toggle" onclick="togglePassword('signupPassword')">👁️</span>
+                </div>
+                
+                <button type="submit" class="auth-submit-btn">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="auth-utils.js"></script>
+    <script>
+        // Toggle between login and signup forms
+        function showForm(formId) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const loginBtn = document.querySelector('.auth-nav-btn:first-child');
+            const signupBtn = document.querySelector('.auth-nav-btn:last-child');
+            
+            // Remove active classes
+            loginForm.classList.remove('active');
+            signupForm.classList.remove('active');
+            loginBtn.classList.remove('active');
+            signupBtn.classList.remove('active');
+            
+            // Add active classes
+            document.getElementById(formId + 'Form').classList.add('active');
+            if (formId === 'login') {
+                loginBtn.classList.add('active');
+            } else {
+                signupBtn.classList.add('active');
+            }
+        }
+        
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const toggle = input.nextElementSibling;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.textContent = '👁️‍🗨️';
+            } else {
+                input.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        async function login(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('.auth-submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Logging in...';
+            submitBtn.disabled = true;
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const formData = new URLSearchParams();
+            formData.append('username', email);
+            formData.append('password', password);
+
+            try {
+                const response = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.auth.login, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Login failed');
+                }
+
+                const data = await response.json();
+                authManager.setToken(data.access_token);
+                
+                submitBtn.textContent = 'Success! Redirecting...';
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred during login. Please make sure the server is running at ' + API_CONFIG.baseUrl);
+                
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        async function signup(event) {
+            event.preventDefault();
+            const submitBtn = event.target.querySelector('.auth-submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Creating Account...';
+            submitBtn.disabled = true;
+            
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            try {
+                // Create user
+                const response = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.auth.signup, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Signup failed');
+                }
+
+                submitBtn.textContent = 'Logging you in...';
+
+                // Login after successful signup
+                const formData = new URLSearchParams();
+                formData.append('username', email);
+                formData.append('password', password);
+
+                const loginResponse = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.auth.login, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData
+                });
+
+                if (!loginResponse.ok) {
+                    throw new Error('Auto-login after signup failed');
+                }
+
+                const data = await loginResponse.json();
+                authManager.setToken(data.access_token);
+                
+                submitBtn.textContent = 'Success! Redirecting...';
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+            } catch (error) {
+                console.error('Signup error:', error);
+                alert('An error occurred during signup. Please make sure the server is running at ' + API_CONFIG.baseUrl);
+                
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

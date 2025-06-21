@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Card</title>
+    <!-- Razorpay Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        :root {
+            --pink: #ff86eb;
+            --green: #b3f461;
+            --purple: #5e17eb;
+            --white: #ffffff;
+            --black: #333333;
+            --light-gray: #f5f5f5;
+            --dark-purple: #4a10d1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 20px;
+        }
+
+        .pricing-container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.free {
+            border: 2px solid var(--green);
+        }
+
+        .pricing-card.pro {
+            border: 2px solid var(--purple);
+        }
+
+        .pricing-header {
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .free .pricing-header {
+            background-color: rgba(179, 244, 97, 0.1);
+        }
+
+        .pro .pricing-header {
+            background-color: rgba(94, 23, 235, 0.1);
+        }
+
+        .pricing-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .free .pricing-title {
+            color: var(--green);
+        }
+
+        .pro .pricing-title {
+            color: var(--purple);
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 15px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .free .pricing-price {
+            color: var(--green);
+        }
+
+        .pro .pricing-price {
+            color: var(--purple);
+        }
+
+        .pricing-period {
+            font-size: 14px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .pricing-features {
+            padding: 0 25px 25px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .feature:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .free .feature:before {
+            background-color: var(--green);
+            color: var(--black);
+        }
+
+        .pro .feature:before {
+            background-color: var(--purple);
+            color: var(--white);
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: var(--black);
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: var(--purple);
+        }
+
+        .pricing-button {
+            display: block;
+            width: calc(100% - 50px);
+            margin: 0 auto 25px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .free .pricing-button {
+            background-color: var(--green);
+            color: var(--black);
+        }
+
+        .free .pricing-button:hover {
+            background-color: #a0e04a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(179, 244, 97, 0.4);
+        }
+
+        .pro .pricing-button {
+            background-color: var(--purple);
+            color: var(--white);
+        }
+
+        .pro .pricing-button:hover {
+            background-color: var(--dark-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.4);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            width: 120px;
+            padding: 5px 0;
+            background-color: var(--pink);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(255, 134, 235, 0.3);
+        }
+
+        .decoration {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .decoration-1 {
+            width: 100px;
+            height: 100px;
+            background-color: var(--pink);
+            top: -30px;
+            left: -30px;
+        }
+
+        .decoration-2 {
+            width: 60px;
+            height: 60px;
+            background-color: var(--green);
+            bottom: 20px;
+            right: -20px;
+        }
+
+        /* Loading state for button */
+        .pricing-button.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .pricing-button.loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <!-- Free Trial Card -->
+        <div class="pricing-card free">
+            <div class="pricing-header">
+                <div class="decoration decoration-1"></div>
+                <div class="decoration decoration-2"></div>
+                <h2 class="pricing-title">Free Trial</h2>
+                <div class="pricing-price">₹0</div>
+                <div class="pricing-period">Limited Access</div>
+            </div>
+            <div class="pricing-features">
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">10 PYQs daily</span> - Access to previous year questions</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">1 Mock Test weekly</span> - Full-length practice test</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">10 Reel Scrolls</span> - Bite-sized learning content</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">Basic AI Chat</span> - Limited question support</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text">Ads supported experience</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text">Community access</div>
+                </div>
+            </div>
+            <button class="pricing-button">Start Free Trial</button>
+        </div>
+
+        <!-- Pro Card -->
+        <div class="pricing-card pro">
+            <div class="pricing-header">
+                <div class="decoration decoration-1"></div>
+                <div class="decoration decoration-2"></div>
+                <div class="badge">POPULAR</div>
+                <h2 class="pricing-title">Pro Plan</h2>
+                <div class="pricing-price">₹99</div>
+                <div class="pricing-period">First 3 months special offer</div>
+            </div>
+            <div class="pricing-features">
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">Unlimited PYQs</span> - All previous year questions</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">Unlimited Mock Tests</span> - Detailed analytics</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">Unlimited Reel Scrolls</span> - All learning content</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">Advanced AI Chat</span> - 24/7 question support</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">Weak Areas Detection</span> - Identify improvement areas</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-text"><span class="highlight">AI Explanations</span> - Detailed answer explanations</div>
+                </div>
+            </div>
+            <button class="pricing-button" id="proUpgradeBtn">Upgrade to Pro</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        let currentUser = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            
+            const freeTrialBtn = document.querySelector('.free .pricing-button');
+            const proUpgradeBtn = document.getElementById('proUpgradeBtn');
+
+            freeTrialBtn.addEventListener('click', function() {
+                alert('Starting your 7-day free trial... Enjoy your limited access!');
+            });
+
+            proUpgradeBtn.addEventListener('click', function() {
+                initiateProPayment();
+            });
+
+            // Add animation to cards on load
+            const cards = document.querySelectorAll('.pricing-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+
+        // Check if user is logged in
+        async function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please login first to access payment plans');
+                window.location.href = 'auth.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.users.me, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    currentUser = await response.json();
+                } else {
+                    localStorage.removeItem('token');
+                    window.location.href = 'auth.html';
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                window.location.href = 'auth.html';
+            }
+        }
+
+        // Initiate Pro Plan payment directly
+        async function initiateProPayment() {
+            const proUpgradeBtn = document.getElementById('proUpgradeBtn');
+            const originalText = proUpgradeBtn.textContent;
+            
+            try {
+                // Show loading state
+                proUpgradeBtn.classList.add('loading');
+                proUpgradeBtn.textContent = 'Processing...';
+                proUpgradeBtn.disabled = true;
+
+                // Get the Pro Plan from backend
+                const plansResponse = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.payment.plans);
+                if (!plansResponse.ok) {
+                    throw new Error('Failed to load payment plans');
+                }
+                
+                const plansData = await plansResponse.json();
+                const proPlan = plansData.plans.find(plan => plan.name === 'Pro Plan');
+                
+                if (!proPlan) {
+                    throw new Error('Pro Plan not found');
+                }
+
+                // Create payment order
+                const token = localStorage.getItem('token');
+                const orderResponse = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.payment.createOrder, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ plan_id: proPlan.id })
+                });
+                
+                if (!orderResponse.ok) {
+                    throw new Error('Failed to create payment order');
+                }
+                
+                const orderData = await orderResponse.json();
+                
+                // Initialize Razorpay checkout
+                const options = {
+                    key: orderData.key,
+                    amount: orderData.amount,
+                    currency: orderData.currency,
+                    name: 'Aspirant',
+                    description: `${proPlan.name} Subscription`,
+                    order_id: orderData.order_id,
+                    prefill: {
+                        name: currentUser?.username || '',
+                        email: currentUser?.email || ''
+                    },
+                    theme: {
+                        color: '#5e17eb'
+                    },
+                    handler: function(response) {
+                        verifyPayment(response);
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            // Reset button when modal is closed
+                            proUpgradeBtn.classList.remove('loading');
+                            proUpgradeBtn.textContent = originalText;
+                            proUpgradeBtn.disabled = false;
+                        }
+                    }
+                };
+                
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function(response) {
+                    alert('Payment failed: ' + response.error.description);
+                    proUpgradeBtn.classList.remove('loading');
+                    proUpgradeBtn.textContent = originalText;
+                    proUpgradeBtn.disabled = false;
+                });
+                
+                rzp.open();
+                
+            } catch (error) {
+                console.error('Error initiating payment:', error);
+                alert('Failed to initiate payment. Please try again.');
+                
+                // Reset button
+                proUpgradeBtn.classList.remove('loading');
+                proUpgradeBtn.textContent = originalText;
+                proUpgradeBtn.disabled = false;
+            }
+        }
+
+        // Verify payment
+        async function verifyPayment(response) {
+            const token = localStorage.getItem('token');
+            
+            try {
+                const verifyResponse = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.payment.verify, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature
+                    })
+                });
+                
+                if (verifyResponse.ok) {
+                    alert('Payment successful! Your Pro subscription has been activated.');
+                    window.location.href = 'home.html';
+                } else {
+                    throw new Error('Payment verification failed');
+                }
+                
+            } catch (error) {
+                console.error('Error verifying payment:', error);
+                alert('Payment verification failed. Please contact support with your payment ID: ' + response.razorpay_payment_id);
+            }
+        }
+    </script>
+</body>
+</html>

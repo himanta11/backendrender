@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspirant - Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: rgba(108, 92, 231, 0.1);
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --card-shadow: 0 10px 20px -5px rgba(108, 92, 231, 0.15);
+            --unread-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .header-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Notification Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .tab-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+        
+        /* Notification List */
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .notification-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            gap: 12px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+        
+        .notification-item.unread {
+            background-color: var(--unread-bg);
+        }
+        
+        .notification-item.unread::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .notification-text {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .notification-time {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 50px;
+            color: var(--text-light);
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+        
+        .empty-text {
+            color: var(--text-light);
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <button class="header-btn">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="header-title">Notifications</div>
+        <div class="header-actions">
+            <button class="header-btn">
+                <i class="fas fa-check-double"></i>
+            </button>
+            <button class="header-btn">
+                <i class="fas fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Notification Tabs -->
+        <div class="tabs">
+            <div class="tab active">All</div>
+            <div class="tab">Unread</div>
+            <div class="tab">System</div>
+            <div class="tab">Tests</div>
+        </div>
+        
+        <!-- Notification List -->
+        <div class="notification-list" style="display: none;">
+            <!-- Unread Notification -->
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">New Mock Test Available</div>
+                    <div class="notification-text">RRB NTPC Full Test 13 is now available. Test your preparation!</div>
+                    <div class="notification-time">10 min ago</div>
+                </div>
+            </div>
+            
+            <!-- Read Notification -->
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">Performance Update</div>
+                    <div class="notification-text">Your rank improved by 12 positions in last week's tests</div>
+                    <div class="notification-time">2 hours ago</div>
+                </div>
+            </div>
+            
+            <!-- System Notification -->
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">System Maintenance</div>
+                    <div class="notification-text">We'll be performing scheduled maintenance tomorrow from 2-4 AM</div>
+                    <div class="notification-time">Yesterday</div>
+                </div>
+            </div>
+            
+            <!-- Course Notification -->
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">New Course Content</div>
+                    <div class="notification-text">Chapter 5 of Quantitative Aptitude has been updated with new practice questions</div>
+                    <div class="notification-time">Yesterday</div>
+                </div>
+            </div>
+            
+            <!-- Achievement Notification -->
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">Achievement Unlocked!</div>
+                    <div class="notification-text">You've completed 20 mock tests. Keep up the good work!</div>
+                    <div class="notification-time">2 days ago</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="far fa-bell"></i>
+            </div>
+            <div class="empty-text">No new notifications</div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelector('.tab.active').classList.remove('active');
+                this.classList.add('active');
+                
+                // In a real app, this would filter notifications
+                console.log('Showing:', this.textContent.trim());
+            });
+        });
+        
+        // Mark all as read
+        document.querySelector('.header-actions .fa-check-double').closest('button').addEventListener('click', function() {
+            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                item.classList.remove('unread');
+            });
+            console.log('All notifications marked as read');
+        });
+        
+        // Back button
+        document.querySelector('.header-btn .fa-arrow-left').closest('button').addEventListener('click', function() {
+            window.history.back();
+        });
+    </script>
+</body>
+</html>

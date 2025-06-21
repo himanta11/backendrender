@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India's Premier Exam Selection Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-blue: #1a237e;
+            --dark-blue: #0d1440;
+            --accent-blue: #3949ab;
+            --light-blue: #e8eaf6;
+            --white: #ffffff;
+            --highlight: #5c6bc0;
+            --railway-orange: #f57c00;
+            --banking-green: #2e7d32;
+            --defense-red: #c62828;
+            --mba-purple: #6a1b9a;
+            --teaching-teal: #00897b;
+            --psc-indigo: #4527a0;
+            --engineering-blue: #0277bd;
+            --medical-red: #d32f2f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            padding: 30px 15px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: var(--primary-blue);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .header p {
+            color: #555;
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .exam-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-top: 4px solid var(--primary-blue);
+            position: relative;
+        }
+        
+        /* Category-specific border colors */
+        .railways { border-top-color: var(--railway-orange); }
+        .banking { border-top-color: var(--banking-green); }
+        .defense { border-top-color: var(--defense-red); }
+        .mba { border-top-color: var(--mba-purple); }
+        .teaching { border-top-color: var(--teaching-teal); }
+        .psc { border-top-color: var(--psc-indigo); }
+        .engineering { border-top-color: var(--engineering-blue); }
+        .medical { border-top-color: var(--medical-red); }
+        
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .coming-soon::after {
+            content: 'Coming Soon';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background-color: var(--medical-red);
+            color: white;
+            padding: 3px 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .card-header {
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .railways .card-header { background: linear-gradient(135deg, var(--railway-orange), #e65100); }
+        .banking .card-header { background: linear-gradient(135deg, var(--banking-green), #1b5e20); }
+        .defense .card-header { background: linear-gradient(135deg, var(--defense-red), #b71c1c); }
+        .mba .card-header { background: linear-gradient(135deg, var(--mba-purple), #4a148c); }
+        .teaching .card-header { background: linear-gradient(135deg, var(--teaching-teal), #00695c); }
+        .psc .card-header { background: linear-gradient(135deg, var(--psc-indigo), #311b92); }
+        .engineering .card-header { background: linear-gradient(135deg, var(--engineering-blue), #01579b); }
+        .medical .card-header { background: linear-gradient(135deg, var(--medical-red), #b71c1c); }
+        
+        .card-icon {
+            font-size: 26px;
+            margin-right: 12px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .exam-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0;
+            transition: max-height 0.4s ease;
+        }
+        
+        .exam-list.expanded {
+            max-height: 1000px;
+        }
+        
+        .exam-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .exam-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .exam-list::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 3px;
+        }
+        
+        .exam-item {
+            padding: 14px 18px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .exam-item:last-child {
+            border-bottom: none;
+        }
+        
+        .exam-item:hover {
+            background: var(--light-blue);
+        }
+        
+        .exam-abbr {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-right: 8px;
+            min-width: 55px;
+            font-size: 0.9rem;
+        }
+        
+        .exam-fullname {
+            color: #555;
+            font-size: 0.85rem;
+            flex: 1;
+        }
+        
+        .lock-icon {
+            width: 24px;
+            height: 24px;
+            margin-left: auto;
+            padding-right: 5px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFD700"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .locked {
+            opacity: 0.7;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .locked:hover::after {
+            content: "Coming Soon";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        .view-all {
+            text-align: center;
+            padding: 12px;
+            color: var(--accent-blue);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .view-all:hover {
+            background: var(--light-blue);
+        }
+        
+        .view-all .icon {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .view-all.expanded .icon {
+            transform: rotate(180deg);
+        }
+        
+        .hidden-exam {
+            display: none;
+        }
+        
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .exam-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        /* Staggered animation delays */
+        .exam-card:nth-child(1) { animation-delay: 0.1s; }
+        .exam-card:nth-child(2) { animation-delay: 0.2s; }
+        .exam-card:nth-child(3) { animation-delay: 0.3s; }
+        .exam-card:nth-child(4) { animation-delay: 0.4s; }
+        .exam-card:nth-child(5) { animation-delay: 0.5s; }
+        .exam-card:nth-child(6) { animation-delay: 0.6s; }
+        .exam-card:nth-child(7) { animation-delay: 0.7s; }
+        .exam-card:nth-child(8) { animation-delay: 0.8s; }
+        .exam-card:nth-child(9) { animation-delay: 0.9s; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 0.95rem;
+            }
+            
+            .exam-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card-header {
+                padding: 12px;
+            }
+            
+            .card-title {
+                font-size: 1rem;
+            }
+            
+            .exam-item {
+                padding: 10px 12px;
+            }
+
+            .card-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            body {
+                padding: 15px 8px;
+            }
+            
+            .header {
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+            }
+            
+            .header p {
+                font-size: 0.85rem;
+                padding: 0 10px;
+            }
+            
+            .exam-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .exam-card {
+                border-radius: 10px;
+            }
+            
+            .card-header {
+                padding: 10px 12px;
+            }
+            
+            .card-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+                margin-right: 10px;
+            }
+            
+            .card-title {
+                font-size: 0.95rem;
+            }
+            
+            .exam-list {
+                max-height: 250px;
+            }
+            
+            .exam-item {
+                padding: 8px 10px;
+            }
+            
+            .exam-abbr {
+                min-width: 40px;
+                font-size: 0.75rem;
+            }
+            
+            .exam-fullname {
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+            
+            .lock-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .view-all {
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+            
+            .view-all .icon {
+                font-size: 0.7rem;
+            }
+            
+            .coming-soon::after {
+                font-size: 0.7rem;
+                padding: 2px 25px;
+                top: 8px;
+                right: -25px;
+            }
+            
+            .locked:hover::after {
+                font-size: 10px;
+                padding: 3px 6px;
+                right: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>India's Premier Exam Selection</h1>
+        <p>Browse and select from all major government and competitive examinations</p>
+    </div>
+    
+    <div class="exam-grid">
+        <!-- UPSC Card -->
+        <div class="exam-card coming-soon">
+            <div class="card-header">
+                <div class="card-icon">🏛️</div>
+                <div class="card-title">UPSC Examinations</div>
+            </div>
+            <div class="exam-list" id="upsc-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">CSE</span>
+                    <span class="exam-fullname">Civil Services Exam (IAS/IPS/IFS)</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">IFoS</span>
+                    <span class="exam-fullname">Indian Forest Service</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">ESE/IES</span>
+                    <span class="exam-fullname">Engineering Services Exam</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">CDS</span>
+                    <span class="exam-fullname">Combined Defence Services</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">CAPF</span>
+                    <span class="exam-fullname">Central Armed Police Forces</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">NDA</span>
+                    <span class="exam-fullname">National Defence Academy</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">CMS</span>
+                    <span class="exam-fullname">Combined Medical Services</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">IES/ISS</span>
+                    <span class="exam-fullname">Indian Economic/Statistical Service</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('upsc')">
+                    <span>View all UPSC exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Railways Card -->
+        <div class="exam-card railways coming-soon">
+            <div class="card-header">
+                <div class="card-icon">🚂</div>
+                <div class="card-title">Railway Recruitment Board</div>
+            </div>
+            <div class="exam-list" id="railways-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">RRB NTPC</span>
+                    <span class="exam-fullname">Non-Technical Popular Categories</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">RRB Group D</span>
+                    <span class="exam-fullname">Level 1 Posts</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">RRB ALP</span>
+                    <span class="exam-fullname">Assistant Loco Pilot & Technicians</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">RRB JE</span>
+                    <span class="exam-fullname">Junior Engineer</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">RRB Paramedical</span>
+                    <span class="exam-fullname">Ministerial & Isolated Categories</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">RRB SSE</span>
+                    <span class="exam-fullname">Senior Section Engineer</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">RRB TA</span>
+                    <span class="exam-fullname">Ticket Collector/Commercial Apprentice</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('railways')">
+                    <span>View all RRB exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SSC Card -->
+        <div class="exam-card coming-soon">
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Staff Selection Commission</div>
+            </div>
+            <div class="exam-list" id="ssc-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">SSC CGL</span>
+                    <span class="exam-fullname">Combined Graduate Level</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">SSC CHSL</span>
+                    <span class="exam-fullname">10+2 Level</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">SSC GD</span>
+                    <span class="exam-fullname">Constable</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">SSC CPO</span>
+                    <span class="exam-fullname">Sub-Inspector (Delhi Police/CAPF)</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">SSC JE</span>
+                    <span class="exam-fullname">Junior Engineer</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">SSC Stenographer</span>
+                    <span class="exam-fullname">Grade C & D</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">SSC MTS</span>
+                    <span class="exam-fullname">Multi-Tasking Staff</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('ssc')">
+                    <span>View all SSC exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Banking Card -->
+        <div class="exam-card coming-soon banking">
+            <div class="card-header">
+                <div class="card-icon">🏦</div>
+                <div class="card-title">Banking & Insurance Exams</div>
+            </div>
+            <div class="exam-list" id="banking-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">IBPS PO</span>
+                    <span class="exam-fullname">Probationary Officer</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">IBPS Clerk</span>
+                    <span class="exam-fullname">Clerical Cadre</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">SBI PO</span>
+                    <span class="exam-fullname">State Bank Probationary Officer</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">RBI Grade B</span>
+                    <span class="exam-fullname">Officer</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">NABARD</span>
+                    <span class="exam-fullname">Grade A/B Officers</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">IBPS RRB</span>
+                    <span class="exam-fullname">Regional Rural Banks</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">SBI Clerk</span>
+                    <span class="exam-fullname">Clerical Cadre</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('banking')">
+                    <span>View all banking exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Defense Card -->
+        <div class="exam-card coming-soon defense">
+            <div class="card-header">
+                <div class="card-icon">🛡️</div>
+                <div class="card-title">Defense Examinations</div>
+            </div>
+            <div class="exam-list" id="defense-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">NDA & NA</span>
+                    <span class="exam-fullname">National Defence Academy & Naval Academy</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">CDS</span>
+                    <span class="exam-fullname">Combined Defence Services (Graduate)</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">AFCAT</span>
+                    <span class="exam-fullname">Air Force Common Admission Test</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">TA</span>
+                    <span class="exam-fullname">Territorial Army Officer</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">ICG</span>
+                    <span class="exam-fullname">Indian Coast Guard (Asst. Commandant)</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">INET</span>
+                    <span class="exam-fullname">Indian Navy Entrance Test</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">Army TES</span>
+                    <span class="exam-fullname">Technical Entry Scheme</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('defense')">
+                    <span>View all defense exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- JEE Card -->
+        <div class="exam-card coming-soon engineering">
+            <div class="card-header">
+                <div class="card-icon">⚙️</div>
+                <div class="card-title">Engineering Entrance</div>
+            </div>
+            <div class="exam-list" id="engineering-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">JEE Main</span>
+                    <span class="exam-fullname">Joint Entrance Examination (Main)</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">JEE Advanced</span>
+                    <span class="exam-fullname">Joint Entrance Examination (Advanced)</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">BITSAT</span>
+                    <span class="exam-fullname">Birla Institute Entrance Test</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">VITEEE</span>
+                    <span class="exam-fullname">VIT Engineering Entrance Exam</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">SRMJEEE</span>
+                    <span class="exam-fullname">SRM Joint Engineering Entrance</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">COMEDK</span>
+                    <span class="exam-fullname">Consortium of Medical, Engineering Exams</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">WBJEE</span>
+                    <span class="exam-fullname">West Bengal Joint Entrance Exam</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('engineering')">
+                    <span>View all engineering exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEET Card -->
+        <div class="exam-card coming-soon medical">
+            <div class="card-header">
+                <div class="card-icon">🩺</div>
+                <div class="card-title">Medical Entrance</div>
+            </div>
+            <div class="exam-list" id="medical-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">NEET UG</span>
+                    <span class="exam-fullname">National Eligibility cum Entrance Test</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">AIIMS</span>
+                    <span class="exam-fullname">All India Institute of Medical Sciences</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">JIPMER</span>
+                    <span class="exam-fullname">Jawaharlal Institute Postgraduate Medical Education</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">AFMC</span>
+                    <span class="exam-fullname">Armed Forces Medical College</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">PGIMER</span>
+                    <span class="exam-fullname">Postgraduate Institute of Medical Education</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">NEET PG</span>
+                    <span class="exam-fullname">National Eligibility cum Entrance Test (Postgraduate)</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">FMGE</span>
+                    <span class="exam-fullname">Foreign Medical Graduates Examination</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('medical')">
+                    <span>View all medical exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Teaching Card -->
+        <div class="exam-card coming-soon teaching">
+            <div class="card-header">
+                <div class="card-icon">📚</div>
+                <div class="card-title">Teaching Examinations</div>
+            </div>
+            <div class="exam-list" id="teaching-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">CTET</span>
+                    <span class="exam-fullname">Central Teacher Eligibility Test</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">UPTET</span>
+                    <span class="exam-fullname">UP Teacher Eligibility Test</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">KVS</span>
+                    <span class="exam-fullname">Kendriya Vidyalaya Recruitment</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">DSSSB</span>
+                    <span class="exam-fullname">Delhi Subordinate Services</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">Super TET</span>
+                    <span class="exam-fullname">UP Super Teacher Eligibility Test</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">MPTET</span>
+                    <span class="exam-fullname">MP Teacher Eligibility Test</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">HTET</span>
+                    <span class="exam-fullname">Haryana Teacher Eligibility Test</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('teaching')">
+                    <span>View all teaching exams</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- State PSC Card -->
+        <div class="exam-card coming-soon psc">
+            <div class="card-header">
+                <div class="card-icon">🏛️</div>
+                <div class="card-title">State PSC Examinations</div>
+            </div>
+            <div class="exam-list" id="psc-list">
+                <div class="exam-item">
+                    <span class="exam-abbr">APSC</span>
+                    <span class="exam-fullname">Assam PSC</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">MPSC</span>
+                    <span class="exam-fullname">Maharashtra PSC</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">BPSC</span>
+                    <span class="exam-fullname">Bihar PSC</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">WBPSC</span>
+                    <span class="exam-fullname">West Bengal PSC</span>
+                </div>
+                <div class="exam-item">
+                    <span class="exam-abbr">TNPSC</span>
+                    <span class="exam-fullname">Tamil Nadu PSC</span>
+                </div>
+                <!-- Hidden exams -->
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">RPSC</span>
+                    <span class="exam-fullname">Rajasthan PSC</span>
+                </div>
+                <div class="exam-item hidden-exam">
+                    <span class="exam-abbr">APPSC</span>
+                    <span class="exam-fullname">Andhra Pradesh PSC</span>
+                </div>
+                <div class="view-all" onclick="toggleExams('psc')">
+                    <span>View all state PSCs</span>
+                    <span class="icon">▼</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle expanded view for exams
+        function toggleExams(category) {
+            const list = document.getElementById(`${category}-list`);
+            const button = list.querySelector('.view-all');
+            const hiddenExams = list.querySelectorAll('.hidden-exam');
+            
+            list.classList.toggle('expanded');
+            button.classList.toggle('expanded');
+            
+            hiddenExams.forEach(exam => {
+                exam.classList.toggle('hidden-exam');
+                exam.style.display = exam.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Scroll to bottom if expanding
+            if (list.classList.contains('expanded')) {
+                setTimeout(() => {
+                    list.scrollTop = list.scrollHeight;
+                }, 350);
+            }
+        }
+        
+        // Add click functionality to exam items
+        document.querySelectorAll('.exam-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (this.classList.contains('locked')) {
+                    e.preventDefault();
+                    return;
+                }
+                if (this.closest('.coming-soon')) {
+                    alert('This exam section is coming soon! Stay tuned for updates.');
+                } else {
+                    // Check if it's RRB NTPC
+                    const examName = this.querySelector('.exam-abbr').textContent;
+                    if (examName === 'RRB NTPC') {
+                        window.location.href = 'frontend/rrb/ntpc.html';
+                    } else {
+                        console.log(`Selected exam: ${examName}`);
+                    }
+                }
+            });
+        });
+        
+        // Initialize hidden exams
+        document.querySelectorAll('.hidden-exam').forEach(exam => {
+            exam.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

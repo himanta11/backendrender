@@ -1,0 +1,1224 @@
+[
+    {
+      "question_id": 1,
+      "question_text": "The Make In India Logo is made up of what?",
+      "options": {
+        "A": "Lion made of Cogs",
+        "B": "Eagle Made of Steel",
+        "C": "Chakra Made of Cotton",
+        "D": "Tiger Made of Khadi"
+      },
+      "correct_option": "A",
+      "subject": "General Awareness"
+    },
+    {
+      "question_id": 2,
+      "question_text": "The median of the following numbers arranged in ascending order is 2.5, if so find x? 0, 0, 1, 1, 2, 2, x, 3, 3, 4, 5, 7",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "4",
+        "D": "0"
+      },
+      "correct_option": "A",
+      "subject": "Mathematics"
+    },
+    {
+      "question_id": 3,
+      "question_text": "How do Indians celebrate Holi?",
+      "options": {
+        "A": "By playing pranks on each other",
+        "B": "By throwing coloured powder and water on each other",
+        "C": "By Lighting Lamps",
+        "D": "By setting pigeons free"
+      },
+      "correct_option": "B",
+      "subject": "General Awareness"
+    },
+    {
+      "question_id": 4,
+      "question_text": "X is the only daughter of Y’s grandfather’s only son. Y’s grandfather has only one child. How is X related to Y?",
+      "options": {
+        "A": "Mother",
+        "B": "Sister",
+        "C": "Paternal Aunt",
+        "D": "Grandmother"
+      },
+      "correct_option": "B",
+      "subject": "Reasoning"
+    },
+    {
+      "question_id": 5,
+      "question_text": "In Indian sport what does HIL stand for?",
+      "options": {
+        "A": "Himachal Indian Lions",
+        "B": "Haryana Indus League",
+        "C": "Hockey India League",
+        "D": "Hyderabad India League"
+      },
+      "correct_option": "C",
+      "subject": "General Awareness"
+    },
+    {
+      "question_id": 6,
+      "question_text": "Find the missing (?) in the series: 50, 49.5, ?, 45.5, 42, 37.5",
+      "options": {
+        "A": "49",
+        "B": "48",
+        "C": "47.5",
+        "D": "46"
+      },
+      "correct_option": "C",
+      "subject": "Mathematics"
+    },
+    {
+      "question_id": 7,
+      "question_text": "Malgudi Days is based on the works of which Indian Writer?",
+      "options": {
+        "A": "Shankar Nag",
+        "B": "R. K. Lakshman",
+        "C": "R.K. Narayan",
+        "D": "Girish Karnad"
+      },
+      "correct_option": "C",
+      "subject": "General Awareness"
+    },
+    {
+      "question_id": 8,
+      "question_text": "At what time did India Gain Independence of 15th August 1947?",
+      "options": {
+        "A": "Morning",
+        "B": "Midevening",
+        "C": "Midnight",
+        "D": "Noon"
+      },
+      "correct_option": "C",
+      "subject": "History"
+    },
+    {
+      "question_id": 9,
+      "question_text": "A train having a length of 500 m passes through a tunnel of 1000 m in 1 minute. What is the speed of the train in Km/hr?",
+      "options": {
+        "A": "75 Km/hr",
+        "B": "90 Km/hr",
+        "C": "87 Km/hr",
+        "D": "96 Km/hr"
+      },
+      "correct_option": "B",
+      "subject": "Mathematics"
+    },
+    {
+      "question_id": 10,
+      "question_text": "What is the science or art of designing and accelerating projectiles so as to achieve a desired performance called?",
+      "options": {
+        "A": "Ballistics",
+        "B": "Catapulting",
+        "C": "Ejection",
+        "D": "Rocket Science"
+      },
+      "correct_option": "A",
+      "subject": "Science"
+    },
+    
+      {
+        "question_id": 11,
+        "question_text": "Find the similarity in the following: Orange, Peach, Olive, Carmine",
+        "options": {
+          "A": "All of them are fruits.",
+          "B": "All of them are names of seasons.",
+          "C": "All of them are colours.",
+          "D": "All of them are shades of orange."
+        },
+        "correct_option": "C",
+        "subject": "General Awareness"
+      },
+      {
+        "question_id": 12,
+        "question_text": "What does WLAN stand for?",
+        "options": {
+          "A": "Wireless Local Area Network",
+          "B": "Wide Local Area Network",
+          "C": "Wind Light Atmospheric Nature",
+          "D": "Wireless Local Area Node"
+        },
+        "correct_option": "A",
+        "subject": "Computer Awareness"
+      },
+      {
+        "question_id": 13,
+        "question_text": "What does “Bicameral Legislature” mean?",
+        "options": {
+          "A": "Legislators are divided into 4 separate assemblies",
+          "B": "Legislators are grouped as 1 assembly",
+          "C": "Legislators are divided into 2 separate assemblies",
+          "D": "Legislators are divided into 8 separate assemblies"
+        },
+        "correct_option": "C",
+        "subject": "Polity"
+      },
+      {
+        "question_id": 14,
+        "question_text": "Find the missing (?) in the series: …, HG, IJ, LK, MN, ?, …",
+        "options": {
+          "A": "OP",
+          "B": "PO",
+          "C": "QP",
+          "D": "PQ"
+        },
+        "correct_option": "A",
+        "subject": "Reasoning"
+      },
+      {
+        "question_id": 15,
+        "question_text": "Which is the most abundant combustible natural gas?",
+        "options": {
+          "A": "Propane",
+          "B": "Methane",
+          "C": "Ethane",
+          "D": "Butane"
+        },
+        "correct_option": "B",
+        "subject": "Science"
+      },
+      {
+        "question_id": 16,
+        "question_text": "Which among the following is the Largest Freshwater Lake in India?",
+        "options": {
+          "A": "Dal Lake",
+          "B": "Thol Lake",
+          "C": "Pushkar Lake",
+          "D": "Wular Lake"
+        },
+        "correct_option": "D",
+        "subject": "Geography"
+      },
+      {
+        "question_id": 17,
+        "question_text": "Manu sold a dozen watches for Rs. 1454.64 per watch and made a profit of 16%. Find the cost price of the watches?",
+        "options": {
+          "A": "1254.00",
+          "B": "1362.36",
+          "C": "15048.00",
+          "D": "16348.32"
+        },
+        "correct_option": "B",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 18,
+        "question_text": "The famous camel trading event is a part of which annual fair?",
+        "options": {
+          "A": "Udaipur Mela",
+          "B": "Thar Mela",
+          "C": "Kumbh Mela",
+          "D": "Pushkar Mela"
+        },
+        "correct_option": "D",
+        "subject": "General Awareness"
+      },
+      {
+        "question_id": 19,
+        "question_text": "What is the rate of change of position of an object with respect to a frame of reference, which is a function of time called?",
+        "options": {
+          "A": "Mechanics",
+          "B": "Vector",
+          "C": "Velocity",
+          "D": "Magnitude"
+        },
+        "correct_option": "C",
+        "subject": "Science"
+      },
+      {
+        "question_id": 20,
+        "question_text": "If DELHI is QRYUV, then BOMBAY is:",
+        "options": {
+          "A": "OBZNOL",
+          "B": "OZBNOL",
+          "C": "OZBONL",
+          "D": "OBZONL"
+        },
+        "correct_option": "C",
+        "subject": "Reasoning"
+      },
+      {
+        "question_id": 21,
+        "question_text": "If GOING is 38253 and CASUAL is 409106, then LOGICAL is",
+        "options": {
+          "A": "6034286",
+          "B": "6834206",
+          "C": "6032486",
+          "D": "6832406"
+        },
+        "correct_option": "C",
+        "subject": "Reasoning"
+      },
+      {
+        "question_id": 22,
+        "question_text": "Manju takes 16 days to complete a work. If she works with her friend Jenny they complete it in 12 days. How many days will it take for Jenny to complete the work alone?",
+        "options": {
+          "A": "48",
+          "B": "32",
+          "C": "36",
+          "D": "24"
+        },
+        "correct_option": "A",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 23,
+        "question_text": "Solve: 109 × 102 ÷ 10³",
+        "options": {
+          "A": "108",
+          "B": "106",
+          "C": "10²",
+          "D": "105"
+        },
+        "correct_option": "B",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 24,
+        "question_text": "If the circumference of a circle is 22 cm, find the area of the semicircle.",
+        "options": {
+          "A": "38.5 sq.cm",
+          "B": "19.25 sq.cm",
+          "C": "44 sq.cm",
+          "D": "77 sq.cm"
+        },
+        "correct_option": "A",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 25,
+        "question_text": "Find the interest on Rs. 25000 at 12% p.a compounded annually for 3 years.",
+        "options": {
+          "A": "9,000",
+          "B": "9,833.40",
+          "C": "10,123.20",
+          "D": "10,678.90"
+        },
+        "correct_option": "B",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 26,
+        "question_text": "The LCM and HCF of 2 numbers are 168 and 6 respectively. If one of the numbers is 24, find the other.",
+        "options": {
+          "A": "36",
+          "B": "38",
+          "C": "40",
+          "D": "42"
+        },
+        "correct_option": "A",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 27,
+        "question_text": "Seeta said, 'Ram’s only brother is the father of my son’s father.' How is Ram’s brother related to Seeta’s son?",
+        "options": {
+          "A": "Father",
+          "B": "Grandfather",
+          "C": "Maternal Uncle",
+          "D": "Paternal Uncle"
+        },
+        "correct_option": "B",
+        "subject": "Reasoning"
+      },
+      {
+        "question_id": 28,
+        "question_text": "78 books, 114 crayons and 141 notebooks were distributed to school children equally. It was found that 6 were left undistributed in each. What was the total number of children?",
+        "options": {
+          "A": "9",
+          "B": "8",
+          "C": "13",
+          "D": "12"
+        },
+        "correct_option": "C",
+        "subject": "Mathematics"
+      },
+      {
+        "question_id": 29,
+        "question_text": "What are Vivipara?",
+        "options": {
+          "A": "Vertebrates that are born live",
+          "B": "Type of cactus",
+          "C": "Type of algae",
+          "D": "Type of yeast"
+        },
+        "correct_option": "A",
+        "subject": "Science"
+      },
+      {
+        "question_id": 30,
+        "question_text": "If Ax+y = a⁶ and x > y by 2 find x.",
+        "options": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "correct_option": "C",
+        "subject": "Mathematics"
+      },
+      
+        {
+          "question_id": 31,
+          "question_text": "What is a Limerick?",
+          "options": {
+            "A": "A Type of Lime Stone",
+            "B": "A form of poetry mostly in five-lines",
+            "C": "A type of Theatre Play",
+            "D": "A type of Word game"
+          },
+          "correct_option": "B",
+          "subject": "English"
+        },
+        {
+          "question_id": 32,
+          "question_text": "If Annual: One year, then Quinquennial: ________",
+          "options": {
+            "A": "Five years",
+            "B": "Ten years",
+            "C": "Hundred years",
+            "D": "Thousand years"
+          },
+          "correct_option": "A",
+          "subject": "General Awareness"
+        },
+        {
+          "question_id": 33,
+          "question_text": "Andromeda is a",
+          "options": {
+            "A": "Galaxy neighboring the Milky way",
+            "B": "Planet",
+            "C": "Name of a black hole",
+            "D": "Comet"
+          },
+          "correct_option": "A",
+          "subject": "Science"
+        },
+        {
+          "question_id": 34,
+          "question_text": "Whose quote is “In practice of tolerance, one’s enemy is the best teacher”?",
+          "options": {
+            "A": "Gautama Buddha",
+            "B": "Mahatma Gandhi",
+            "C": "Barack Obama",
+            "D": "The Dalai Lama"
+          },
+          "correct_option": "D",
+          "subject": "General Awareness"
+        },
+        {
+          "question_id": 35,
+          "question_text": "What is Shigmo?",
+          "options": {
+            "A": "A Goan Spring Festival",
+            "B": "The tallest peak in Nilgiris",
+            "C": "A type of Rangoli",
+            "D": "One of the Names of Lord Shiva"
+          },
+          "correct_option": "A",
+          "subject": "Culture"
+        },
+        {
+          "question_id": 36,
+          "question_text": "In computers, what does Yosemite, Mavericks, Mountain Lion, Lion, Snow Leopard, Leopard, Tiger, Panther, Jaguar, Puma and Cheetah stand for?",
+          "options": {
+            "A": "Versions of Mac OS X",
+            "B": "Types of Storage Servers",
+            "C": "Macintosh Clones",
+            "D": "PowerBooks"
+          },
+          "correct_option": "A",
+          "subject": "Computer Awareness"
+        },
+        {
+          "question_id": 37,
+          "question_text": "LIGO, Laser Interferometer Observatory was recently in the news. Why?",
+          "options": {
+            "A": "Discovery of water in Mars",
+            "B": "Discovery of a diamond-filled star",
+            "C": "Detection of Gravitational waves",
+            "D": "Proving Big Bang theory as wrong"
+          },
+          "correct_option": "C",
+          "subject": "Science & Technology"
+        },
+        {
+          "question_id": 38,
+          "question_text": "In which century did Portuguese merchants first land in Goa?",
+          "options": {
+            "A": "14th",
+            "B": "15th",
+            "C": "16th",
+            "D": "17th"
+          },
+          "correct_option": "C",
+          "subject": "History"
+        },
+        {
+          "question_id": 39,
+          "question_text": "In 1999 who was the Prime Minister of Pakistan who was overthrown by a Military coup led by General Pervez Musharraf?",
+          "options": {
+            "A": "Zulfiqar Ali Bhutto",
+            "B": "Zia ul-Haq",
+            "C": "Nawaz Sharif",
+            "D": "Yusuf Raza Gilani"
+          },
+          "correct_option": "C",
+          "subject": "International Affairs"
+        },
+        {
+          "question_id": 40,
+          "question_text": "What is C6H6?",
+          "options": {
+            "A": "Chloroform",
+            "B": "Hydro Chloric Acid",
+            "C": "Benzene",
+            "D": "Toluene"
+          },
+          "correct_option": "C",
+          "subject": "Chemistry"
+        },
+        {
+          "question_id": 41,
+          "question_text": "What is Oneirology, the study of?",
+          "options": {
+            "A": "Gods",
+            "B": "Dreams",
+            "C": "Sleep",
+            "D": "Colour"
+          },
+          "correct_option": "B",
+          "subject": "General Awareness"
+        },
+        {
+          "question_id": 42,
+          "question_text": "Which was the host city of the first modern summer Olympic games held in 1896?",
+          "options": {
+            "A": "Athens",
+            "B": "Paris",
+            "C": "London",
+            "D": "Amsterdam"
+          },
+          "correct_option": "A",
+          "subject": "Sports"
+        },
+        {
+          "question_id": 43,
+          "question_text": "I take a book from a library containing 378 pages to be returned in a week’s time. If I can read 14 pages an hour for three hours daily, for how long should it be renewed so that the book can be fully read?",
+          "options": {
+            "A": "1 day",
+            "B": "3 days",
+            "C": "4 days",
+            "D": "2 days"
+          },
+          "correct_option": "C",
+          "subject": "Mathematics"
+        },
+        {
+          "question_id": 44,
+          "question_text": "Carl Sagan was",
+          "options": {
+            "A": "An American astronomer",
+            "B": "British Physicist",
+            "C": "French Astronaut",
+            "D": "American President"
+          },
+          "correct_option": "A",
+          "subject": "Science"
+        },
+        {
+          "question_id": 45,
+          "question_text": "The mean of the marks scored by 12 students of a class is 67.4. If the mean of another class consisting of 15 students is 72.3, find their combined mean?",
+          "options": {
+            "A": "70.12",
+            "B": "69.85",
+            "C": "71.23",
+            "D": "68.94"
+          },
+          "correct_option": "A",
+          "subject": "Mathematics"
+        },
+        {
+          "question_id": 46,
+          "question_text": "If GUITAR = HTJSBQ, then VIOLIN = _________",
+          "options": {
+            "A": "WHPKHM",
+            "B": "WHPKJM",
+            "C": "WHKPHM",
+            "D": "WHKPJM"
+          },
+          "correct_option": "B",
+          "subject": "Reasoning"
+        },
+        {
+          "question_id": 47,
+          "question_text": "A man walks at a certain speed and reaches his destination which is 6 km in 1 hr 40 minutes. If he runs the same distance in 1 hour 20 minutes what is the difference in speed?",
+          "options": {
+            "A": "1 km/hr",
+            "B": "0.9 km/hr",
+            "C": "1.5 km/hr",
+            "D": "1.9 km/hr"
+          },
+          "correct_option": "A",
+          "subject": "Mathematics"
+        },
+        {
+          "question_id": 48,
+          "question_text": "What is “Binary Electronic Sequence Calculator” (BESK), created in 1953?",
+          "options": {
+            "A": "Electronic computer",
+            "B": "Analogous Computer",
+            "C": "Digital Computer",
+            "D": "A Banker’s Calculator"
+          },
+          "correct_option": "A",
+          "subject": "Computer Awareness"
+        },
+        {
+          "question_id": 49,
+          "question_text": "The product of two numbers is 2522 and their LCM is 97 then their HCF is:",
+          "options": {
+            "A": "28",
+            "B": "29",
+            "C": "27",
+            "D": "26"
+          },
+          "correct_option": "B",
+          "subject": "Mathematics"
+        },
+        {
+          "question_id": 50,
+          "question_text": "Which of the following is not regarded as helpful to compost?",
+          "options": {
+            "A": "Egg shells",
+            "B": "Sawdust",
+            "C": "Tea-bags",
+            "D": "Fish bones"
+          },
+          "correct_option": "D",
+          "subject": "Science"
+        },
+        
+          {
+            "question_id": 51,
+            "question_text": "The functioning of a very old model pendulum clock was completely",
+            "options": {
+              "A": "Mechanical",
+              "B": "Mechanical and electrical",
+              "C": "Electrical",
+              "D": "Battery operated"
+            },
+            "correct_option": "A",
+            "subject": "Physics"
+          },
+          {
+            "question_id": 52,
+            "question_text": "Which is the correct ascending order of the given numbers? 1/3, 1/5, 2/5",
+            "options": {
+              "A": "1/3, 1/5, 2/5",
+              "B": "1/3, 2/5, 1/5",
+              "C": "1/5, 1/3, 2/5",
+              "D": "1/5, 2/5, 1/3"
+            },
+            "correct_option": "C",
+            "subject": "Mathematics"
+          },
+          {
+            "question_id": 53,
+            "question_text": "Nepal’s first woman President is",
+            "options": {
+              "A": "Rita Bhandari",
+              "B": "Vidya Devi Bhandari",
+              "C": "Aishwarya Rajya Laxmi",
+              "D": "Komal Rajya Laxmi"
+            },
+            "correct_option": "B",
+            "subject": "International Affairs"
+          },
+          {
+            "question_id": 54,
+            "question_text": "Which article of the Constitution of India relates to Uniform Civil Code?",
+            "options": {
+              "A": "41",
+              "B": "42",
+              "C": "43",
+              "D": "44"
+            },
+            "correct_option": "D",
+            "subject": "Polity"
+          },
+          {
+            "question_id": 55,
+            "question_text": "A telephone bill costs Rs. 13 for 19 minutes. What is the cost in rupees for 15 minutes 50 seconds? (Rounded to one decimal)",
+            "options": {
+              "A": "10.8",
+              "B": "10.7",
+              "C": "10.6",
+              "D": "10.9"
+            },
+            "correct_option": "A",
+            "subject": "Mathematics"
+          },
+          {
+            "question_id": 56,
+            "question_text": "Find the odd one out: 1, 2, 3, 4",
+            "options": {
+              "A": "1",
+              "B": "2",
+              "C": "3",
+              "D": "4"
+            },
+            "correct_option": "A",
+            "subject": "Reasoning"
+          },
+          {
+            "question_id": 57,
+            "question_text": "Q is P’s sister. R is P’s mother. M is Mrs. R’s father. How is Q’s father related to M?",
+            "options": {
+              "A": "Son",
+              "B": "Grandson",
+              "C": "Son-in-law",
+              "D": "Brother"
+            },
+            "correct_option": "C",
+            "subject": "Reasoning"
+          },
+          {
+            "question_id": 58,
+            "question_text": "If the mathematical operator ‘+’ means ‘×’, ‘÷’ means ‘–’, ‘–’ means ‘+’, and ‘×’ means ‘÷’, then the value of 11 + 14 × 7 – 5 ÷ 29 is",
+            "options": {
+              "A": "-5",
+              "B": "-12",
+              "C": "-7",
+              "D": "-2"
+            },
+            "correct_option": "C",
+            "subject": "Reasoning"
+          },
+          {
+            "question_id": 59,
+            "question_text": "The cash difference between the selling price of an article at a profit of 2% and 12% is Rs. 3. The ratio of two selling prices is:",
+            "options": {
+              "A": "51:56",
+              "B": "51:53",
+              "C": "52:53",
+              "D": "55:56"
+            },
+            "correct_option": "A",
+            "subject": "Mathematics"
+          },
+          {
+            "question_id": 60,
+            "question_text": "Simplify: (25)^3/2",
+            "options": {
+              "A": "625",
+              "B": "15625",
+              "C": "125",
+              "D": "√125"
+            },
+            "correct_option": "A",
+            "subject": "Mathematics"
+          },
+          
+            {
+              "question_id": 61,
+              "question_text": "The number of sides of a regular polygon whose exterior angles are each 40° is:",
+              "options": {
+                "A": "7",
+                "B": "10",
+                "C": "9",
+                "D": "8"
+              },
+              "correct_option": "B",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 62,
+              "question_text": "Who awarded the Kaisar-i-Hind medal of the British to Mahatma Gandhi for his contribution to ambulance services in South Africa?",
+              "options": {
+                "A": "Lord Dalhousie",
+                "B": "Lord Canning",
+                "C": "Lord Hardinge",
+                "D": "Lord Curzon"
+              },
+              "correct_option": "C",
+              "subject": "History"
+            },
+            {
+              "question_id": 63,
+              "question_text": "A shopkeeper cheats to the extent of 8% while buying and selling fruits by using tampered weights, his total gain in percentage is:",
+              "options": {
+                "A": "16.25",
+                "B": "16.64",
+                "C": "16.75",
+                "D": "16.5"
+              },
+              "correct_option": "B",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 64,
+              "question_text": "Mahabharata war lasted for how many days?",
+              "options": {
+                "A": "17",
+                "B": "18",
+                "C": "19",
+                "D": "21"
+              },
+              "correct_option": "B",
+              "subject": "History"
+            },
+            {
+              "question_id": 65,
+              "question_text": "Mughal Emperor Humayun’s tomb is located in",
+              "options": {
+                "A": "Kabul",
+                "B": "Delhi",
+                "C": "Shahdara Bagh",
+                "D": "Khuldabad"
+              },
+              "correct_option": "B",
+              "subject": "History"
+            },
+            {
+              "question_id": 66,
+              "question_text": "The length of a diagonal in cm of a rectangle of length 9 cm and width 5 cm is:",
+              "options": {
+                "A": "√106",
+                "B": "±√106",
+                "C": "2√14",
+                "D": "± 2√14"
+              },
+              "correct_option": "A",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 67,
+              "question_text": "Statements: Some blues are violets whereas some are purples. All oranges are reds and some reds are violets. All purples are red. Conclusions: I. Some reds are blues. II. Some oranges are violets.",
+              "options": {
+                "A": "Only I follows",
+                "B": "Only II follows",
+                "C": "Both I and II follow",
+                "D": "Neither I nor II follows"
+              },
+              "correct_option": "D",
+              "subject": "Reasoning"
+            },
+            {
+              "question_id": 68,
+              "question_text": "The value of 2.31×0.34 = ?",
+              "options": {
+                "A": "1.7854",
+                "B": "0.7854",
+                "C": "0.7845",
+                "D": "0.7584"
+              },
+              "correct_option": "B",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 69,
+              "question_text": "Which of the following is not correct with reference to Bio-sand Water Filter?",
+              "options": {
+                "A": "It deactivates or kills pathogens",
+                "B": "Sedimentation removes larger particles",
+                "C": "Filtration removes smaller particles",
+                "D": "High quality water is always assured"
+              },
+              "correct_option": "D",
+              "subject": "Science"
+            },
+            {
+              "question_id": 70,
+              "question_text": "Find the odd one out: Cocaine, Caffeine, Nicotine, Heroin",
+              "options": {
+                "A": "Cocaine",
+                "B": "Caffeine",
+                "C": "Nicotine",
+                "D": "Heroin"
+              },
+              "correct_option": "B",
+              "subject": "General Awareness"
+            },
+            
+              {
+                "question_id": 71,
+                "question_text": "Air is a _____________________.",
+                "options": {
+                  "A": "Pure compound",
+                  "B": "Mixture of only compounds",
+                  "C": "Mixture of only elements",
+                  "D": "Mixture of both elements and compounds"
+                },
+                "correct_option": "D",
+                "subject": "Science"
+              },
+              {
+                "question_id": 72,
+                "question_text": "The world heritage site Pashupatinath temple is located at",
+                "options": {
+                  "A": "Peshawar",
+                  "B": "Kabul",
+                  "C": "Kathmandu",
+                  "D": "Multan"
+                },
+                "correct_option": "C",
+                "subject": "General Awareness"
+              },
+              {
+                "question_id": 73,
+                "question_text": "The variance of a set of data is 121. Then the standard deviation of the data is:",
+                "options": {
+                  "A": "± 11",
+                  "B": "11",
+                  "C": "21",
+                  "D": "60.5"
+                },
+                "correct_option": "B",
+                "subject": "Mathematics"
+              },
+              {
+                "question_id": 74,
+                "question_text": "Mr. Devesh borrowed Rs. 4,500 at 4% per annum compound interest. The compound interest compounded annually for 2 years is:",
+                "options": {
+                  "A": "Rs. 367.2",
+                  "B": "Rs. 4867.2",
+                  "C": "Rs. 4876.2",
+                  "D": "Rs. 376.2"
+                },
+                "correct_option": "A",
+                "subject": "Mathematics"
+              },
+              {
+                "question_id": 75,
+                "question_text": "Ms. Alina borrowed Rs. 650 at 6% per annum simple interest. What amount will she pay to clear her debt after 4 years?",
+                "options": {
+                  "A": "Rs. 165",
+                  "B": "Rs. 860",
+                  "C": "Rs. 806",
+                  "D": "Rs. 156"
+                },
+                "correct_option": "C",
+                "subject": "Mathematics"
+              },
+              {
+                "question_id": 76,
+                "question_text": "Compute: 4082÷ 157–23",
+                "options": {
+                  "A": "-3",
+                  "B": "3",
+                  "C": "2041/67",
+                  "D": "2014/67"
+                },
+                "correct_option": "A",
+                "subject": "Mathematics"
+              },
+              {
+                "question_id": 77,
+                "question_text": "Manoj is twice efficient fishermen than Anuraj. If together they finish a work in 22 days. Then in how many days will Anuraj do the work alone?",
+                "options": {
+                  "A": "44",
+                  "B": "66",
+                  "C": "88",
+                  "D": "60"
+                },
+                "correct_option": "B",
+                "subject": "Mathematics"
+              },
+              {
+                "question_id": 78,
+                "question_text": "The nation-wide campaign ‘Operation Smile’ is related to",
+                "options": {
+                  "A": "Senior citizens",
+                  "B": "War widows",
+                  "C": "Freedom fighters",
+                  "D": "Missing children"
+                },
+                "correct_option": "D",
+                "subject": "Current Affairs"
+              },
+              {
+                "question_id": 79,
+                "question_text": "Which one does not relate to CT Scan?",
+                "options": {
+                  "A": "Combines many X-ray images",
+                  "B": "Scanning is often painful",
+                  "C": "Generates 3-D cross-sectional views",
+                  "D": "Identifies normal and abnormal structures"
+                },
+                "correct_option": "B",
+                "subject": "Science"
+              },
+              {
+                "question_id": 80,
+                "question_text": "Find the median of series -3, 4, 0, 4, -2, -5, 1, 7, 10, 5",
+                "options": {
+                  "A": "2",
+                  "B": "2.5",
+                  "C": "2.75",
+                  "D": "3"
+                },
+                "correct_option": "B",
+                "subject": "Mathematics"
+              },
+              
+                {
+                  "question_id": 81,
+                  "question_text": "_________ was India’s first satellite launched from Indian-made launch vehicle.",
+                  "options": {
+                    "A": "Aryabhata",
+                    "B": "Rohini",
+                    "C": "Bhaskara-1",
+                    "D": "INSAT-1A"
+                  },
+                  "correct_option": "B",
+                  "subject": "Science & Technology"
+                },
+                {
+                  "question_id": 82,
+                  "question_text": "Mother of Anand is the sister of the son of father of Chandra. How is Anand related to father of Chandra?",
+                  "options": {
+                    "A": "Grandfather",
+                    "B": "Father",
+                    "C": "Uncle",
+                    "D": "Grandson"
+                  },
+                  "correct_option": "D",
+                  "subject": "Reasoning"
+                },
+                {
+                  "question_id": 83,
+                  "question_text": "Mr. Akshar sold a bus for Rs. 20,400 with a loss of 15%. At what price should the bus be sold to get a profit of 15%?",
+                  "options": {
+                    "A": "27,400",
+                    "B": "27,300",
+                    "C": "27,500",
+                    "D": "27,600"
+                  },
+                  "correct_option": "A",
+                  "subject": "Mathematics"
+                },
+                {
+                  "question_id": 84,
+                  "question_text": "Simplify: (5/28) ÷ (28/35) ÷ (20/112)",
+                  "options": {
+                    "A": "4/5",
+                    "B": "5/4",
+                    "C": "4/7",
+                    "D": "7/4"
+                  },
+                  "correct_option": "C",
+                  "subject": "Mathematics"
+                },
+                {
+                  "question_id": 85,
+                  "question_text": "Transparency International (TI) has put India at which rank out of 168 countries in its Corruption Perception Index as on January 2016?",
+                  "options": {
+                    "A": "68",
+                    "B": "76",
+                    "C": "84",
+                    "D": "101"
+                  },
+                  "correct_option": "A",
+                  "subject": "Current Affairs"
+                },
+                {
+                  "question_id": 86,
+                  "question_text": "Acid rain is caused by release of _____ and _____ into the air.",
+                  "options": {
+                    "A": "Carbon dioxide and carbon monoxide",
+                    "B": "Sulphur dioxide and nitrogen oxides",
+                    "C": "Oxygen and water vapour",
+                    "D": "Nitrous oxide and ozone"
+                  },
+                  "correct_option": "B",
+                  "subject": "Science"
+                },
+                {
+                  "question_id": 87,
+                  "question_text": "Identify the positive impact of internet in life.",
+                  "options": {
+                    "A": "Cyber-crimes are on the increase",
+                    "B": "Users suffer from internet addiction disorder",
+                    "C": "Best source of knowledge through a click",
+                    "D": "Leads to less physical activity and poor eyesight"
+                  },
+                  "correct_option": "C",
+                  "subject": "General Awareness"
+                },
+                {
+                  "question_id": 88,
+                  "question_text": "Borosilicate glassware is used in microwave oven because",
+                  "options": {
+                    "A": "It is not brittle",
+                    "B": "It is highly heat resistant",
+                    "C": "It cooks faster than any other vessel",
+                    "D": "It is energy efficient"
+                  },
+                  "correct_option": "B",
+                  "subject": "Science"
+                },
+                {
+                  "question_id": 89,
+                  "question_text": "Which one of the following does not directly refer to cholesterol?",
+                  "options": {
+                    "A": "Low density lipoprotein",
+                    "B": "High density lipoprotein",
+                    "C": "Rhesus factor",
+                    "D": "Packaged protein coat"
+                  },
+                  "correct_option": "C",
+                  "subject": "Biology"
+                },
+                {
+                  "question_id": 90,
+                  "question_text": "In a certain code, ‘book is big’ is written as 756; ‘big is story’ is 764 and ‘story book is interesting’ is 4356. Which digit represents ‘interesting’?",
+                  "options": {
+                    "A": "3",
+                    "B": "4",
+                    "C": "5",
+                    "D": "6"
+                  },
+                  "correct_option": "A",
+                  "subject": "Reasoning"
+                },
+                
+                  {
+                    "question_id": 91,
+                    "question_text": "Divide Rs. 221 in the ratio 1:3:6:7. The rupees in the respective ratios are:",
+                    "options": {
+                      "A": "13, 39, 77 & 92",
+                      "B": "13, 39, 79 & 90",
+                      "C": "13, 39, 78 & 91",
+                      "D": "13, 40, 80 & 91"
+                    },
+                    "correct_option": "C",
+                    "subject": "Mathematics"
+                  },
+                  {
+                    "question_id": 92,
+                    "question_text": "Which one does not relate to mobile phone touch panel sensing methods?",
+                    "options": {
+                      "A": "Finger touch",
+                      "B": "Voice recognition",
+                      "C": "Gloved touch",
+                      "D": "Light transmittance"
+                    },
+                    "correct_option": "B",
+                    "subject": "Computer Awareness"
+                  },
+                  {
+                    "question_id": 93,
+                    "question_text": "Keerthana takes 9hrs 20minutes in walking a distance and riding back. She could walk both ways in 11 hrs 15 minutes. The time taken by her to ride both ways is:",
+                    "options": {
+                      "A": "7 hrs 25 min",
+                      "B": "7 hrs 35 min",
+                      "C": "7 hrs 45 min",
+                      "D": "7 hrs 15 min"
+                    },
+                    "correct_option": "B",
+                    "subject": "Mathematics"
+                  },
+                  {
+                    "question_id": 94,
+                    "question_text": "Select the alternative that shows a similar relationship as the given pair – Impulsive : Impromptu",
+                    "options": {
+                      "A": "Moderate : Increase",
+                      "B": "Flawless : Impeccable",
+                      "C": "Perpetual : Transitory",
+                      "D": "Resistant : Receptive"
+                    },
+                    "correct_option": "B",
+                    "subject": "English"
+                  },
+                  {
+                    "question_id": 95,
+                    "question_text": "__________ does not relate to measurement of memory capacity.",
+                    "options": {
+                      "A": "GB",
+                      "B": "TB",
+                      "C": "HB",
+                      "D": "ZB"
+                    },
+                    "correct_option": "C",
+                    "subject": "Computer Awareness"
+                  },
+                  {
+                    "question_id": 96,
+                    "question_text": "Astronauts inside spaceship feel _____",
+                    "options": {
+                      "A": "weightless",
+                      "B": "heavy",
+                      "C": "light",
+                      "D": "pressure"
+                    },
+                    "correct_option": "A",
+                    "subject": "Physics"
+                  },
+                  {
+                    "question_id": 97,
+                    "question_text": "The average of first 30 multiples of 9 is:",
+                    "options": {
+                      "A": "142",
+                      "B": "138.5",
+                      "C": "139.5",
+                      "D": "143.5"
+                    },
+                    "correct_option": "C",
+                    "subject": "Mathematics"
+                  },
+                  {
+                    "question_id": 98,
+                    "question_text": "Centigrade is a unit of measurement of temperature named after whom?",
+                    "options": {
+                      "A": "Kelvin",
+                      "B": "Jean-Pierre Christin",
+                      "C": "Marten Stromer",
+                      "D": "Anders Celsius"
+                    },
+                    "correct_option": "D",
+                    "subject": "Physics"
+                  },
+                  {
+                    "question_id": 99,
+                    "question_text": "Which planet is orange in colour with white bands on it?",
+                    "options": {
+                      "A": "Mars",
+                      "B": "Saturn",
+                      "C": "Jupiter",
+                      "D": "Venus"
+                    },
+                    "correct_option": "C",
+                    "subject": "Astronomy"
+                  },
+                  {
+                    "question_id": 100,
+                    "question_text": "Which bacterium is used to turn milk to curd?",
+                    "options": {
+                      "A": "Streptomyces",
+                      "B": "Vibrio",
+                      "C": "Lactobacillus",
+                      "D": "Spirilla"
+                    },
+                    "correct_option": "C",
+                    "subject": "Biology"
+                  }
+                ]
+                
+              
+              
+            
+            
+          
+          
+        
+        
+      
+      
+    
+    
+  
+  

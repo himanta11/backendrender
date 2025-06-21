@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade to Pro</title>
+    <style>
+        :root {
+            --pink: #ff86eb;
+            --green: #b3f461;
+            --purple: #5e17eb;
+            --white: #ffffff;
+            --black: #333333;
+            --light-gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .card {
+            position: relative;
+            width: 350px;
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: 10;
+        }
+
+        body.active .card {
+            transform: scale(1);
+        }
+
+        .card-header {
+            background-color: var(--purple);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 25px;
+            height: 25px;
+            background-color: var(--white);
+            color: var(--purple);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .features {
+            margin-bottom: 25px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .feature-icon.pink {
+            background-color: var(--pink);
+            color: var(--white);
+        }
+
+        .feature-icon.green {
+            background-color: var(--green);
+            color: var(--black);
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: var(--black);
+        }
+
+        .upgrade-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--purple);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+
+        .upgrade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+        }
+
+        .decoration {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .decoration-1 {
+            width: 100px;
+            height: 100px;
+            background-color: var(--pink);
+            top: -30px;
+            left: -30px;
+        }
+
+        .decoration-2 {
+            width: 60px;
+            height: 60px;
+            background-color: var(--green);
+            bottom: 20px;
+            right: -20px;
+        }
+
+        .trigger-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 25px;
+            background-color: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(94, 23, 235, 0.3);
+            transition: transform 0.2s;
+            z-index: 900;
+        }
+
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <button class="trigger-btn">Show Popup</button>
+    
+    <div class="popup-overlay">
+        <div class="card">
+            <div class="card-header">
+                <div class="close-btn">×</div>
+                <h2>You've Hit Your Free Limit!</h2>
+                <p>Upgrade to Pro to unlock unlimited PYQs</p>
+                <div class="decoration decoration-1"></div>
+                <div class="decoration decoration-2"></div>
+            </div>
+            <div class="card-body">
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon pink">✓</div>
+                        <div class="feature-text">Access to all previous year questions</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon green">✓</div>
+                        <div class="feature-text">Detailed solutions and explanations</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon pink">✓</div>
+                        <div class="feature-text">Topic-wise question banks</div>
+                    </div>
+                </div>
+                <button class="upgrade-btn">Upgrade to Pro Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.querySelector('.popup-overlay');
+            const card = document.querySelector('.card');
+            const closeBtn = document.querySelector('.close-btn');
+            const triggerBtn = document.querySelector('.trigger-btn');
+            const upgradeBtn = document.querySelector('.upgrade-btn');
+
+            // Show popup
+            triggerBtn.addEventListener('click', function() {
+                overlay.classList.add('active');
+            });
+
+            // Close popup
+            closeBtn.addEventListener('click', function() {
+                overlay.classList.remove('active');
+            });
+
+            // Close when clicking outside the card
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+
+            // Upgrade button action
+            upgradeBtn.addEventListener('click', function() {
+                window.location.href = 'pricing.html';
+                overlay.classList.remove('active');
+            });
+
+            // Add animation to features
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateX(-20px)';
+                feature.style.transition = `all 0.3s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateX(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
