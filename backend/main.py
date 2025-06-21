@@ -36,6 +36,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://frontendvercel-git-main-himantas-projects.vercel.app",  # New Vercel frontend
         "https://newfrontend-sage.vercel.app",    # Production frontend
         "https://aspirant-app.onrender.com",      # Render backend domain
         "https://*.onrender.com",                 # Any Render subdomain
