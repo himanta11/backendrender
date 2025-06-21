@@ -3,8 +3,8 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import func, text
 from typing import List, Optional
-from database import get_db, SessionLocal
-from models import Question, ExamType, ExamStage, Subject
+from .database import get_db, SessionLocal
+from .models import Question, ExamType, ExamStage, Subject
 from pydantic import BaseModel
 import logging
 import traceback

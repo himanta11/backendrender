@@ -1,7 +1,7 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, date
 from sqlalchemy.orm import Session
-from models import UserSubscription, UserTier, UserUsage, UsageType
+from .models import UserSubscription, UserTier, UserUsage, UsageType
 from typing import Dict, Any
 import logging
 

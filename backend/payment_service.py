@@ -5,8 +5,8 @@ import hashlib
 import hmac
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
-from models import Payment, PaymentPlan, UserSubscription, PaymentStatus, User
-from database import get_db
+from .models import Payment, PaymentPlan, UserSubscription, PaymentStatus, User
+from .database import get_db
 from typing import Dict, Any
 import logging
 

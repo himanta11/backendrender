@@ -3,15 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import Optional, List, Dict
-import models
-import schemas
-from database import SessionLocal, engine, Base
-from auth import create_access_token, get_current_user, router as auth_router
+from . import models
+from . import schemas
+from .database import SessionLocal, engine, Base
+from .auth import create_access_token, get_current_user, router as auth_router
 from datetime import datetime, timedelta
 import logging
 import traceback
 from fastapi.responses import JSONResponse, StreamingResponse
-from questions import router as questions_router, QuestionFilters
+from .questions import router as questions_router, QuestionFilters
 from fastapi.routing import APIRouter
 from pydantic import BaseModel
 import os
@@ -21,10 +21,10 @@ import requests
 from together import Together
 from dotenv import load_dotenv
 import time
-from payment_service import payment_service
-from models import PaymentPlan, Payment, UserSubscription, UsageType
-from utils import UserLimitService
-from intent_detection import intent_detector, IntentType
+from .payment_service import payment_service
+from .models import PaymentPlan, Payment, UserSubscription, UsageType
+from .utils import UserLimitService
+from .intent_detection import intent_detector, IntentType
 
 # Initialize FastAPI app with CORS configuration
 app = FastAPI(
