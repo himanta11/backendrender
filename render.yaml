@@ -8,6 +8,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        value: postgresql://aspirant_user:zrz6djAcM5fWQuVDwW3HuVEeJ6UmrUI7@dpg-d0uptr3e5dus73a2fapg-a/aspirant
       - key: SECRET_KEY
         generateValue: true
       - key: ALGORITHM
@@ -23,10 +25,4 @@ services:
       - key: LOG_LEVEL
         value: INFO
     healthCheckPath: /health
-    autoDeploy: true
-
-databases:
-  - name: aspirant-db
-    databaseName: aspirant
-    user: aspirant_user
-    plan: starter 
+    autoDeploy: true 
