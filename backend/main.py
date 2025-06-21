@@ -18,7 +18,6 @@ import os
 import json
 from sqlalchemy import text
 import requests
-from together import Together
 from dotenv import load_dotenv
 import time
 from .payment_service import payment_service
@@ -66,11 +65,10 @@ async def startup_event():
 # Load environment variables
 load_dotenv()
 
-# Initialize Together AI client with hardcoded API key
+# Together AI API configuration
 TOGETHER_API_KEY = "39b58efc9f06bc95aeb6a246badf5561100d6247136a4cd33bc6f2c96cc9d6bf"
 TOGETHER_API_URL = "https://api.together.xyz/v1/completions"
 TOGETHER_CHAT_URL = "https://api.together.xyz/v1/chat/completions"
-together_client = Together(api_key=TOGETHER_API_KEY)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)

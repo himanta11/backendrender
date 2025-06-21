@@ -13,6 +13,5 @@ starlette==0.27.0
 click==8.2.1
 h11==0.16.0
 email-validator==2.1.0.post1
-together==0.1.2
 python-dotenv==1.0.0
 razorpay==1.4.2
