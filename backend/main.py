@@ -36,6 +36,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://aspirant.live",                           # Custom domain frontend
         "https://frontendvercel-git-main-himantas-projects.vercel.app",  # New Vercel frontend
         "https://newfrontend-sage.vercel.app",    # Production frontend
         "https://aspirant-app.onrender.com",      # Render backend domain
