@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends, status, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
+from sqlalchemy import text, func, and_, or_
 from typing import Optional, List, Dict
 from . import models
 from . import schemas
@@ -16,12 +17,11 @@ from fastapi.routing import APIRouter
 from pydantic import BaseModel
 import os
 import json
-from sqlalchemy import text
 import requests
 from dotenv import load_dotenv
 import time
 from .payment_service import payment_service
-from .models import PaymentPlan, Payment, UserSubscription, UsageType
+from .models import PaymentPlan, Payment, UserSubscription, UsageType, PaymentStatus
 from .utils import UserLimitService
 from .intent_detection import intent_detector, IntentType
 
@@ -739,6 +739,157 @@ async def health_check():
     except Exception as e:
         logger.error(f"Health check failed: {str(e)}")
         raise HTTPException(status_code=503, detail="Service unhealthy")
+
+# Add this new endpoint before the existing endpoints
+@app.get("/admin/dashboard")
+async def get_admin_dashboard(db: Session = Depends(get_db)):
+    """
+    Get real-time admin dashboard data
+    """
+    try:
+        # Calculate date ranges
+        now = datetime.utcnow()
+        last_month = now - timedelta(days=30)
+        yesterday = now - timedelta(days=1)
+        today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        
+        # 1. Total Users
+        total_users = db.query(models.User).count()
+        
+        # Users from last month for growth calculation
+        users_last_month = db.query(models.User).filter(
+            models.User.created_at >= last_month
+        ).count()
+        user_growth = (users_last_month / max(total_users - users_last_month, 1)) * 100 if total_users > 0 else 0
+        
+        # 2. Daily Active Users (users who have any usage today)
+        daily_active_users = db.query(models.UserUsage).filter(
+            models.UserUsage.usage_date == now.strftime('%Y-%m-%d')
+        ).distinct(models.UserUsage.user_id).count()
+        
+        # DAU from yesterday for growth calculation
+        yesterday_active_users = db.query(models.UserUsage).filter(
+            models.UserUsage.usage_date == yesterday.strftime('%Y-%m-%d')
+        ).distinct(models.UserUsage.user_id).count()
+        dau_growth = ((daily_active_users - yesterday_active_users) / max(yesterday_active_users, 1)) * 100 if yesterday_active_users > 0 else 0
+        
+        # 3. Revenue Data
+        total_revenue = db.query(func.sum(models.Payment.amount)).filter(
+            models.Payment.status == PaymentStatus.COMPLETED
+        ).scalar() or 0
+        
+        # Revenue from last month
+        revenue_last_month = db.query(func.sum(models.Payment.amount)).filter(
+            and_(
+                models.Payment.status == PaymentStatus.COMPLETED,
+                models.Payment.created_at >= last_month
+            )
+        ).scalar() or 0
+        
+        # Calculate revenue growth
+        revenue_before_last_month = total_revenue - revenue_last_month
+        revenue_growth = (revenue_last_month / max(revenue_before_last_month, 1)) * 100 if revenue_before_last_month > 0 else 0
+        
+        # 4. Free vs Paid Users
+        paid_users = db.query(models.UserSubscription).filter(
+            and_(
+                models.UserSubscription.is_active == True,
+                models.UserSubscription.end_date > now
+            )
+        ).distinct(models.UserSubscription.user_id).count()
+        
+        free_users = total_users - paid_users
+        
+        # Paid users from last month
+        paid_users_last_month = db.query(models.UserSubscription).filter(
+            and_(
+                models.UserSubscription.created_at >= last_month,
+                models.UserSubscription.is_active == True
+            )
+        ).distinct(models.UserSubscription.user_id).count()
+        
+        # Calculate growth rates
+        paid_users_before = paid_users - paid_users_last_month
+        paid_user_growth = (paid_users_last_month / max(paid_users_before, 1)) * 100 if paid_users_before > 0 else 0
+        
+        free_users_last_month = users_last_month - paid_users_last_month
+        free_users_before = free_users - free_users_last_month
+        free_user_growth = (free_users_last_month / max(free_users_before, 1)) * 100 if free_users_before > 0 else 0
+        
+        # 5. Question Statistics
+        total_questions = db.query(models.Question).count()
+        
+        # Questions added in last month
+        questions_last_month = db.query(models.Question).filter(
+            models.Question.created_at >= last_month
+        ).count()
+        questions_before = total_questions - questions_last_month
+        questions_growth = (questions_last_month / max(questions_before, 1)) * 100 if questions_before > 0 else 0
+        
+        # 6. Mock Test Statistics
+        total_tests_taken = db.query(models.UserUsage).filter(
+            models.UserUsage.usage_type == UsageType.MOCK_TEST
+        ).count()
+        
+        # Tests taken in last month
+        tests_last_month = db.query(models.UserUsage).filter(
+            and_(
+                models.UserUsage.usage_type == UsageType.MOCK_TEST,
+                models.UserUsage.created_at >= last_month
+            )
+        ).count()
+        tests_before = total_tests_taken - tests_last_month
+        tests_growth = (tests_last_month / max(tests_before, 1)) * 100 if tests_before > 0 else 0
+        
+        # 7. Average Usage Time (mock calculation based on activity)
+        # For now, we'll estimate based on usage frequency
+        avg_daily_usage = db.query(func.avg(models.UserUsage.count)).filter(
+            models.UserUsage.usage_date >= (now - timedelta(days=7)).strftime('%Y-%m-%d')
+        ).scalar() or 0
+        
+        # Estimate usage time (assuming each usage = ~2-3 minutes)
+        avg_usage_time = avg_daily_usage * 2.5
+        
+        # Usage time growth (mock calculation)
+        avg_daily_usage_last_week = db.query(func.avg(models.UserUsage.count)).filter(
+            and_(
+                models.UserUsage.usage_date >= (now - timedelta(days=14)).strftime('%Y-%m-%d'),
+                models.UserUsage.usage_date < (now - timedelta(days=7)).strftime('%Y-%m-%d')
+            )
+        ).scalar() or 0
+        
+        usage_time_growth = ((avg_daily_usage - avg_daily_usage_last_week) / max(avg_daily_usage_last_week, 1)) * 100 if avg_daily_usage_last_week > 0 else 0
+        
+        # Prepare response data
+        dashboard_data = {
+            "total_users": total_users,
+            "user_growth": round(user_growth, 1),
+            "daily_active_users": daily_active_users,
+            "dau_growth": round(dau_growth, 1),
+            "total_revenue": round(total_revenue, 2),
+            "revenue_growth": round(revenue_growth, 1),
+            "free_users": free_users,
+            "free_user_growth": round(free_user_growth, 1),
+            "paid_users": paid_users,
+            "paid_user_growth": round(paid_user_growth, 1),
+            "total_questions": total_questions,
+            "questions_growth": round(questions_growth, 1),
+            "total_tests_taken": total_tests_taken,
+            "tests_growth": round(tests_growth, 1),
+            "avg_usage_time": round(avg_usage_time, 1),
+            "usage_time_growth": round(usage_time_growth, 1),
+            "last_updated": now.isoformat()
+        }
+        
+        return dashboard_data
+        
+    except Exception as e:
+        logger.error(f"Error fetching admin dashboard data: {str(e)}")
+        logger.error(traceback.format_exc())
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error fetching dashboard data: {str(e)}"
+        )
 
 if __name__ == "__main__":
     import uvicorn
