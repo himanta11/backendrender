@@ -1,0 +1,1230 @@
+[
+    {
+      "question_id": 1,
+      "question_text": "Select the option that represents the correct order of the given words as they would appear in an English dictionary: Warriors, Warehouse, Warcraft, Warranty, Wardrobe, Wardenship",
+      "options": {
+        "A": "3, 6, 5, 2, 1, 4",
+        "B": "3, 5, 6, 2, 1, 4",
+        "C": "3, 5, 6, 2, 4, 1",
+        "D": "3, 6, 5, 2, 4, 1"
+      },
+      "correct_option": "D",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 2,
+      "question_text": "Three statements are given, followed by four conclusions. Statements: Some desks are trays. Some trays are plates. Some plates are desks.",
+      "options": {
+        "A": "Only conclusion III follows",
+        "B": "Only conclusion IV follows",
+        "C": "Only conclusion II follows",
+        "D": "Only conclusion I follows"
+      },
+      "correct_option": "A",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 3,
+      "question_text": "Ganesh was taking a walk with his mother’s brother’s father’s granddaughter. Who was he walking with?",
+      "options": {
+        "A": "Daughter",
+        "B": "Mother",
+        "C": "Cousin",
+        "D": "Granddaughter"
+      },
+      "correct_option": "C",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 4,
+      "question_text": "Which of the following letter-clusters will replace the question mark (?) in the given series? UV, OY, IB, EE, ?",
+      "options": {
+        "A": "ZK",
+        "B": "AH",
+        "C": "BI",
+        "D": "BH"
+      },
+      "correct_option": "B",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 5,
+      "question_text": "The second number in the given number-pairs is obtained by performing certain mathematical operation(s) on the first number. The same operation(s) is/are followed in all the number-pairs except one. Find that odd number-pair. 20:11, 6:4, 15:9, 12:7",
+      "options": {
+        "A": "20:11",
+        "B": "6:4",
+        "C": "15:9",
+        "D": "12:7"
+      },
+      "correct_option": "A",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 6,
+      "question_text": "Select the set in which the numbers are related in the same way as are the numbers of the following sets: (55, 11, 25), (64, 16, 16)",
+      "options": {
+        "A": "(33, 11, 9)",
+        "B": "(33, 11, 22)",
+        "C": "(33, 11, 3)",
+        "D": "(33, 11, 10)"
+      },
+      "correct_option": "A",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 7,
+      "question_text": "Select the option that is related to the sixth letter-cluster in the same way as the first is to the second and the third is to the fourth: HMD : KOE :: BNQ : EPR :: ? : FLV",
+      "options": {
+        "A": "SJE",
+        "B": "UJC",
+        "C": "EJS",
+        "D": "CJU"
+      },
+      "correct_option": "D",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 8,
+      "question_text": "Select the Venn diagram that best illustrates the relationship between the following classes: Ticket, Aeroplane, Rail",
+      "options": {
+        "A": "All intersecting",
+        "B": "Aeroplane and Rail within Ticket",
+        "C": "Ticket separate from Aeroplane and Rail",
+        "D": "Two intersecting circles and one separate"
+      },
+      "correct_option": "A",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 9,
+      "question_text": "Four letter-clusters have been given, out of which three are alike in some manner and one is different. Select the odd letter-cluster.",
+      "options": {
+        "A": "BFJN",
+        "B": "DHLP",
+        "C": "HJKP",
+        "D": "JNRV"
+      },
+      "correct_option": "C",
+      "subject": "General Intelligence and Reasoning"
+    },
+    {
+      "question_id": 10,
+      "question_text": "Select the option that is related to the fifth number in the same way as the second is to the first and the fourth is to the third: 5 : 45 :: 3 : 3 :: 6 : ?",
+      "options": {
+        "A": "90",
+        "B": "106",
+        "C": "110",
+        "D": "96"
+      },
+      "correct_option": "D",
+      "subject": "General Intelligence and Reasoning"
+    },
+    
+        {
+          "question_id": 11,
+          "question_text": "Select the set in which the numbers are related in the same way as the numbers of the following sets: (55, 11, 25), (64, 16, 16)",
+          "options": {
+            "A": "(33, 11, 9)",
+            "B": "(33, 11, 22)",
+            "C": "(33, 11, 3)",
+            "D": "(33, 11, 10)"
+          },
+          "correct_option": "A",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 12,
+          "question_text": "Select the option that is related to the sixth letter-cluster in the same way as the first letter-cluster is related to the second and the third is to the fourth: HMD : KOE :: BNQ : EPR :: ? : FLV",
+          "options": {
+            "A": "SJE",
+            "B": "UJC",
+            "C": "EJS",
+            "D": "CJU"
+          },
+          "correct_option": "D",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 13,
+          "question_text": "Select the Venn diagram that best illustrates the relationship between the following classes: Ticket, Aeroplane, Rail",
+          "options": {
+            "A": "All intersecting",
+            "B": "Aeroplane and Rail within Ticket",
+            "C": "Ticket separate from Aeroplane and Rail",
+            "D": "Two intersecting circles and one separate"
+          },
+          "correct_option": "A",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 14,
+          "question_text": "Four letter-clusters have been given, out of which three are alike in some manner and one is different. Select the odd letter-cluster.",
+          "options": {
+            "A": "BFJN",
+            "B": "DHLP",
+            "C": "HJKP",
+            "D": "JNRV"
+          },
+          "correct_option": "C",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 15,
+          "question_text": "Select the option that is related to the fifth number in the same way as the second is to the first and the fourth is to the third: 5 : 45 :: 3 : 3 :: 6 : ?",
+          "options": {
+            "A": "90",
+            "B": "106",
+            "C": "110",
+            "D": "96"
+          },
+          "correct_option": "D",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 16,
+          "question_text": "Which of the following numbers will replace the question mark (?) in the given series? 8, 15, 26, ?, 56, 75",
+          "options": {
+            "A": "41",
+            "B": "39",
+            "C": "43",
+            "D": "37"
+          },
+          "correct_option": "C",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 17,
+          "question_text": "Select the number from among the given options that can replace the question mark (?) in the following series: 4, 10, 20, 34, 52, ?, 100",
+          "options": {
+            "A": "76",
+            "B": "72",
+            "C": "74",
+            "D": "70"
+          },
+          "correct_option": "B",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 18,
+          "question_text": "Select the option in which the numbers share the same relationship as that shared by the given pair of numbers. (15, 225)",
+          "options": {
+            "A": "(17, 289)",
+            "B": "(13, 169)",
+            "C": "(19, 361)",
+            "D": "(12, 142)"
+          },
+          "correct_option": "D",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 19,
+          "question_text": "Which number will replace the question mark (?) in the following series? 13, 18, 26, 37, ?, 66",
+          "options": {
+            "A": "51",
+            "B": "49",
+            "C": "48",
+            "D": "50"
+          },
+          "correct_option": "A",
+          "subject": "General Intelligence and Reasoning"
+        },
+        {
+          "question_id": 20,
+          "question_text": "Select the option that represents the correct mirror image of the given word when the mirror is placed to the right of the word. WORD",
+          "options": {
+            "A": "DROW",
+            "B": "WDR0",
+            "C": "W0RD",
+            "D": "D0RW"
+          },
+          "correct_option": "A",
+          "subject": "General Intelligence and Reasoning"
+        },
+        
+            {
+              "question_id": 21,
+              "question_text": "Select the option that is related to the third word in the same way as the second is related to the first: Skin : Touch :: Nose : ?",
+              "options": {
+                "A": "Smell",
+                "B": "Taste",
+                "C": "Nose ring",
+                "D": "Sweat"
+              },
+              "correct_option": "A",
+              "subject": "General Intelligence and Reasoning"
+            },
+            {
+              "question_id": 22,
+              "question_text": "Which of the following numbers will replace the question mark (?) in the series? 8, 15, 26, ?, 56, 75",
+              "options": {
+                "A": "37",
+                "B": "41",
+                "C": "43",
+                "D": "39"
+              },
+              "correct_option": "C",
+              "subject": "General Intelligence and Reasoning"
+            },
+            {
+              "question_id": 23,
+              "question_text": "Which number will replace the question mark in the series? 13, 18, 26, 37, ?, 66",
+              "options": {
+                "A": "48",
+                "B": "49",
+                "C": "50",
+                "D": "51"
+              },
+              "correct_option": "D",
+              "subject": "General Intelligence and Reasoning"
+            },
+            {
+              "question_id": 24,
+              "question_text": "What is the mean proportion between 7 and 112?",
+              "options": {
+                "A": "42",
+                "B": "28",
+                "C": "21",
+                "D": "14"
+              },
+              "correct_option": "B",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 25,
+              "question_text": "Select the correct combination of mathematical signs to sequentially replace the * signs and to balance the given equation: 150 * 3 * 10 * 2 * 7 * 46",
+              "options": {
+                "A": "÷, +, −, ×, =",
+                "B": "−, ×, +, ÷, =",
+                "C": "+, −, ÷, ×, =",
+                "D": "×, +, ÷, −, ="
+              },
+              "correct_option": "A",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 26,
+              "question_text": "A shopkeeper offers two discount schemes: A) Buy 3 get 4 free, B) Buy 5 get 6 free. Which gives the maximum discount?",
+              "options": {
+                "A": "Scheme A",
+                "B": "Scheme B",
+                "C": "Same discount",
+                "D": "No discount"
+              },
+              "correct_option": "A",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 27,
+              "question_text": "If the total surface area of a cube is 24 sq.units, what is its volume?",
+              "options": {
+                "A": "8",
+                "B": "4",
+                "C": "16",
+                "D": "10"
+              },
+              "correct_option": "A",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 28,
+              "question_text": "In what time will ₹10,000 at 4% per annum produce the same interest as ₹8,000 in 4 years at 5% simple interest?",
+              "options": {
+                "A": "5 years",
+                "B": "3 years",
+                "C": "4 years",
+                "D": "6 years"
+              },
+              "correct_option": "C",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 29,
+              "question_text": "A man, a boy and a woman can finish a work in 10, 15, and 30 days respectively. How many days will it take if all work together?",
+              "options": {
+                "A": "10",
+                "B": "5",
+                "C": "8",
+                "D": "6"
+              },
+              "correct_option": "D",
+              "subject": "Mathematics"
+            },
+            {
+              "question_id": 30,
+              "question_text": "Which of the following sets is related in the same way as (55, 11, 25) and (64, 16, 16)?",
+              "options": {
+                "A": "(33, 11, 9)",
+                "B": "(33, 11, 22)",
+                "C": "(33, 11, 3)",
+                "D": "(33, 11, 10)"
+              },
+              "correct_option": "A",
+              "subject": "General Intelligence and Reasoning"
+            },
+            
+                {
+                  "question_id": 31,
+                  "question_text": "Select the set in which the numbers are related in the same way as (3, 9, 30) and (10, 3, 33).",
+                  "options": {
+                    "A": "(6, 9, 40)",
+                    "B": "(8, 8, 74)",
+                    "C": "(12, 3, 39)",
+                    "D": "(9, 7, 98)"
+                  },
+                  "correct_option": "C",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 32,
+                  "question_text": "Which number should replace the question mark (?) in the following series? 39, 42, 48, 57, 69, ?, 102",
+                  "options": {
+                    "A": "81",
+                    "B": "87",
+                    "C": "79",
+                    "D": "84"
+                  },
+                  "correct_option": "D",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 33,
+                  "question_text": "Which number will replace the question mark (?) in the series? 33, 80, 108, ?, 183, 230, 258",
+                  "options": {
+                    "A": "143",
+                    "B": "138",
+                    "C": "155",
+                    "D": "160"
+                  },
+                  "correct_option": "B",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 34,
+                  "question_text": "Select the correct combination of mathematical signs to sequentially replace the * signs to balance the equation: 150 * 3 * 10 * 2 * 7 * 46",
+                  "options": {
+                    "A": "÷, +, −, ×, =",
+                    "B": "−, ×, +, ÷, =",
+                    "C": "+, −, ÷, ×, =",
+                    "D": "×, +, ÷, −, ="
+                  },
+                  "correct_option": "A",
+                  "subject": "Mathematics"
+                },
+                {
+                  "question_id": 35,
+                  "question_text": "Select the set in which the numbers are related in the same way as (8, 44, 3) and (12, 60, 3).",
+                  "options": {
+                    "A": "(12, 68, 5)",
+                    "B": "(8, 50, 2)",
+                    "C": "(17, 56, 9)",
+                    "D": "(23, 98, 5)"
+                  },
+                  "correct_option": "A",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 36,
+                  "question_text": "Select the number set that is related in the same way as (31, 47, 35) and (51, 67, 55).",
+                  "options": {
+                    "A": "(33, 47, 35)",
+                    "B": "(32, 39, 27)",
+                    "C": "(13, 29, 17)",
+                    "D": "(21, 36, 35)"
+                  },
+                  "correct_option": "C",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 37,
+                  "question_text": "Orthopaedic : Bone :: Cardiologist : ?",
+                  "options": {
+                    "A": "Kidney",
+                    "B": "Heart",
+                    "C": "Lungs",
+                    "D": "Brain"
+                  },
+                  "correct_option": "B",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 38,
+                  "question_text": "Select the letter sequence that completes the series: _ V J R W B _ _ R W B V L _ _ B V _ _ W",
+                  "options": {
+                    "A": "A V K R W M R",
+                    "B": "A W K R X N R",
+                    "C": "B V K R W M R",
+                    "D": "B W K R W M R"
+                  },
+                  "correct_option": "C",
+                  "subject": "General Intelligence and Reasoning"
+                },
+                {
+                  "question_id": 39,
+                  "question_text": "In an election, 2% did not vote and 500 votes were invalid. Candidate A got 43% of votes and defeated B by 200 votes. Find total votes cast.",
+                  "options": {
+                    "A": "2450",
+                    "B": "2800",
+                    "C": "3000",
+                    "D": "3250"
+                  },
+                  "correct_option": "C",
+                  "subject": "Mathematics"
+                },
+                {
+                  "question_id": 40,
+                  "question_text": "Evaluate: sin(25°)·sin(65°) − cos(25°)·cos(65°)",
+                  "options": {
+                    "A": "40",
+                    "B": "4",
+                    "C": "0",
+                    "D": "1"
+                  },
+                  "correct_option": "C",
+                  "subject": "Mathematics"
+                },
+                
+                    {
+                      "question_id": 41,
+                      "question_text": "Which of the following sets is related in the same way as (55, 11, 25) and (64, 16, 16)?",
+                      "options": {
+                        "A": "(33, 11, 9)",
+                        "B": "(33, 11, 22)",
+                        "C": "(33, 11, 3)",
+                        "D": "(33, 11, 10)"
+                      },
+                      "correct_option": "A",
+                      "subject": "General Intelligence and Reasoning"
+                    },
+                    {
+                      "question_id": 42,
+                      "question_text": "In a race around a circular cycling track of 75 km, two cyclists are riding at a speed of 30 km/h and 25 km/h. After what time (in hours) will they meet at the point from where they started their journey?",
+                      "options": {
+                        "A": "16",
+                        "B": "7",
+                        "C": "14",
+                        "D": "15"
+                      },
+                      "correct_option": "D",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 43,
+                      "question_text": "The present age of Rahim is five times the present age of his daughter, Savita. Seven years from now, Rahim will be three times as old as Savita. What is the present age (in years) of Rahim?",
+                      "options": {
+                        "A": "45",
+                        "B": "35",
+                        "C": "40",
+                        "D": "30"
+                      },
+                      "correct_option": "B",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 44,
+                      "question_text": "P is two times more efficient than Q. P is able to complete a piece of work in 40 days less than Q. Working together, the whole number of days taken by them to complete the work is (round off to the nearest integer):",
+                      "options": {
+                        "A": "26",
+                        "B": "25",
+                        "C": "27",
+                        "D": "28"
+                      },
+                      "correct_option": "C",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 45,
+                      "question_text": "If A is 95% of B, then what per cent of A is B?",
+                      "options": {
+                        "A": "105.26%",
+                        "B": "95%",
+                        "C": "102.63%",
+                        "D": "100%"
+                      },
+                      "correct_option": "A",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 46,
+                      "question_text": "The marked price of mustard oil is 25% more than its cost price. At what percentage less than the marked price should it be sold to have no profit and no loss?",
+                      "options": {
+                        "A": "15%",
+                        "B": "20%",
+                        "C": "18%",
+                        "D": "22%"
+                      },
+                      "correct_option": "B",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 47,
+                      "question_text": "Let ABC, PQR be two congruent triangles such that ∠A = ∠P = 90°. If BC = 13 cm, PR = 5 cm, find AB.",
+                      "options": {
+                        "A": "12 cm",
+                        "B": "8 cm",
+                        "C": "10 cm",
+                        "D": "5 cm"
+                      },
+                      "correct_option": "A",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 48,
+                      "question_text": "A shopkeeper uses 940 gm weight in place of one kg and sells at 4% profit. What will be the actual profit percentage?",
+                      "options": {
+                        "A": "10.64%",
+                        "B": "11.11%",
+                        "C": "6.38%",
+                        "D": "6.38%"
+                      },
+                      "correct_option": "D",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 49,
+                      "question_text": "Two concentric circles are of radii 10 cm and 6 cm. Find the length of the chord of the larger circle which touches the smaller circle.",
+                      "options": {
+                        "A": "8 cm",
+                        "B": "16 cm",
+                        "C": "12 cm",
+                        "D": "9 cm"
+                      },
+                      "correct_option": "C",
+                      "subject": "Mathematics"
+                    },
+                    {
+                      "question_id": 50,
+                      "question_text": "If the four numbers, 39, 117, 17 and y are in proportion, then find the value of y.",
+                      "options": {
+                        "A": "49",
+                        "B": "51",
+                        "C": "57",
+                        "D": "85"
+                      },
+                      "correct_option": "B",
+                      "subject": "Mathematics"
+                    },
+                    
+                        {
+                          "question_id": 51,
+                          "question_text": "X and Y can complete a work in 9 days and 36 days respectively. They work on alternate days starting with X. How many days will the work take to complete?",
+                          "options": {
+                            "A": "13",
+                            "B": "15",
+                            "C": "12",
+                            "D": "18"
+                          },
+                          "correct_option": "A",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 52,
+                          "question_text": "In what ratio must water be mixed with milk costing ₹32 per litre to get a mixture worth ₹28 per litre?",
+                          "options": {
+                            "A": "1:3",
+                            "B": "1:2",
+                            "C": "2:3",
+                            "D": "3:1"
+                          },
+                          "correct_option": "A",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 53,
+                          "question_text": "12 women and 7 girls earn a total of ₹42,120 in 13 days. How much did they earn per day?",
+                          "options": {
+                            "A": "₹3,240",
+                            "B": "₹3,240",
+                            "C": "₹3,240",
+                            "D": "₹3,240"
+                          },
+                          "correct_option": "A",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 54,
+                          "question_text": "A customer has 2850 reward points, each worth ₹0.10. If a laptop marked ₹72,000 is on 20% and 25% successive discounts, what is the final price after using reward points?",
+                          "options": {
+                            "A": "₹42,215",
+                            "B": "₹43,200",
+                            "C": "₹42,942",
+                            "D": "₹42,915"
+                          },
+                          "correct_option": "D",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 55,
+                          "question_text": "Evaluate: cos(36° + A)·cos(36° − A) + cos(54° + A)·cos(54° − A)",
+                          "options": {
+                            "A": "cos A",
+                            "B": "cos 2A",
+                            "C": "sin 2A",
+                            "D": "sin A"
+                          },
+                          "correct_option": "B",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 56,
+                          "question_text": "If the total surface area of a cube is 24 sq.units, what is its volume?",
+                          "options": {
+                            "A": "8",
+                            "B": "4",
+                            "C": "10",
+                            "D": "16"
+                          },
+                          "correct_option": "A",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 57,
+                          "question_text": "A perpendicular of 15 cm is drawn from the center of a circle to a chord of 40 cm. What is the radius?",
+                          "options": {
+                            "A": "25 cm",
+                            "B": "22 cm",
+                            "C": "27 cm",
+                            "D": "20 cm"
+                          },
+                          "correct_option": "A",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 58,
+                          "question_text": "5 women and 9 girls earn ₹18,720 in 9 days. 9 women and 16 girls earn ₹52,080 in 14 days. What do 12 women and 7 girls earn in 13 days?",
+                          "options": {
+                            "A": "₹42,510",
+                            "B": "₹41,990",
+                            "C": "₹42,380",
+                            "D": "₹42,120"
+                          },
+                          "correct_option": "D",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 59,
+                          "question_text": "Find the mean proportion between 7 and 112.",
+                          "options": {
+                            "A": "21",
+                            "B": "28",
+                            "C": "42",
+                            "D": "14"
+                          },
+                          "correct_option": "B",
+                          "subject": "Mathematics"
+                        },
+                        {
+                          "question_id": 60,
+                          "question_text": "4 women or 6 boys can finish a work in same time. A man can finish it in 60 days. In how many days will 5 women complete the work?",
+                          "options": {
+                            "A": "4 days",
+                            "B": "10 days",
+                            "C": "6 days",
+                            "D": "8 days"
+                          },
+                          "correct_option": "C",
+                          "subject": "Mathematics"
+                        },
+                        
+                            {
+                              "question_id": 61,
+                              "question_text": "If cos(A) = 3/5, and A is an acute angle, what is the value of sin(A)?",
+                              "options": {
+                                "A": "4/5",
+                                "B": "5/4",
+                                "C": "3/4",
+                                "D": "4/3"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 62,
+                              "question_text": "A shopkeeper gains 20% by selling an article for ₹120. Find its cost price.",
+                              "options": {
+                                "A": "₹100",
+                                "B": "₹110",
+                                "C": "₹105",
+                                "D": "₹115"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 63,
+                              "question_text": "A mixture of 60 litres contains milk and water in the ratio 2:1. How much water must be added to make the ratio 1:2?",
+                              "options": {
+                                "A": "60 L",
+                                "B": "80 L",
+                                "C": "90 L",
+                                "D": "100 L"
+                              },
+                              "correct_option": "C",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 64,
+                              "question_text": "If A:B = 3:4 and B:C = 5:6, what is A:C?",
+                              "options": {
+                                "A": "15:24",
+                                "B": "5:8",
+                                "C": "2:3",
+                                "D": "4:5"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 65,
+                              "question_text": "A shopkeeper marked an item 40% above the cost price and allowed a discount of 25%. Find the profit percent.",
+                              "options": {
+                                "A": "5%",
+                                "B": "10%",
+                                "C": "15%",
+                                "D": "20%"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 66,
+                              "question_text": "The average of five consecutive even numbers is 50. What is the smallest number?",
+                              "options": {
+                                "A": "46",
+                                "B": "48",
+                                "C": "50",
+                                "D": "52"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 67,
+                              "question_text": "What is the HCF of 45 and 75?",
+                              "options": {
+                                "A": "15",
+                                "B": "5",
+                                "C": "10",
+                                "D": "25"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 68,
+                              "question_text": "Find the simple interest on ₹2000 at 5% per annum for 3 years.",
+                              "options": {
+                                "A": "₹300",
+                                "B": "₹200",
+                                "C": "₹250",
+                                "D": "₹150"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 69,
+                              "question_text": "If 30% of a number is 240, what is the number?",
+                              "options": {
+                                "A": "800",
+                                "B": "700",
+                                "C": "900",
+                                "D": "600"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            {
+                              "question_id": 70,
+                              "question_text": "The average age of 10 students is 15 years. If one new student joins the group, the average becomes 16 years. What is the age of the new student?",
+                              "options": {
+                                "A": "26",
+                                "B": "25",
+                                "C": "24",
+                                "D": "21"
+                              },
+                              "correct_option": "A",
+                              "subject": "Mathematics"
+                            },
+                            
+                                {
+                                  "question_id": 71,
+                                  "question_text": "If cos(A) = 3/5, and A is an acute angle, what is the value of tan(A)?",
+                                  "options": {
+                                    "A": "4/3",
+                                    "B": "3/4",
+                                    "C": "5/4",
+                                    "D": "4/5"
+                                  },
+                                  "correct_option": "A",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 72,
+                                  "question_text": "If 30% of a number is 210, what is the number?",
+                                  "options": {
+                                    "A": "600",
+                                    "B": "700",
+                                    "C": "800",
+                                    "D": "900"
+                                  },
+                                  "correct_option": "C",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 73,
+                                  "question_text": "Find the compound interest on ₹12,000 for 2 years at 5% per annum compounded annually.",
+                                  "options": {
+                                    "A": "₹1,230",
+                                    "B": "₹1,250",
+                                    "C": "₹1,200",
+                                    "D": "₹1,176"
+                                  },
+                                  "correct_option": "D",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 74,
+                                  "question_text": "A man walks at the speed of 5 km/h. What distance will he cover in 2 hours 30 minutes?",
+                                  "options": {
+                                    "A": "12.5 km",
+                                    "B": "10 km",
+                                    "C": "15 km",
+                                    "D": "13 km"
+                                  },
+                                  "correct_option": "A",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 75,
+                                  "question_text": "The average of first 10 odd numbers is:",
+                                  "options": {
+                                    "A": "10",
+                                    "B": "9",
+                                    "C": "11",
+                                    "D": "8"
+                                  },
+                                  "correct_option": "B",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 76,
+                                  "question_text": "In what time will ₹5,000 at 4% per annum produce ₹400 interest?",
+                                  "options": {
+                                    "A": "2 years",
+                                    "B": "4 years",
+                                    "C": "3 years",
+                                    "D": "5 years"
+                                  },
+                                  "correct_option": "C",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 77,
+                                  "question_text": "A can do a piece of work in 6 days and B in 8 days. How many days will they take to complete it together?",
+                                  "options": {
+                                    "A": "3.4 days",
+                                    "B": "3.5 days",
+                                    "C": "4.2 days",
+                                    "D": "4.8 days"
+                                  },
+                                  "correct_option": "B",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 78,
+                                  "question_text": "If A : B = 3 : 4 and B : C = 2 : 5, find A : C.",
+                                  "options": {
+                                    "A": "3:10",
+                                    "B": "3:5",
+                                    "C": "6:5",
+                                    "D": "3:8"
+                                  },
+                                  "correct_option": "A",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 79,
+                                  "question_text": "The LCM of two numbers is 84 and their HCF is 14. If one number is 28, what is the other number?",
+                                  "options": {
+                                    "A": "42",
+                                    "B": "21",
+                                    "C": "36",
+                                    "D": "24"
+                                  },
+                                  "correct_option": "A",
+                                  "subject": "Mathematics"
+                                },
+                                {
+                                  "question_id": 80,
+                                  "question_text": "The average age of 15 students is 14 years. If the age of the teacher is included, the average becomes 15. Find the age of the teacher.",
+                                  "options": {
+                                    "A": "29",
+                                    "B": "30",
+                                    "C": "35",
+                                    "D": "34"
+                                  },
+                                  "correct_option": "B",
+                                  "subject": "Mathematics"
+                                },
+                                
+                                    {
+                                      "question_id": 81,
+                                      "question_text": "A shopkeeper offers two successive discounts of 20% and 25% on an item. What is the effective discount?",
+                                      "options": {
+                                        "A": "45%",
+                                        "B": "40%",
+                                        "C": "30%",
+                                        "D": "20%"
+                                      },
+                                      "correct_option": "B",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 82,
+                                      "question_text": "The average age of a class of 30 students is 12 years. When the age of the class teacher is included, the average becomes 13 years. What is the age of the teacher?",
+                                      "options": {
+                                        "A": "40",
+                                        "B": "43",
+                                        "C": "45",
+                                        "D": "42"
+                                      },
+                                      "correct_option": "C",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 83,
+                                      "question_text": "The mean of 20 values is 18. If one value 38 is removed and another value 12 is added, what is the new mean?",
+                                      "options": {
+                                        "A": "17.5",
+                                        "B": "17.8",
+                                        "C": "17.6",
+                                        "D": "17.4"
+                                      },
+                                      "correct_option": "C",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 84,
+                                      "question_text": "What is the value of x if 8x − 3 = 3x + 7?",
+                                      "options": {
+                                        "A": "2",
+                                        "B": "3",
+                                        "C": "1",
+                                        "D": "4"
+                                      },
+                                      "correct_option": "D",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 85,
+                                      "question_text": "If sin A = 3/5 and A is acute, then what is the value of cos A?",
+                                      "options": {
+                                        "A": "4/5",
+                                        "B": "3/4",
+                                        "C": "5/4",
+                                        "D": "4/3"
+                                      },
+                                      "correct_option": "A",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 86,
+                                      "question_text": "If 4x + 3 = 27, then what is the value of x?",
+                                      "options": {
+                                        "A": "5",
+                                        "B": "6",
+                                        "C": "4",
+                                        "D": "3"
+                                      },
+                                      "correct_option": "A",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 87,
+                                      "question_text": "If the sum of two numbers is 40 and their difference is 8, what is the smaller number?",
+                                      "options": {
+                                        "A": "16",
+                                        "B": "12",
+                                        "C": "20",
+                                        "D": "24"
+                                      },
+                                      "correct_option": "A",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 88,
+                                      "question_text": "The area of a square is 625 m². What is the length of one side?",
+                                      "options": {
+                                        "A": "25 m",
+                                        "B": "20 m",
+                                        "C": "30 m",
+                                        "D": "35 m"
+                                      },
+                                      "correct_option": "A",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 89,
+                                      "question_text": "Which of the following numbers is a perfect cube?",
+                                      "options": {
+                                        "A": "729",
+                                        "B": "512",
+                                        "C": "625",
+                                        "D": "1000"
+                                      },
+                                      "correct_option": "B",
+                                      "subject": "Mathematics"
+                                    },
+                                    {
+                                      "question_id": 90,
+                                      "question_text": "A number is divisible by both 3 and 4. Which of the following numbers satisfies this condition?",
+                                      "options": {
+                                        "A": "18",
+                                        "B": "24",
+                                        "C": "36",
+                                        "D": "48"
+                                      },
+                                      "correct_option": "B",
+                                      "subject": "Mathematics"
+                                    },
+                                    
+                                        {
+                                          "question_id": 91,
+                                          "question_text": "Select the set in which the numbers are related in the same way as are the numbers of the following sets: (55, 11, 25), (64, 16, 16).",
+                                          "options": {
+                                            "A": "(33, 11, 9)",
+                                            "B": "(33, 11, 22)",
+                                            "C": "(33, 11, 3)",
+                                            "D": "(33, 11, 10)"
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "General Intelligence and Reasoning"
+                                        },
+                                        {
+                                          "question_id": 92,
+                                          "question_text": "Ganesh was taking a walk with his mother’s brother’s father’s granddaughter. Who was he walking with?",
+                                          "options": {
+                                            "A": "Daughter",
+                                            "B": "Mother",
+                                            "C": "Cousin",
+                                            "D": "Granddaughter"
+                                          },
+                                          "correct_option": "C",
+                                          "subject": "General Intelligence and Reasoning"
+                                        },
+                                        {
+                                          "question_id": 93,
+                                          "question_text": "Select the option that is related to the third word in the same way as the second word is related to the first word: Skin : Touch :: Nose : ?",
+                                          "options": {
+                                            "A": "Smell",
+                                            "B": "Taste",
+                                            "C": "Nose ring",
+                                            "D": "Sweat"
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "General Intelligence and Reasoning"
+                                        },
+                                        {
+                                          "question_id": 94,
+                                          "question_text": "Select the INCORRECTLY spelt word in the sentence: The village beggars, no longer ill at ease in the gathering of gliterring dignitaries, sat in their assigned rows.",
+                                          "options": {
+                                            "A": "Assigned",
+                                            "B": "Apprentices",
+                                            "C": "Beggars",
+                                            "D": "Gliterring"
+                                          },
+                                          "correct_option": "D",
+                                          "subject": "English Grammar"
+                                        },
+                                        {
+                                          "question_id": 95,
+                                          "question_text": "Select the most appropriate antonym of the underlined word: Henry is so *servile* that other people take advantage of him.",
+                                          "options": {
+                                            "A": "Arrogant",
+                                            "B": "Sheepish",
+                                            "C": "Bickering",
+                                            "D": "Cunning"
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "English Grammar"
+                                        },
+                                        {
+                                          "question_id": 96,
+                                          "question_text": "Select the option that expresses the sentence in passive voice: The company's board of directors will announce the financial results tomorrow.",
+                                          "options": {
+                                            "A": "The financial results will be announced by the company's board of directors tomorrow.",
+                                            "B": "The financial results are being announced by the company's board of directors tomorrow.",
+                                            "C": "The financial results will have been announced by the board tomorrow.",
+                                            "D": "The financial results were announced by the board tomorrow."
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "English Grammar"
+                                        },
+                                        {
+                                          "question_id": 97,
+                                          "question_text": "Select the grammatically correct sentence.",
+                                          "options": {
+                                            "A": "The participants of the competition are waiting for their turn curiously.",
+                                            "B": "The participants of the competition has been waiting curiously.",
+                                            "C": "A participants of the competition is waiting curiously.",
+                                            "D": "The participants of the competition is waiting curiously."
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "English Grammar"
+                                        },
+                                        {
+                                          "question_id": 98,
+                                          "question_text": "Select the most appropriate antonym of the word *under* in the sentence: Her dog can climb under the fence.",
+                                          "options": {
+                                            "A": "Over",
+                                            "B": "Sink",
+                                            "C": "Behind",
+                                            "D": "Beneath"
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "English Grammar"
+                                        },
+                                        {
+                                          "question_id": 99,
+                                          "question_text": "Find the remainder when (265)^4081 + 9 is divided by 266.",
+                                          "options": {
+                                            "A": "8",
+                                            "B": "6",
+                                            "C": "1",
+                                            "D": "9"
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "Mathematics"
+                                        },
+                                        {
+                                          "question_id": 100,
+                                          "question_text": "Two runners, Sony and Mony, run on a 200 m circular track at speeds of 18 and 24 km/h. When will they meet again at the starting point?",
+                                          "options": {
+                                            "A": "120 sec",
+                                            "B": "110 sec",
+                                            "C": "100 sec",
+                                            "D": "90 sec"
+                                          },
+                                          "correct_option": "A",
+                                          "subject": "Mathematics"
+                                        }
+                                      ]
+                                      
+                                  
+                                  
+                              
+                              
+                          
+                          
+                      
+                      
+                  
+                  
+              
+              
+          
+          
+      
+      
+  
+  

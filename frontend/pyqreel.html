@@ -852,33 +852,14 @@
     <!-- Filters Panel -->
     <div class="filters-panel" id="filtersPanel">
         <button class="close-btn" id="closeFilters">×</button>
-        <h2>Filter Content</h2>
-        
         <div class="filter-section">
-            <h3 class="filter-title">Course</h3>
+            <h3 class="filter-title">Choose Subjects</h3>
             <div class="filter-options">
-                <div class="filter-option selected">RRB</div>
-                <div class="filter-option">SSC</div>
-                <div class="filter-option disabled">Others Coming Soon</div>
-            </div>
-        </div>
-        
-        <div class="filter-section">
-            <h3 class="filter-title">Exam Type</h3>
-            <div class="filter-options">
-                <div class="filter-option selected">NTPC</div>
-                <div class="filter-option">CGL</div>
-                <div class="filter-option disabled">Others Coming Soon</div>
-            </div>
-        </div>
-        
-        <div class="filter-section">
-            <h3 class="filter-title">Subject & Topics</h3>
-            <div class="filter-options">
-                <div class="filter-option">General Awareness</div>
+                <div class="filter-option selected">General Awareness</div>
                 <div class="filter-option">General Intelligence and Reasoning</div>
                 <div class="filter-option">Mathematics</div>
                 <div class="filter-option">General Science</div>
+                <div class="filter-option">English Grammar</div>
             </div>
         </div>
         
@@ -1164,23 +1145,23 @@
                 try {
                     console.log('Fetching questions...');
                     
-                    // Get selected topics from filters
-                    const selectedTopics = Array.from(document.querySelectorAll('.filter-option.selected'))
-                        .map(option => option.textContent.trim())
-                        .filter(topic => topic !== 'RRB' && topic !== 'NTPC');
+                    // Get selected subjects from filters
+                    const selectedSubjects = Array.from(document.querySelectorAll('.filter-option.selected'))
+                        .map(option => option.textContent.trim());
 
-                    console.log('Selected topics:', selectedTopics);
+                    console.log('Selected subjects:', selectedSubjects);
 
                     // Map the subject name to match the API's expected format
                     const subjectMapping = {
                         'General Awareness': 'General Awareness',
                         'General Intelligence and Reasoning': 'Reasoning',
                         'Mathematics': 'Mathematics',
-                        'General Science': 'General Science'
+                        'General Science': 'General Science',
+                        'English Grammar': 'English Grammar'
                     };
 
-                    const selectedSubject = selectedTopics.length > 0 ? selectedTopics[0] : 'General Awareness';
-                    const mappedSubject = selectedSubject === 'SSC' ? 'General Intelligence & Reasoning' : subjectMapping[selectedSubject] || selectedSubject;
+                    const selectedSubject = selectedSubjects[0] || 'General Awareness';
+                    const mappedSubject = subjectMapping[selectedSubject] || selectedSubject;
 
                     console.log('Selected subject:', selectedSubject);
                     console.log('Mapped subject:', mappedSubject);
@@ -1188,11 +1169,13 @@
                     // Limit questions for free users
                     const questionLimit = this.state.maxSessions === -1 ? 20 : this.state.questionsPerSession;
 
+                    // Ensure we have a valid limit
+                    const validLimit = questionLimit || 10;  // Default to 10 if undefined
+                    
                     const requestBody = {
-                        exam_type: selectedSubject === 'SSC' ? 'CGL' : 'NTPC',
-                        exam_stage: selectedSubject === 'SSC' ? 'Tier 1' : 'CBT 1',
-                        subject: mappedSubject,
-                        limit: questionLimit
+                        subject: mappedSubject,  // Use the mapped subject name instead of display name
+                        limit: validLimit,
+                        random: true  // This ensures we get random questions from any exam
                     };
 
                     console.log('Request body:', requestBody);
@@ -1318,10 +1301,13 @@
                 const colorClass = this.config.colors[index % this.config.colors.length];
                 
                 card.className = `quiz-card ${colorClass}`;
+                // Get the currently selected subject
+                const selectedSubject = document.querySelector('.filter-option.selected')?.textContent || 'General Awareness';
+                
                 card.innerHTML = `
                     <div class="card-header">
                         <div class="card-number">${index + 1}</div>
-                        <div class="exam-info">${questionData.exam_type === 'CGL' ? 'SSC CGL' : (questionData.exam_name || 'RRB NTPC')} ${questionData.year || '2023'}</div>
+                        <div class="exam-info">${questionData.subject || selectedSubject}</div>
                     </div>
                     <div class="question">${questionData.question}</div>
                     <div class="options">
@@ -1567,51 +1553,61 @@
                 const question = card.querySelector('.question');
                 const options = card.querySelector('.options');
                 const cardHeight = card.offsetHeight;
-                const questionHeight = question.offsetHeight;
+                const questionHeight = question.scrollHeight;
                 const optionsHeight = options.offsetHeight;
-                const availableSpace = cardHeight - questionHeight - optionsHeight - 100;
 
-                this.adjustQuestionFontSize(question);
+                // First try to adjust the font size to fit the content
+                this.adjustQuestionFontSize(question, cardHeight);
+
+                // After font adjustment, check if we still need to adjust spacing
+                const newQuestionHeight = question.scrollHeight;
+                const availableSpace = cardHeight - newQuestionHeight - optionsHeight - 100;
 
                 if (availableSpace > 0) {
-                    const extraSpace = availableSpace / 2;
-                    question.style.marginTop = `${40 + extraSpace}px`;
-                    options.style.marginTop = `${30 + extraSpace}px`;
+                    // If we have space, distribute it evenly
+                    const extraSpace = Math.min(availableSpace / 3, 30); // Cap the extra space
+                    question.style.marginTop = `${20 + extraSpace}px`;
+                    options.style.marginTop = `${20 + extraSpace}px`;
+                } else {
+                    // If we don't have enough space, minimize margins
+                    question.style.marginTop = '15px';
+                    options.style.marginTop = '15px';
+                    
+                    // Adjust options spacing
+                    const optionButtons = options.querySelectorAll('.option');
+                    optionButtons.forEach(opt => {
+                        opt.style.padding = '8px 12px';
+                        opt.style.marginBottom = '8px';
+                    });
                 }
+
+                // Ensure the question doesn't overflow
+                question.style.maxHeight = `${cardHeight * 0.4}px`; // Limit question height to 40% of card
             }
 
-            adjustQuestionFontSize(questionElement) {
-                const containerWidth = questionElement.offsetWidth;
-                const textLength = questionElement.textContent.length;
-                let fontSize = 1.4;
-
-                if (textLength > 300) {
-                    fontSize = 0.9;
-                } else if (textLength > 250) {
-                    fontSize = 1.0;
-                } else if (textLength > 200) {
-                    fontSize = 1.1;
-                } else if (textLength > 150) {
-                    fontSize = 1.2;
-                } else if (textLength > 100) {
-                    fontSize = 1.3;
-                } else if (textLength > 50) {
-                    fontSize = 1.35;
-                }
-
-                if (containerWidth < 300) {
-                    fontSize *= 0.9;
-                } else if (containerWidth < 400) {
-                    fontSize *= 0.95;
-                }
-
-                fontSize = Math.max(0.9, Math.min(1.4, fontSize));
-                
+            adjustQuestionFontSize(questionElement, cardHeight) {
+                const maxHeight = cardHeight * 0.4; // Maximum 40% of card height for question
+                let fontSize = 1.4; // Start with maximum font size
                 questionElement.style.fontSize = `${fontSize}rem`;
-                questionElement.style.lineHeight = `${Math.max(1.4, fontSize + 0.2)}`;
                 
-                const padding = Math.max(10, fontSize * 10);
+                // Keep reducing font size until content fits without scrolling
+                while (questionElement.scrollHeight > maxHeight && fontSize > 0.7) {
+                    fontSize -= 0.1;
+                    questionElement.style.fontSize = `${fontSize}rem`;
+                }
+
+                // Adjust line height based on font size
+                const lineHeight = Math.max(1.3, fontSize + 0.1);
+                questionElement.style.lineHeight = `${lineHeight}`;
+
+                // Adjust padding based on font size
+                const padding = Math.max(8, fontSize * 8);
                 questionElement.style.padding = `${padding}px 0`;
+
+                // Set these styles to ensure proper text display
+                questionElement.style.display = 'block';
+                questionElement.style.overflow = 'hidden';
+                questionElement.style.textOverflow = 'ellipsis';
             }
 
             setupFilterHandling() {
@@ -1639,6 +1635,9 @@
             }
 
             getFallbackQuestions() {
+                // Get the currently selected subject
+                const selectedSubject = document.querySelector('.filter-option.selected')?.textContent || 'General Awareness';
+                
                 return [
                     {
                         id: 1,
@@ -1646,6 +1645,7 @@
                         options: ["Mumbai", "Delhi", "Kolkata", "Chennai"],
                         answer: 1,
                         explanation: "Delhi is the capital of India. It is a union territory and contains New Delhi, the capital of India.",
+                        subject: selectedSubject,
                         exam_name: "RRB NTPC",
                         year: "2023",
                         exam_type: "NTPC"
@@ -1656,6 +1656,7 @@
                         options: ["USA", "India", "China", "Brazil"],
                         answer: 1,
                         explanation: "India is the world's largest democracy with over 900 million eligible voters.",
+                        subject: selectedSubject,
                         exam_name: "RRB NTPC",
                         year: "2023",
                         exam_type: "NTPC"
@@ -1845,20 +1846,12 @@
             option.addEventListener('click', function() {
                 if (this.classList.contains('disabled')) return;
                 
-                const text = this.textContent.trim();
-                if (text.includes('CBT')) {
-                    this.textContent = text.replace(' ', '');
-                }
+                // Remove selected class from all options
+                const siblings = this.parentElement.querySelectorAll('.filter-option');
+                siblings.forEach(sib => sib.classList.remove('selected'));
                 
-                const parent = this.parentElement;
-                const sectionTitle = parent.previousElementSibling.textContent;
-                if (sectionTitle === 'Course' || sectionTitle === 'Exam Type') {
-                    const siblings = parent.querySelectorAll('.filter-option');
-                    siblings.forEach(sib => sib.classList.remove('selected'));
-                    this.classList.add('selected');
-                } else {
-                    this.classList.toggle('selected');
-                }
+                // Add selected class to clicked option
+                this.classList.add('selected');
             });
         });
 

@@ -1,0 +1,15 @@
+{
+    "name": "Dizloon AI",
+    "short_name": "Dizloon",
+    "icons": [
+        {
+            "src": "/favicon/aspirant.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0000FF",
+    "background_color": "#0000FF",
+    "display": "standalone",
+    "start_url": "/"
+} 

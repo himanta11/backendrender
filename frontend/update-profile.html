@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile - Dizloon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: rgba(108, 92, 231, 0.1);
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --card-shadow: 0 10px 20px -5px rgba(108, 92, 231, 0.15);
+            --error: #ff4757;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236c5ce7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5849c2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='profile.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Update Profile</h1>
+            <p>Update your personal and academic information</p>
+        </div>
+
+        <form id="updateProfileForm" onsubmit="handleSubmit(event)">
+            <div class="form-card">
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-circle"></i>
+                        Personal Information
+                    </h2>
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required>
+                        <div class="error-message">Please enter a valid name</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" class="form-input" placeholder="Enter your mobile number" required>
+                        <div class="error-message">Please enter a valid mobile number</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="dob">Date of Birth</label>
+                        <input type="date" id="dob" class="form-input" required>
+                        <div class="error-message">Please enter your date of birth</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="gender">Gender</label>
+                        <select id="gender" class="form-select" required>
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error-message">Please select your gender</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-card">
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Academic Information
+                    </h2>
+                    <div class="form-group">
+                        <label class="form-label" for="education">Education Level</label>
+                        <select id="education" class="form-select" required>
+                            <option value="">Select education level</option>
+                            <option value="high-school">High School</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error-message">Please select your education level</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="targetExam">Target Exam</label>
+                        <select id="targetExam" class="form-select" required>
+                            <option value="">Select target exam</option>
+                            <option value="jee-main">JEE Main</option>
+                            <option value="jee-advanced">JEE Advanced</option>
+                            <option value="neet">NEET</option>
+                            <option value="gate">GATE</option>
+                            <option value="cat">CAT</option>
+                            <option value="upsc">UPSC</option>
+                            <option value="ssc">SSC</option>
+                            <option value="banking">Banking Exams</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error-message">Please select your target exam</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='profile.html'">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check"></i>
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="auth-utils.js"></script>
+    <script>
+        // Load existing profile data
+        async function loadProfileData() {
+            try {
+                const headers = await authManager.getAuthHeaders();
+                const response = await fetch(`${API_CONFIG.baseUrl}/users/me`, {
+                    headers: headers
+                });
+                
+                if (response.ok) {
+                    const userData = await response.json();
+                    
+                    // Populate form fields
+                    document.getElementById('fullName').value = userData.fullName || '';
+                    document.getElementById('mobile').value = userData.mobile || '';
+                    document.getElementById('dob').value = userData.dob || '';
+                    document.getElementById('gender').value = userData.gender || '';
+                    document.getElementById('education').value = userData.education || '';
+                    document.getElementById('targetExam').value = userData.targetExam || '';
+                }
+            } catch (error) {
+                console.error('Error loading profile data:', error);
+            }
+        }
+
+        // Handle form submission
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                mobile: document.getElementById('mobile').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                education: document.getElementById('education').value,
+                targetExam: document.getElementById('targetExam').value
+            };
+
+            try {
+                const headers = await authManager.getAuthHeaders();
+                const response = await fetch(`${API_CONFIG.baseUrl}/users/update`, {
+                    method: 'POST',
+                    headers: {
+                        ...headers,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    // Save to localStorage for immediate UI updates
+                    localStorage.setItem('userData', JSON.stringify(formData));
+                    
+                    // Redirect back to profile page
+                    window.location.href = 'profile.html';
+                } else {
+                    throw new Error('Failed to update profile');
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                // Show error message to user
+                alert('Failed to update profile. Please try again.');
+            }
+        }
+
+        // Load profile data when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            await authManager.checkAuthOnLoad();
+            loadProfileData();
+        });
+    </script>
+</body>
+</html> 

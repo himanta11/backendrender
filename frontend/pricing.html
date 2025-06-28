@@ -497,6 +497,26 @@
                 });
                 
                 if (verifyResponse.ok) {
+                    // Update user data in localStorage to reflect pro status
+                    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                    userData.membership = 'pro';
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    
+                    // Also fetch updated user data from server
+                    const userResponse = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.users.me, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (userResponse.ok) {
+                        const updatedUserData = await userResponse.json();
+                        localStorage.setItem('userData', JSON.stringify({
+                            ...updatedUserData,
+                            membership: 'pro'
+                        }));
+                    }
+                    
                     alert('Payment successful! Your Pro subscription has been activated.');
                     window.location.href = 'home.html';
                 } else {

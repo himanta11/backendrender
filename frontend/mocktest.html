@@ -322,6 +322,20 @@
                 padding: 0 10px;
             }
         }
+
+        .attempt-history {
+            background: rgba(108, 92, 231, 0.05);
+            padding: 8px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .attempt-history {
+                font-size: 11px !important;
+                padding: 6px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -357,24 +371,6 @@
             </div>
             
             <div class="exam-card">
-                <div class="exam-banner">RRB NTPC CBT 2</div>
-                <div class="exam-content">
-                    <div class="exam-title">RRB NTPC CBT 2 Mock Test</div>
-                    <div class="exam-meta">
-                        <span>120 Questions</span>
-                        <span>120 Minutes</span>
-                    </div>
-                    <div class="exam-desc">
-                        Advanced level mock test for RRB NTPC Stage 2 examination.
-                    </div>
-                    <button class="action-btn">
-                        <i class="fas fa-lock lock-icon"></i>
-                        Start Test
-                    </button>
-                </div>
-            </div>
-
-            <div class="exam-card">
                 <div class="exam-banner">SSC CGL Tier 1</div>
                 <div class="exam-content">
                     <div class="exam-title">SSC CGL Tier 1 Mock Test</div>
@@ -386,6 +382,60 @@
                         Comprehensive mock test covering General Intelligence, Reasoning, General Awareness, and Quantitative Aptitude.
                     </div>
                     <button class="action-btn" onclick="startTest('SSC_CGL_TIER1_001')">
+                        <i class="fas fa-lock lock-icon"></i>
+                        Start Test
+                    </button>
+                </div>
+            </div>
+
+            <div class="exam-card">
+                <div class="exam-banner">SSC CGL Tier 1</div>
+                <div class="exam-content">
+                    <div class="exam-title">SSC CGL Tier 1 Mock Test (Set 2)</div>
+                    <div class="exam-meta">
+                        <span>100 Questions</span>
+                        <span>60 Minutes</span>
+                    </div>
+                    <div class="exam-desc">
+                        Advanced level questions focusing on Data Interpretation, Advanced Maths, and English Language.
+                    </div>
+                    <button class="action-btn" onclick="startTest('SSC_CGL_TIER1_002')">
+                        <i class="fas fa-lock lock-icon"></i>
+                        Start Test
+                    </button>
+                </div>
+            </div>
+
+            <div class="exam-card">
+                <div class="exam-banner">SSC CGL Tier 1</div>
+                <div class="exam-content">
+                    <div class="exam-title">SSC CGL Tier 1 Mock Test (Set 3)</div>
+                    <div class="exam-meta">
+                        <span>100 Questions</span>
+                        <span>60 Minutes</span>
+                    </div>
+                    <div class="exam-desc">
+                        Previous year pattern questions with special focus on Reasoning and Quantitative Aptitude.
+                    </div>
+                    <button class="action-btn" onclick="startTest('SSC_CGL_TIER1_003')">
+                        <i class="fas fa-lock lock-icon"></i>
+                        Start Test
+                    </button>
+                </div>
+            </div>
+
+            <div class="exam-card">
+                <div class="exam-banner">SSC CGL Tier 1</div>
+                <div class="exam-content">
+                    <div class="exam-title">SSC CGL Tier 1 Mock Test (Set 4)</div>
+                    <div class="exam-meta">
+                        <span>100 Questions</span>
+                        <span>60 Minutes</span>
+                    </div>
+                    <div class="exam-desc">
+                        Expert level questions with emphasis on Current Affairs and General Knowledge sections.
+                    </div>
+                    <button class="action-btn" onclick="startTest('SSC_CGL_TIER1_004')">
                         <i class="fas fa-lock lock-icon"></i>
                         Start Test
                     </button>
@@ -409,6 +459,42 @@
                     </button>
                 </div>
             </div>
+
+            <div class="exam-card">
+                <div class="exam-banner">Railway Group D</div>
+                <div class="exam-content">
+                    <div class="exam-title">Railway Group D Mock Test (Set 2)</div>
+                    <div class="exam-meta">
+                        <span>100 Questions</span>
+                        <span>90 Minutes</span>
+                    </div>
+                    <div class="exam-desc">
+                        Advanced mock test with focus on Technical Ability, Electronics, and Mechanical Engineering concepts.
+                    </div>
+                    <button class="action-btn" onclick="startTest('RRB_GROUP_D_002')">
+                        <i class="fas fa-lock lock-icon"></i>
+                        Start Test
+                    </button>
+                </div>
+            </div>
+
+            <div class="exam-card">
+                <div class="exam-banner">Railway Group D</div>
+                <div class="exam-content">
+                    <div class="exam-title">Railway Group D Mock Test (Set 3)</div>
+                    <div class="exam-meta">
+                        <span>100 Questions</span>
+                        <span>90 Minutes</span>
+                    </div>
+                    <div class="exam-desc">
+                        Previous year pattern test with emphasis on Railway-specific General Knowledge and Current Affairs.
+                    </div>
+                    <button class="action-btn" onclick="startTest('RRB_GROUP_D_003')">
+                        <i class="fas fa-lock lock-icon"></i>
+                        Start Test
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -416,38 +502,42 @@
     <script src="auth-utils.js"></script>
     <script>
         let userLimits = null;
-        let completedTests = JSON.parse(localStorage.getItem('completedTests') || '[]');
+        let testAttempts = JSON.parse(localStorage.getItem('testAttempts') || '{}');
 
         // Check user authentication and limits on page load
         document.addEventListener('DOMContentLoaded', async function() {
             await checkAuthAndLimits();
-            loadCompletedTests();
+            loadTestAttempts();
         });
 
-        // Load completed tests from localStorage
-        function loadCompletedTests() {
-            const saved = localStorage.getItem('completedTests');
+        // Load test attempts from localStorage
+        function loadTestAttempts() {
+            const saved = localStorage.getItem('testAttempts');
             if (saved) {
-                completedTests = JSON.parse(saved);
+                testAttempts = JSON.parse(saved);
             }
         }
 
-        // Save completed tests to localStorage
-        function saveCompletedTests() {
-            localStorage.setItem('completedTests', JSON.stringify(completedTests));
+        // Save test attempts to localStorage
+        function saveTestAttempts() {
+            localStorage.setItem('testAttempts', JSON.stringify(testAttempts));
         }
 
-        // Mark a test as completed
-        function markTestCompleted(testId) {
-            if (!completedTests.includes(testId)) {
-                completedTests.push(testId);
-                saveCompletedTests();
+        // Record a test attempt
+        function recordTestAttempt(testId, score) {
+            if (!testAttempts[testId]) {
+                testAttempts[testId] = [];
             }
+            testAttempts[testId].push({
+                date: new Date().toISOString(),
+                score: score || 0
+            });
+            saveTestAttempts();
         }
 
-        // Check if a test is completed
-        function isTestCompleted(testId) {
-            return completedTests.includes(testId);
+        // Get test attempts
+        function getTestAttempts(testId) {
+            return testAttempts[testId] || [];
         }
 
         // Get button text based on test status
@@ -456,8 +546,10 @@
                 return '<i class="fas fa-lock"></i> Pro Only';
             }
             
-            if (isTestCompleted(testId)) {
-                return '<i class="fas fa-check"></i> Completed';
+            const attempts = getTestAttempts(testId);
+            if (attempts.length > 0) {
+                const lastScore = attempts[attempts.length - 1].score;
+                return `<i class="fas fa-redo"></i> Retake Test (Last Score: ${lastScore}%)`;
             }
             
             return '<i class="fas fa-play"></i> Start Test';
@@ -467,10 +559,6 @@
         function getButtonStyle(testId, isUnlocked) {
             if (!isUnlocked) {
                 return { opacity: '0.6', cursor: 'not-allowed' };
-            }
-            
-            if (isTestCompleted(testId)) {
-                return { opacity: '0.8', cursor: 'default' };
             }
             
             return { opacity: '1', cursor: 'pointer' };
@@ -501,6 +589,7 @@
             const limitsBanner = document.getElementById('limitsBanner');
             const limitsCounter = document.getElementById('limitsCounter');
             const testButtons = document.querySelectorAll('.action-btn');
+            const examCards = document.querySelectorAll('.exam-card');
 
             if (userLimits.tier === 'PRO') {
                 limitsCounter.innerHTML = `
@@ -511,26 +600,24 @@
                 limitsCounter.style.display = 'block';
                 limitsBanner.style.display = 'none';
                 
-                // Unlock all tests for Pro users
-                testButtons.forEach((btn, index) => {
+                // Update all test buttons for Pro users
+                examCards.forEach((card, index) => {
                     const testId = getTestId(index);
                     const isUnlocked = true;
+                    const button = card.querySelector('.action-btn');
                     const buttonText = getButtonText(testId, isUnlocked);
                     const buttonStyle = getButtonStyle(testId, isUnlocked);
                     
-                    btn.disabled = isTestCompleted(testId);
-                    btn.innerHTML = buttonText;
-                    btn.style.opacity = buttonStyle.opacity;
-                    btn.style.cursor = buttonStyle.cursor;
+                    button.disabled = false;
+                    button.innerHTML = buttonText;
+                    button.style.opacity = buttonStyle.opacity;
+                    button.style.cursor = buttonStyle.cursor;
+                    button.onclick = () => startTest(testId);
                     
-                    if (!isTestCompleted(testId)) {
-                        btn.onclick = () => startTest(testId);
-                    } else {
-                        btn.onclick = null;
-                    }
+                    updateExamCard(card, testId);
                 });
             } else {
-                // Free user
+                // Free user logic
                 const mockInfo = userLimits.mock_tests;
                 
                 limitsCounter.innerHTML = `
@@ -551,11 +638,15 @@
                     limitsBanner.style.display = 'block';
                     
                     // Disable all test buttons
-                    testButtons.forEach(btn => {
-                        btn.disabled = true;
-                        btn.innerHTML = '<i class="fas fa-lock"></i> Weekly Limit Reached';
-                        btn.style.opacity = '0.6';
-                        btn.style.cursor = 'not-allowed';
+                    examCards.forEach((card, index) => {
+                        const button = card.querySelector('.action-btn');
+                        button.disabled = true;
+                        button.innerHTML = '<i class="fas fa-lock"></i> Weekly Limit Reached';
+                        button.style.opacity = '0.6';
+                        button.style.cursor = 'not-allowed';
+                        
+                        const testId = getTestId(index);
+                        updateExamCard(card, testId);
                     });
                 } else {
                     limitsBanner.innerHTML = `
@@ -567,30 +658,42 @@
                     limitsBanner.style.display = 'block';
                     
                     // Enable only the first test for free users
-                    testButtons.forEach((btn, index) => {
+                    examCards.forEach((card, index) => {
                         const testId = getTestId(index);
                         const isUnlocked = index === 0;
+                        const button = card.querySelector('.action-btn');
                         const buttonText = getButtonText(testId, isUnlocked);
                         const buttonStyle = getButtonStyle(testId, isUnlocked);
                         
-                        btn.disabled = !isUnlocked || isTestCompleted(testId);
-                        btn.innerHTML = buttonText;
-                        btn.style.opacity = buttonStyle.opacity;
-                        btn.style.cursor = buttonStyle.cursor;
+                        button.disabled = !isUnlocked;
+                        button.innerHTML = buttonText;
+                        button.style.opacity = buttonStyle.opacity;
+                        button.style.cursor = buttonStyle.cursor;
                         
-                        if (isUnlocked && !isTestCompleted(testId)) {
-                            btn.onclick = () => startTest(testId);
+                        if (isUnlocked) {
+                            button.onclick = () => startTest(testId);
                         } else {
-                            btn.onclick = null;
+                            button.onclick = null;
                         }
+                        
+                        updateExamCard(card, testId);
                     });
                 }
             }
         }
 
-        // Helper function to get test ID based on index
+        // Update getTestId function to remove RRB NTPC CBT2
         function getTestId(index) {
-            const testIds = ['RRB_NTPC_CBT1_001', 'RRB_NTPC_CBT2_001', 'SSC_CGL_TIER1_001', 'RRB_GROUP_D_001'];
+            const testIds = [
+                'RRB_NTPC_CBT1_001',
+                'SSC_CGL_TIER1_001',
+                'SSC_CGL_TIER1_002',
+                'SSC_CGL_TIER1_003',
+                'SSC_CGL_TIER1_004',
+                'RRB_GROUP_D_001',
+                'RRB_GROUP_D_002',
+                'RRB_GROUP_D_003'
+            ];
             return testIds[index] || 'DEFAULT_TEST';
         }
 
@@ -642,38 +745,54 @@
             // Record mock test usage
             await recordMockTestUsage();
             
-            // Store the test ID in sessionStorage so demomock.html can mark it as completed
+            // Store the test ID in sessionStorage
             sessionStorage.setItem('currentTestId', testId);
             
             // Navigate to demomock.html with test ID
             window.location.href = `demomock.html?test=${testId}`;
         }
 
-        // Function to mark current test as completed (called from demomock.html)
-        function completeCurrentTest() {
-            const testId = sessionStorage.getItem('currentTestId');
+        // Function to handle test completion (called from demomock.html)
+        function completeTest(testId, score) {
             if (testId) {
-                markTestCompleted(testId);
+                recordTestAttempt(testId, score);
                 sessionStorage.removeItem('currentTestId');
-                // Refresh the UI to show completed status
+                // Refresh the UI to show updated status
                 updateLimitsUI();
             }
         }
 
-        // Function to manually mark a test as completed (for testing purposes)
-        function markTestAsCompleted(testId) {
-            markTestCompleted(testId);
-            updateLimitsUI();
-        }
-
-        // Check for completed test on page load (in case user returned from demomock.html)
-        window.addEventListener('pageshow', function() {
-            const testId = sessionStorage.getItem('currentTestId');
-            if (testId) {
-                // If there's a test ID in sessionStorage, it means the test was completed
-                completeCurrentTest();
+        // Update the exam card to show attempt history
+        function updateExamCard(card, testId) {
+            const attempts = getTestAttempts(testId);
+            const examContent = card.querySelector('.exam-content');
+            const existingHistory = examContent.querySelector('.attempt-history');
+            
+            if (existingHistory) {
+                existingHistory.remove();
             }
-        });
+            
+            if (attempts.length > 0) {
+                const historyDiv = document.createElement('div');
+                historyDiv.className = 'attempt-history';
+                historyDiv.style.marginTop = '10px';
+                historyDiv.style.fontSize = '12px';
+                historyDiv.style.color = 'var(--text-light)';
+                
+                const lastThreeAttempts = attempts.slice(-3).reverse();
+                const historyHtml = lastThreeAttempts.map((attempt, index) => {
+                    const date = new Date(attempt.date).toLocaleDateString();
+                    return `<div>Attempt ${attempts.length - index}: ${attempt.score}% (${date})</div>`;
+                }).join('');
+                
+                historyDiv.innerHTML = `
+                    <div style="margin-bottom: 5px; font-weight: 600;">Recent Attempts:</div>
+                    ${historyHtml}
+                `;
+                
+                examContent.insertBefore(historyDiv, examContent.querySelector('.action-btn'));
+            }
+        }
 
         // Search functionality
         function performSearch() {

@@ -12,7 +12,8 @@ const API_CONFIG = {
         chat: '/api/chat',
         explain: '/questions/explain',
         users: {
-            me: '/users/me'
+            me: '/users/me',
+            stats: '/users/stats'
         },
         payment: {
             plans: '/payment/plans',

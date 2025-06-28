@@ -891,6 +891,64 @@ async def get_admin_dashboard(db: Session = Depends(get_db)):
             detail=f"Error fetching dashboard data: {str(e)}"
         )
 
+@app.get("/users/stats")
+async def get_user_stats(
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    try:
+        # Get today's date in YYYY-MM-DD format
+        today = datetime.now().strftime("%Y-%m-%d")
+        
+        # Get questions scrolled today
+        questions_today = db.query(models.UserUsage).filter(
+            models.UserUsage.user_id == current_user.id,
+            models.UserUsage.usage_type == models.UsageType.REEL_SCROLL,
+            models.UserUsage.usage_date == today
+        ).first()
+        
+        questions_count = questions_today.count if questions_today else 0
+        
+        # Calculate accuracy from user progress
+        total_attempts = db.query(func.count(models.UserProgress.id)).filter(
+            models.UserProgress.user_id == current_user.id
+        ).scalar()
+        
+        correct_attempts = db.query(func.count(models.UserProgress.id)).filter(
+            models.UserProgress.user_id == current_user.id,
+            models.UserProgress.correct == 1
+        ).scalar()
+        
+        accuracy = (correct_attempts / total_attempts * 100) if total_attempts > 0 else 0
+        
+        # Calculate streak
+        # A streak is maintained if the user has used the app (any usage type) in consecutive days
+        streak = 0
+        current_date = datetime.now().date()
+        
+        while True:
+            date_str = current_date.strftime("%Y-%m-%d")
+            usage = db.query(models.UserUsage).filter(
+                models.UserUsage.user_id == current_user.id,
+                models.UserUsage.usage_date == date_str
+            ).first()
+            
+            if not usage:
+                break
+                
+            streak += 1
+            current_date -= timedelta(days=1)
+        
+        return {
+            "questionsToday": questions_count,
+            "accuracy": accuracy,
+            "streak": streak
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting user stats: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

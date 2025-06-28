@@ -387,7 +387,7 @@
             }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 440px) {
             .filter-section {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -971,8 +971,8 @@
                     <option value="general_awareness">General Awareness</option>
                     <option value="general_intelligence">General Intelligence</option>
                     <option value="reasoning">Reasoning</option>
-                    <option value="arithmetic">Arithmetic</option>
-                    <option value="general_science">General Science</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="english_grammar">English Grammar</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -1127,17 +1127,19 @@
                     examTypeSelect.appendChild(option);
                 });
             } else if (selectedCourse === 'ssc') {
-                const sscExams = [
-                    { value: 'cgl', text: 'CGL' },
-                    { value: 'chsl', text: 'CHSL' }
-                ];
+                // Add CGL option
+                const option = document.createElement('option');
+                option.value = 'cgl';
+                option.textContent = 'CGL';
+                examTypeSelect.appendChild(option);
                 
-                sscExams.forEach(exam => {
-                    const option = document.createElement('option');
-                    option.value = exam.value;
-                    option.textContent = exam.text;
-                    examTypeSelect.appendChild(option);
-                });
+                // Add "others coming soon" option
+                const comingSoonOption = document.createElement('option');
+                comingSoonOption.disabled = true;
+                comingSoonOption.style.color = '#999';
+                comingSoonOption.style.fontStyle = 'italic';
+                comingSoonOption.textContent = 'Others coming soon...';
+                examTypeSelect.appendChild(comingSoonOption);
             }
         }
 
@@ -1147,28 +1149,95 @@
             examStageSelect.innerHTML = '<option value="">Select Stage</option>';
             
             if (selectedCourse === 'rrb') {
-                const rrbStages = [
-                    { value: 'cbt1', text: 'CBT 1' },
-                    { value: 'cbt2', text: 'CBT 2' }
-                ];
-                
-                rrbStages.forEach(stage => {
+                if (selectedExamType === 'group_d') {
+                    // Only show CBT 1 for Group D
                     const option = document.createElement('option');
-                    option.value = stage.value;
-                    option.textContent = stage.text;
+                    option.value = 'cbt1';
+                    option.textContent = 'CBT 1';
                     examStageSelect.appendChild(option);
+                } else if (selectedExamType === 'ntpc') {
+                    // Only show CBT 1 for NTPC
+                    const option = document.createElement('option');
+                    option.value = 'cbt1';
+                    option.textContent = 'CBT 1';
+                    examStageSelect.appendChild(option);
+                } else {
+                    // Show both stages for other RRB exams
+                    const rrbStages = [
+                        { value: 'cbt1', text: 'CBT 1' },
+                        { value: 'cbt2', text: 'CBT 2' }
+                    ];
+                    
+                    rrbStages.forEach(stage => {
+                        const option = document.createElement('option');
+                        option.value = stage.value;
+                        option.textContent = stage.text;
+                        examStageSelect.appendChild(option);
+                    });
+                }
+            } else if (selectedCourse === 'ssc') {
+                // Only show Tier 1 for SSC
+                const option = document.createElement('option');
+                option.value = 'tier1';
+                option.textContent = 'Tier 1';
+                examStageSelect.appendChild(option);
+            }
+
+            // Update subject options based on course and exam type
+            updateSubjectOptions(selectedCourse, selectedExamType);
+        }
+
+        function updateSubjectOptions(selectedCourse, selectedExamType) {
+            const topicSelect = document.getElementById('topic');
+            topicSelect.innerHTML = '<option value="">Select Topic</option>';
+
+            if (selectedCourse === 'rrb' && selectedExamType === 'ntpc') {
+                // NTPC specific subjects
+                const ntpcSubjects = [
+                    { value: 'general_awareness', text: 'General Awareness' },
+                    { value: 'general_intelligence', text: 'General Intelligence' },
+                    { value: 'reasoning', text: 'Reasoning' },
+                    { value: 'arithmetic', text: 'Arithmetic' },
+                    { value: 'general_science', text: 'General Science' }
+                ];
+
+                ntpcSubjects.forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject.value;
+                    option.textContent = subject.text;
+                    topicSelect.appendChild(option);
                 });
             } else if (selectedCourse === 'ssc') {
-                const sscStages = [
-                    { value: 'tier1', text: 'Tier 1' },
-                    { value: 'tier2', text: 'Tier 2' }
+                // SSC subjects
+                const sscSubjects = [
+                    { value: 'general_awareness', text: 'General Awareness' },
+                    { value: 'general_intelligence', text: 'General Intelligence' },
+                    { value: 'reasoning', text: 'Reasoning' },
+                    { value: 'mathematics', text: 'Mathematics' },
+                    { value: 'english_grammar', text: 'English Grammar' }
                 ];
-                
-                sscStages.forEach(stage => {
+
+                sscSubjects.forEach(subject => {
                     const option = document.createElement('option');
-                    option.value = stage.value;
-                    option.textContent = stage.text;
-                    examStageSelect.appendChild(option);
+                    option.value = subject.value;
+                    option.textContent = subject.text;
+                    topicSelect.appendChild(option);
+                });
+            } else if (selectedCourse === 'rrb') {
+                // Default RRB subjects (for Group D and others)
+                const rrbSubjects = [
+                    { value: 'general_awareness', text: 'General Awareness' },
+                    { value: 'general_intelligence', text: 'General Intelligence' },
+                    { value: 'reasoning', text: 'Reasoning' },
+                    { value: 'mathematics', text: 'Mathematics' },
+                    ...(selectedExamType === 'group_d' ? [{ value: 'english_grammar', text: 'English Grammar' }] : [])
+                ];
+
+                rrbSubjects.forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject.value;
+                    option.textContent = subject.text;
+                    topicSelect.appendChild(option);
                 });
             }
         }
@@ -1214,15 +1283,38 @@
         }
 
         async function loadQuestionsBatch(course, examType, examStage, topic, isInitialLoad = false) {
+            // Format exam stage to ensure proper spacing and capitalization
             const formattedExamStage = examStage
-                .toUpperCase()
-                .replace(/([A-Z])(\d)/, '$1 $2');
-
-            const formattedSubject = topic
-                .replace('_', ' ')
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .replace(/([a-z])(\d)/i, '$1 $2')  // Add space between text and number
+                .split(/[\s_]+/)  // Split on spaces or underscores
+                .map(part => {
+                    // Special handling for CBT to ensure proper capitalization
+                    if (part.toLowerCase() === 'cbt') {
+                        return part.toUpperCase();
+                    }
+                    // For Tier, only capitalize first letter
+                    if (part.toLowerCase() === 'tier') {
+                        return 'Tier';
+                    }
+                    return part;
+                })
                 .join(' ');
+            
+            console.log('Formatted exam stage:', formattedExamStage);  // Debug log
+
+            // Special handling for General Intelligence and Reasoning subjects
+            let formattedSubject;
+            if (topic === 'general_intelligence' || topic === 'reasoning') {
+                formattedSubject = 'General Intelligence & Reasoning';
+            } else {
+                formattedSubject = topic
+                    .replace(/_/g, ' ')  // Replace all underscores with spaces
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join(' ');
+            }
+            
+            console.log('Formatted subject:', formattedSubject);  // Debug log
 
             // Ensure userLimits is loaded before proceeding
             if (!userLimits) {
@@ -1259,16 +1351,32 @@
 
             try {
                 const headers = await authManager.getAuthHeaders();
+                // Map exam types to database enum values
+                const examTypeMapping = {
+                    'group_d': 'GROUP D',
+                    'ntpc': 'NTPC',
+                    'cgl': 'CGL',
+                    'chsl': 'CHSL'
+                };
+
+                const requestBody = {
+                    exam_type: examTypeMapping[examType] || examType.toUpperCase(),  // Use mapped enum value
+                    exam_stage: formattedExamStage,
+                    subject: formattedSubject,
+                    limit: questionLimit,
+                    offset: currentOffset
+                };
+                
+                console.log('Sending request with body:', requestBody);  // Debug log
+                
                 const response = await fetch(API_CONFIG.baseUrl + API_CONFIG.endpoints.questions, {
                     method: 'POST',
-                    headers,
-                    body: JSON.stringify({
-                        exam_type: examType.toUpperCase(),
-                        exam_stage: formattedExamStage,
-                        subject: formattedSubject,
-                        limit: questionLimit,
-                        offset: currentOffset
-                    })
+                    headers: {
+                        ...headers,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
                 });
 
                 if (!response.ok) {
@@ -1276,7 +1384,16 @@
                         authManager.handleAuthError();
                         return;
                     }
-                    throw new Error(`Server error: ${response.status}`);
+                    
+                    // Try to get detailed error message from response
+                    const errorData = await response.json().catch(() => null);
+                    console.error('Server error details:', errorData);  // Debug log
+                    
+                    if (errorData && errorData.error) {
+                        throw new Error(`Server error: ${errorData.error}`);
+                    } else {
+                        throw new Error(`Server error: ${response.status}`);
+                    }
                 }
 
                 const data = await response.json();
