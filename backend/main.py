@@ -910,20 +910,23 @@ async def get_user_stats(
         
         questions_count = questions_today.count if questions_today else 0
         
-        # Calculate accuracy from user progress
-        total_attempts = db.query(func.count(models.UserProgress.id)).filter(
-            models.UserProgress.user_id == current_user.id
-        ).scalar()
-        
-        correct_attempts = db.query(func.count(models.UserProgress.id)).filter(
-            models.UserProgress.user_id == current_user.id,
-            models.UserProgress.correct == 1
-        ).scalar()
-        
-        accuracy = (correct_attempts / total_attempts * 100) if total_attempts > 0 else 0
+        try:
+            # Calculate accuracy from user progress
+            total_attempts = db.query(func.count(models.UserProgress.id)).filter(
+                models.UserProgress.user_id == current_user.id
+            ).scalar() or 0
+            
+            correct_attempts = db.query(func.count(models.UserProgress.id)).filter(
+                models.UserProgress.user_id == current_user.id,
+                models.UserProgress.correct == 1
+            ).scalar() or 0
+            
+            accuracy = (correct_attempts / total_attempts * 100) if total_attempts > 0 else 0
+        except Exception as e:
+            logger.warning(f"Error calculating accuracy, defaulting to 0: {str(e)}")
+            accuracy = 0
         
         # Calculate streak
-        # A streak is maintained if the user has used the app (any usage type) in consecutive days
         streak = 0
         current_date = datetime.now().date()
         
@@ -948,7 +951,12 @@ async def get_user_stats(
         
     except Exception as e:
         logger.error(f"Error getting user stats: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        # Return default values instead of throwing error
+        return {
+            "questionsToday": 0,
+            "accuracy": 0,
+            "streak": 0
+        }
 
 if __name__ == "__main__":
     import uvicorn
