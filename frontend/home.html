@@ -1437,7 +1437,7 @@
         async function updateStats() {
             try {
                 const headers = await authManager.getAuthHeaders();
-                const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.users.stats}`, {
+                const response = await fetch(`${API_CONFIG.baseUrl}/users/stats`, {
                     headers: headers
                 });
                 
@@ -1447,14 +1447,12 @@
                     // Update Questions Today
                     const questionsScrolled = document.getElementById('questionsScrolled');
                     if (questionsScrolled) {
-                        // Remove loading placeholder and update with real data
                         questionsScrolled.innerHTML = stats.questionsToday || '0';
                     }
                     
                     // Update Accuracy
                     const accuracy = document.getElementById('accuracy');
                     if (accuracy) {
-                        // Remove loading placeholder and update with real data
                         const accuracyValue = stats.accuracy || 0;
                         accuracy.innerHTML = `${Math.round(accuracyValue)}%`;
                     }
@@ -1462,8 +1460,13 @@
                     // Update Streak
                     const streakDays = document.getElementById('streakDays');
                     if (streakDays) {
-                        // Remove loading placeholder and update with real data
                         streakDays.innerHTML = stats.streak || '0';
+                    }
+
+                    // Also update the streak in the welcome banner if it exists
+                    const streakCount = document.getElementById('streakCount');
+                    if (streakCount) {
+                        streakCount.textContent = stats.streak || '0';
                     }
                 }
             } catch (error) {
@@ -1471,7 +1474,7 @@
             }
         }
 
-        // Authentication check
+        // Call updateStats immediately when the page loads
         document.addEventListener('DOMContentLoaded', async function() {
             // Check authentication on page load
             await authManager.checkAuthOnLoad();
@@ -1479,31 +1482,11 @@
             // Start auto-refresh for persistent login
             authManager.startAutoRefresh();
 
-            // Get user data and update stats
-            try {
-                const headers = await authManager.getAuthHeaders();
-                const response = await fetch(`${API_CONFIG.baseUrl}/users/me`, {
-                    headers: headers
-                });
-                
-                if (response.ok) {
-                    const userData = await response.json();
-                    // Update welcome message with user's email
-                    const welcomeTitle = document.querySelector('.welcome-title');
-                    if (welcomeTitle) {
-                        welcomeTitle.textContent = `Welcome back, ${userData.email}!`;
-                    }
-                    
-                    // Update stats
-                    await updateStats();
-                    
-                    // Set up periodic stats update every 5 minutes
-                    setInterval(updateStats, 300000);
-                }
-            } catch (error) {
-                console.error('Error getting user data:', error);
-                authManager.handleAuthError();
-            }
+            // Update stats immediately
+            await updateStats();
+            
+            // Set up periodic stats update every 2 minutes
+            setInterval(updateStats, 120000);
 
             // Initialize mobile menu
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
