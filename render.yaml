@@ -24,5 +24,11 @@ services:
         value: false
       - key: LOG_LEVEL
         value: INFO
+      - key: ALLOWED_ORIGINS
+        value: "https://www.dizloonai.com,https://dizloonai.vercel.app"
+      - key: FRONTEND_URL
+        value: "https://dizloonai.vercel.app"
+      - key: PRODUCTION_FRONTEND_URL
+        value: "https://www.dizloonai.com"
     healthCheckPath: /health
     autoDeploy: true 

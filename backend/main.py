@@ -32,27 +32,21 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configure CORS with specific origins
+# Update CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://www.aspirant.live",                       # Custom domain frontend (www)
-        "https://aspirant.live",                           # Custom domain frontend
-        "https://frontendvercel-git-main-himantas-projects.vercel.app",  # New Vercel frontend
-        "https://newfrontend-sage.vercel.app",    # Production frontend
-        "https://dizloonfrontend.vercel.app",     # Dizloon Vercel frontend
-        "https://aspirant-app.onrender.com",      # Render backend domain
-        "https://*.onrender.com",                 # Any Render subdomain
-        "http://localhost:5500",                  # Local development
-        "http://127.0.0.1:5500",                  # Local development
-        "http://localhost:8000",                  # Local backend
-        "http://127.0.0.1:8000"                   # Local backend
+        "https://www.dizloonai.com",
+        "https://dizloonai.vercel.app",
+        "http://localhost",
+        "http://localhost:3000",
+        "http://localhost:5000",
+        "http://127.0.0.1:5000",
+        "http://127.0.0.1"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,
 )
 
 # Include routers
