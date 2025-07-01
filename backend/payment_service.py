@@ -13,8 +13,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Razorpay Configuration
-RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "rzp_test_V6JdyQm0GDUzND")  # Your actual test key
-RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "3Jm762gvH7XF17cQa9DuCdky")  # Your actual test secret
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "rzp_live_oecfzJZiQHiyVp")  # Live key
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "GtONJTIsxOGjHMQW4ilmWujx")  # Live secret key
 
 # Initialize Razorpay client
 razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
