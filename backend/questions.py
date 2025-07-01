@@ -22,7 +22,7 @@ TOGETHER_CHAT_URL = "https://api.together.xyz/v1/chat/completions"
 class QuestionFilters(BaseModel):
     exam_type: Optional[str] = None
     topics: Optional[List[str]] = None
-    has_diagram: Optional[bool] = None
+    has_diagram: Optional[bool] = False  # Default to False to exclude diagram questions
     limit: Optional[int] = 50
     subject: Optional[str] = None
     year: Optional[int] = None
@@ -87,16 +87,28 @@ async def get_questions(filters: QuestionFilters):
                    subject, year, exam_stage, difficulty_level
             FROM questions
             WHERE 1=1
+            AND (has_diagram = false OR has_diagram IS NULL)  -- Strictly exclude questions with diagrams
+            AND question_text NOT ILIKE '%diagram%'
+            AND question_text NOT ILIKE '%figure%'
+            AND question_text NOT ILIKE '%image%'
+            AND question_text NOT ILIKE '%picture%'
+            AND question_text NOT ILIKE '%shown below%'
+            AND question_text NOT ILIKE '%given below%'
+            AND question_text NOT ILIKE '%refer to%'
+            AND question_text NOT ILIKE '%look at%'
+            AND question_text NOT ILIKE '%see the%'
+            AND question_text NOT ILIKE '%observe the%'
+            AND question_text NOT ILIKE '%following%graph%'
+            AND question_text NOT ILIKE '%following%table%'
+            AND question_text NOT ILIKE '%following%chart%'
+            AND question_text NOT ILIKE '%following%illustration%'
+            AND question_text NOT ILIKE '%following%diagram%'
         """
         params = {}
         
         if filters.exam_type:
             query += " AND exam_type = :exam_type"
             params['exam_type'] = filters.exam_type
-        
-        if filters.has_diagram is not None:
-            query += " AND has_diagram = :has_diagram"
-            params['has_diagram'] = filters.has_diagram
         
         if filters.topics:
             topic_conditions = []

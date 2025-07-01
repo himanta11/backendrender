@@ -61,17 +61,15 @@ def create_default_plans():
             {
                 "name": "Pro Plan",
                 "description": "Complete package for exam success",
-                "price": 2499.0,
-                "duration_days": 180,
+                "price": 99.0,
+                "duration_days": 90,
                 "features": json.dumps([
-                    "Everything in Premium Plan",
-                    "Live classes access",
-                    "1-on-1 mentoring sessions",
-                    "Exclusive study materials",
-                    "Interview preparation",
-                    "Custom study schedules",
-                    "Expert guidance",
-                    "Unlimited practice tests"
+                    "Unlimited PYQs - All previous year questions",
+                    "Unlimited Mock Tests - Detailed analytics",
+                    "Unlimited Reel Scrolls - All learning content",
+                    "Advanced AI Chat - 24/7 question support",
+                    "Weak Areas Detection - Identify improvement areas",
+                    "AI Explanations - Detailed answer explanations"
                 ]),
                 "is_active": True
             }
