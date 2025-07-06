@@ -14,7 +14,7 @@ try:
     
     if not DATABASE_URL:
         # Fallback to hardcoded PostgreSQL URL
-        DATABASE_URL = "postgresql://aspirant_user:zrz6djAcM5fWQuVDwW3HuVEeJ6UmrUI7@dpg-d0uptr3e5dus73a2fapg-a.oregon-postgres.render.com/aspirant"
+        DATABASE_URL = "postgresql://postgres:VkIEJUdPvuxmATvoicDaEFZmTxhBIBiW@shuttle.proxy.rlwy.net:25171/railway"
     
     logger.info("Attempting to connect to PostgreSQL...")
     
