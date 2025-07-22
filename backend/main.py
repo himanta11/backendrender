@@ -64,7 +64,7 @@ async def startup_event():
 load_dotenv()
 
 # Together AI API configuration
-TOGETHER_API_KEY = "39b58efc9f06bc95aeb6a246badf5561100d6247136a4cd33bc6f2c96cc9d6bf"
+TOGETHER_API_KEY = "0d0813b34ef3c9a9719e7d532b1c1a7b2171f8bbb15b9ba7ed887761060b3ffe"
 TOGETHER_API_URL = "https://api.together.xyz/v1/completions"
 TOGETHER_CHAT_URL = "https://api.together.xyz/v1/chat/completions"
 
