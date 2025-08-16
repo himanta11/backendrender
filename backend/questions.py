@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(tags=["questions"])
 
 # Together AI configuration
-TOGETHER_API_KEY = "0d0813b34ef3c9a9719e7d532b1c1a7b2171f8bbb15b9ba7ed887761060b3ffe"
+TOGETHER_API_KEY = "6db73740c0ff5336d1720e8ae02afa3655b4de9afea8e7e657c19dc5a0b4469d"
 TOGETHER_CHAT_URL = "https://api.together.xyz/v1/chat/completions"
 
 class QuestionFilters(BaseModel):
