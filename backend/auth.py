@@ -106,19 +106,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         raise credentials_exception
     return user
 
-@router.options("/token")
-async def options_token():
-    """Handle OPTIONS preflight requests for CORS"""
-    return JSONResponse(
-        content={"detail": "OK"},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-            "Access-Control-Allow-Credentials": "true",
-            "Content-Type": "application/json"
-        }
-    )
 
 @router.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -173,19 +160,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             }
         )
 
-@router.options("/login")
-async def options_login():
-    """Handle OPTIONS preflight requests for CORS"""
-    return JSONResponse(
-        content={"detail": "OK"},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-            "Access-Control-Allow-Credentials": "true",
-            "Content-Type": "application/json"
-        }
-    )
 
 @router.post("/login")
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -308,19 +282,6 @@ async def signup_user(username: str, email: str, password: str, db: Session = De
             detail=f"Error creating user: {str(e)}"
         )
 
-@router.options("/register")
-async def options_register():
-    """Handle OPTIONS preflight requests for CORS"""
-    return JSONResponse(
-        content={"detail": "OK"},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-            "Access-Control-Allow-Credentials": "true",
-            "Content-Type": "application/json"
-        }
-    )
 
 @router.post("/register")
 async def register_user(user_data: UserRegisterRequest, db: Session = Depends(get_db)):
