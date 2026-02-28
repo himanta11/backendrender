@@ -35,18 +35,11 @@ app = FastAPI(
 # Update CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://www.dizloonai.com",
-        "https://dizloonai.vercel.app",
-        "http://localhost",
-        "http://localhost:3000",
-        "http://localhost:5500",
-        "http://127.0.0.1:5000",
-        "http://127.0.0.1"
-    ],
+    allow_origins=["*"],  # Allow all origins for development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # Include routers
@@ -716,6 +709,20 @@ async def record_usage(
 @app.on_event("startup")
 def on_startup():
     logger.info("Application startup complete")
+
+@app.options("/{path:path}")
+async def global_options_handler():
+    """Global OPTIONS handler for all routes"""
+    return JSONResponse(
+        content={"detail": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, X-Requested-With",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json"
+        }
+    )
 
 @app.get("/health")
 async def health_check():
