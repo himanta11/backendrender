@@ -100,46 +100,139 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         raise credentials_exception
     return user
 
+@router.options("/token")
+async def options_token():
+    """Handle OPTIONS preflight requests for CORS"""
+    return JSONResponse(
+        content={"detail": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json"
+        }
+    )
+
 @router.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     logger.info(f"Login attempt for user: {form_data.username}")
-    user = authenticate_user(db, form_data.username, form_data.password)
-    if not user:
-        logger.warning(f"Failed login attempt for user: {form_data.username}")
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username/email or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
     
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    # Use email for token generation
-    access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+    try:
+        user = authenticate_user(db, form_data.username, form_data.password)
+        if not user:
+            logger.warning(f"Failed login attempt for user: {form_data.username}")
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Incorrect username/email or password"},
+                headers={
+                    "WWW-Authenticate": "Bearer",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json"
+                }
+            )
+        
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        # Use email for token generation
+        access_token = create_access_token(
+            data={"sub": user.email}, expires_delta=access_token_expires
+        )
+        logger.info(f"Login successful for user: {form_data.username}")
+        
+        return JSONResponse(
+            content={"access_token": access_token, "token_type": "bearer"},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json"
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"Error during token generation: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Token generation error: {str(e)}"},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json"
+            }
+        )
+
+@router.options("/login")
+async def options_login():
+    """Handle OPTIONS preflight requests for CORS"""
+    return JSONResponse(
+        content={"detail": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json"
+        }
     )
-    logger.info(f"Login successful for user: {form_data.username}")
-    return {"access_token": access_token, "token_type": "bearer"}
 
 @router.post("/login")
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     """Login endpoint that matches the frontend expectation"""
     logger.info(f"Login attempt for user: {form_data.username}")
-    user = authenticate_user(db, form_data.username, form_data.password)
-    if not user:
-        logger.warning(f"Failed login attempt for user: {form_data.username}")
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username/email or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
     
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    # Use email for token generation
-    access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
-    )
-    logger.info(f"Login successful for user: {form_data.username}")
-    return {"access_token": access_token, "token_type": "bearer"}
+    try:
+        user = authenticate_user(db, form_data.username, form_data.password)
+        if not user:
+            logger.warning(f"Failed login attempt for user: {form_data.username}")
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Incorrect username/email or password"},
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json"
+                }
+            )
+        
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        # Use email for token generation
+        access_token = create_access_token(
+            data={"sub": user.email}, expires_delta=access_token_expires
+        )
+        logger.info(f"Login successful for user: {form_data.username}")
+        
+        return JSONResponse(
+            content={"access_token": access_token, "token_type": "bearer"},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json"
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"Error during login: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Login error: {str(e)}"},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json"
+            }
+        )
 
 @router.post("/signup")
 async def signup_user(username: str, email: str, password: str, db: Session = Depends(get_db)):
