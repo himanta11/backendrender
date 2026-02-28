@@ -44,9 +44,15 @@ def get_db():
         db.close()
 
 def verify_password(plain_password, hashed_password):
+    # bcrypt has a 72-byte limit, truncate if necessary
+    if len(plain_password.encode('utf-8')) > 72:
+        plain_password = plain_password.encode('utf-8')[:72].decode('utf-8', errors='ignore')
     return pwd_context.verify(plain_password, hashed_password)
 
 def get_password_hash(password):
+    # bcrypt has a 72-byte limit, truncate if necessary
+    if len(password.encode('utf-8')) > 72:
+        password = password.encode('utf-8')[:72].decode('utf-8', errors='ignore')
     return pwd_context.hash(password)
 
 def authenticate_user(db: Session, username: str, password: str):
@@ -187,6 +193,20 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
     logger.info(f"Login attempt for user: {form_data.username}")
     
     try:
+        # Validate password length
+        if len(form_data.password.encode('utf-8')) > 72:
+            return JSONResponse(
+                status_code=400,
+                content={"detail": "Password is too long. Maximum 72 characters allowed."},
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json"
+                }
+            )
+        
         user = authenticate_user(db, form_data.username, form_data.password)
         if not user:
             logger.warning(f"Failed login attempt for user: {form_data.username}")
@@ -308,6 +328,20 @@ async def register_user(user_data: UserRegisterRequest, db: Session = Depends(ge
     logger.info(f"Register attempt for username: {user_data.username}, email: {user_data.email}")
     
     try:
+        # Validate password length
+        if len(user_data.password.encode('utf-8')) > 72:
+            return JSONResponse(
+                status_code=400,
+                content={"detail": "Password is too long. Maximum 72 characters allowed."},
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json"
+                }
+            )
+        
         # Check if email already exists
         if db.query(User).filter(User.email == user_data.email).first():
             logger.warning(f"Email already registered: {user_data.email}")
