@@ -33,9 +33,11 @@ app = FastAPI(
 )
 
 # Update CORS configuration
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",") if os.getenv("ALLOWED_ORIGINS") else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for development
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -713,10 +715,12 @@ def on_startup():
 @app.options("/{path:path}")
 async def global_options_handler():
     """Global OPTIONS handler for all routes"""
+    origin = allowed_origins[0] if allowed_origins and allowed_origins[0] != "*" else "*"
+    
     return JSONResponse(
         content={"detail": "OK"},
         headers={
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": origin,
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
             "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, X-Requested-With",
             "Access-Control-Allow-Credentials": "true",
