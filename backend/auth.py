@@ -10,6 +10,7 @@ from .database import SessionLocal
 from .models import User
 from pydantic import BaseModel
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -23,6 +24,19 @@ class UserRegisterRequest(BaseModel):
 
 # Create router
 router = APIRouter()
+
+# Get allowed origins from environment variables
+def get_cors_headers():
+    allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",") if os.getenv("ALLOWED_ORIGINS") else ["*"]
+    origin = allowed_origins[0] if allowed_origins and allowed_origins[0] != "*" else "*"
+    
+    return {
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+        "Access-Control-Allow-Credentials": "true",
+        "Content-Type": "application/json"
+    }
 
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -115,17 +129,12 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         user = authenticate_user(db, form_data.username, form_data.password)
         if not user:
             logger.warning(f"Failed login attempt for user: {form_data.username}")
+            headers = get_cors_headers()
+            headers["WWW-Authenticate"] = "Bearer"
             return JSONResponse(
                 status_code=401,
                 content={"detail": "Incorrect username/email or password"},
-                headers={
-                    "WWW-Authenticate": "Bearer",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                    "Access-Control-Allow-Credentials": "true",
-                    "Content-Type": "application/json"
-                }
+                headers=headers
             )
         
         access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -137,13 +146,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         
         return JSONResponse(
             content={"access_token": access_token, "token_type": "bearer"},
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Allow-Credentials": "true",
-                "Content-Type": "application/json"
-            }
+            headers=get_cors_headers()
         )
         
     except Exception as e:
@@ -151,13 +154,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         return JSONResponse(
             status_code=500,
             content={"detail": f"Token generation error: {str(e)}"},
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Allow-Credentials": "true",
-                "Content-Type": "application/json"
-            }
+            headers=get_cors_headers()
         )
 
 
@@ -187,13 +184,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
             return JSONResponse(
                 status_code=401,
                 content={"detail": "Incorrect username/email or password"},
-                headers={
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                    "Access-Control-Allow-Credentials": "true",
-                    "Content-Type": "application/json"
-                }
+                headers=get_cors_headers()
             )
         
         access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -205,13 +196,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
         
         return JSONResponse(
             content={"access_token": access_token, "token_type": "bearer"},
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Allow-Credentials": "true",
-                "Content-Type": "application/json"
-            }
+            headers=get_cors_headers()
         )
         
     except Exception as e:
@@ -219,13 +204,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
         return JSONResponse(
             status_code=500,
             content={"detail": f"Login error: {str(e)}"},
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Allow-Credentials": "true",
-                "Content-Type": "application/json"
-            }
+            headers=get_cors_headers()
         )
 
 @router.post("/signup")
@@ -359,13 +338,7 @@ async def register_user(user_data: UserRegisterRequest, db: Session = Depends(ge
                 "token_type": "bearer",
                 "message": "User created successfully"
             },
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Allow-Credentials": "true",
-                "Content-Type": "application/json"
-            }
+            headers=get_cors_headers()
         )
         
     except Exception as e:
@@ -374,13 +347,7 @@ async def register_user(user_data: UserRegisterRequest, db: Session = Depends(ge
         return JSONResponse(
             status_code=500,
             content={"detail": f"Error creating user: {str(e)}"},
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-                "Access-Control-Allow-Credentials": "true",
-                "Content-Type": "application/json"
-            }
+            headers=get_cors_headers()
         )
 
 @router.post("/refresh")
