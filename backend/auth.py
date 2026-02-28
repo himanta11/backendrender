@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
@@ -194,36 +195,64 @@ async def signup_user(username: str, email: str, password: str, db: Session = De
             detail=f"Error creating user: {str(e)}"
         )
 
+@router.options("/register")
+async def options_register():
+    """Handle OPTIONS preflight requests for CORS"""
+    return JSONResponse(
+        content={"detail": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json"
+        }
+    )
+
 @router.post("/register")
 async def register_user(user_data: UserRegisterRequest, db: Session = Depends(get_db)):
     """Register endpoint that matches the frontend expectation"""
     logger.info(f"Register attempt for username: {user_data.username}, email: {user_data.email}")
     
-    # Check if email already exists
-    if db.query(User).filter(User.email == user_data.email).first():
-        logger.warning(f"Email already registered: {user_data.email}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email already registered"
-        )
-    
-    # Check if username already exists
-    if db.query(User).filter(User.username == user_data.username).first():
-        logger.warning(f"Username already taken: {user_data.username}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Username already taken"
-        )
-    
-    # Create new user
-    hashed_password = get_password_hash(user_data.password)
-    db_user = User(
-        username=user_data.username,
-        email=user_data.email,
-        hashed_password=hashed_password
-    )
-    
     try:
+        # Check if email already exists
+        if db.query(User).filter(User.email == user_data.email).first():
+            logger.warning(f"Email already registered: {user_data.email}")
+            return JSONResponse(
+                status_code=400,
+                content={"detail": "Email already registered"},
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json"
+                }
+            )
+        
+        # Check if username already exists
+        if db.query(User).filter(User.username == user_data.username).first():
+            logger.warning(f"Username already taken: {user_data.username}")
+            return JSONResponse(
+                status_code=400,
+                content={"detail": "Username already taken"},
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json"
+                }
+            )
+        
+        # Create new user
+        hashed_password = get_password_hash(user_data.password)
+        db_user = User(
+            username=user_data.username,
+            email=user_data.email,
+            hashed_password=hashed_password
+        )
+        
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
@@ -236,17 +265,34 @@ async def register_user(user_data: UserRegisterRequest, db: Session = Depends(ge
             expires_delta=access_token_expires
         )
         
-        return {
-            "access_token": access_token,
-            "token_type": "bearer",
-            "message": "User created successfully"
-        }
+        return JSONResponse(
+            content={
+                "access_token": access_token,
+                "token_type": "bearer",
+                "message": "User created successfully"
+            },
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json"
+            }
+        )
+        
     except Exception as e:
         db.rollback()
         logger.error(f"Error creating user: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error creating user: {str(e)}"
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Error creating user: {str(e)}"},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+                "Access-Control-Allow-Credentials": "true",
+                "Content-Type": "application/json"
+            }
         )
 
 @router.post("/refresh")
